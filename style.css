@@ -35,7 +35,11 @@ h2{font-size:clamp(2rem,4vw,4rem);line-height:1;margin:8px 0 26px}
 .split{display:grid;grid-template-columns:.8fr 1fr;gap:40px;align-items:start}
 .checks p{font-size:1.2rem;background:rgba(255,255,255,.7);padding:18px;border-radius:18px}
 .card h3{font-size:1.5rem;margin:0}.card p{font-size:1.25rem;font-weight:900}.card span{color:var(--muted)}
-.featured{background:#111;color:white;transform:translateY(-10px)}.featured span{color:#f1d9d2}
+.featured{
+  background:#111;
+  color:white;
+  transform:none !important;
+}
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.steps span{background:var(--nude);padding:22px;border-radius:22px;font-weight:900}
 .testimonials{background:#111;color:white}.testimonials .eyebrow{color:var(--nude)}blockquote{color:#111;font-size:1.15rem}
 .contact form{display:grid;gap:14px;max-width:720px;margin-top:22px}
@@ -260,4 +264,7 @@ footer{text-align:center;padding:36px;color:var(--muted)}
   .cards {
     grid-template-columns: 1fr !important;
   }
+}
+.cards .card {
+  transform: none !important;
 }
