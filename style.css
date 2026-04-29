@@ -313,3 +313,12 @@ footer{text-align:center;padding:36px;color:var(--muted)}
 .card:hover::after {
   opacity: 1;
 }
+.logo {
+  height: 40px;
+  object-fit: contain;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+}
