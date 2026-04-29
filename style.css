@@ -217,9 +217,27 @@ footer{text-align:center;padding:36px;color:var(--muted)}
   border: 1px solid rgba(255,255,255,.18);
   transition: .3s ease;
 }
+.portfolio-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.portfolio-grid article {
+  min-height: auto;
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.65);
+  color: #111;
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 12px 30px rgba(0,0,0,.06);
+  font-size: 1rem;
+  font-weight: 800;
+  backdrop-filter: blur(14px);
+}
 
 .portfolio-grid article:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 30px 70px rgba(0,0,0,.22);
-}
+  transform: translateY(-4px);
+  background: #111;
+  color: white;
 }
