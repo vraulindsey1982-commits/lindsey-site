@@ -200,8 +200,26 @@ footer{text-align:center;padding:36px;color:var(--muted)}
   transition: all 0.3s ease;
 }
 
+.portfolio-grid article {
+  min-height: 170px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 28px;
+  border-radius: 28px;
+  color: white;
+  font-size: 1.35rem;
+  font-weight: 900;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(255,255,255,.22), transparent 28%),
+    linear-gradient(135deg, #111 0%, #2b2424 48%, #d9958f 100%);
+  box-shadow: 0 22px 55px rgba(0,0,0,.12);
+  border: 1px solid rgba(255,255,255,.18);
+  transition: .3s ease;
+}
+
 .portfolio-grid article:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-  background: linear-gradient(135deg, #2a2a2a, #5a3a3a);
+  transform: translateY(-8px);
+  box-shadow: 0 30px 70px rgba(0,0,0,.22);
+}
 }
