@@ -122,12 +122,22 @@
       <p class="eyebrow">Contact</p>
       <h2>Travaillons ensemble.</h2>
       <p>Expliquez-moi votre projet, votre produit et vos objectifs. Je vous réponds rapidement avec une proposition adaptée.</p>
-     <form action="https://formspree.io/f/mrernnyw" method="POST">
-  <input name="nom" placeholder="Votre nom" required />
-  <input type="email" name="email" placeholder="Votre email" required />
-  <input name="marque" placeholder="Nom de votre marque" />
-  <textarea name="besoin" placeholder="Votre besoin : vidéo, photo, pack, délai..." required></textarea>
-  <button type="submit" class="btn primary">Demander un devis</button>
+  <form action="https://formspree.io/f/mrernnyw" method="POST" id="contact-form">
+
+<input name="nom" placeholder="Votre nom" required />
+
+<input type="email" name="email" placeholder="Votre email" required />
+
+<input name="marque" placeholder="Nom de votre marque" />
+
+<textarea name="besoin" placeholder="Votre besoin : vidéo, photo, pack, délai..." required></textarea>
+
+<button type="submit" class="btn primary">Demander un devis</button>
+
+<p id="form-success" style="display:none; margin-top:15px; font-weight:600;">
+✅ Merci ! Je vous réponds sous 24h.
+</p>
+
 </form>
     </section>
   </main>
@@ -135,7 +145,31 @@
   <footer>
     <p>© Lindsey Créative Studio — UGC lifestyle, beauté & food</p>
   </footer>
+<script>
+const form = document.getElementById("contact-form");
+const successMsg = document.getElementById("form-success");
 
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const data = new FormData(form);
+
+  const response = await fetch(form.action, {
+    method: form.method,
+    body: data,
+    headers: {
+      'Accept': 'application/json'
+    }
+  });
+
+  if (response.ok) {
+    form.reset();
+    successMsg.style.display = "block";
+  } else {
+    alert("Oops… il y a un problème. Réessaie !");
+  }
+});
+</script>
   <script src="script.js"></script>
 </body>
 </html>
