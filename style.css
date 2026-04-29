@@ -268,3 +268,9 @@ footer{text-align:center;padding:36px;color:var(--muted)}
 .cards .card {
   transform: none !important;
 }
+.cards .card,
+.cards .card.featured,
+.cards .card:hover,
+.cards .card.featured:hover {
+  transform: none !important;
+}
