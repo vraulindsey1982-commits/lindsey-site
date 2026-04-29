@@ -250,3 +250,14 @@ footer{text-align:center;padding:36px;color:var(--muted)}
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
   gap: 20px !important;
 }
+.cards {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 24px !important;
+}
+
+@media (max-width: 850px) {
+  .cards {
+    grid-template-columns: 1fr !important;
+  }
+}
