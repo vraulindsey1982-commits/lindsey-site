@@ -323,3 +323,9 @@ footer{text-align:center;padding:36px;color:var(--muted)}
   display: flex;
   align-items: center;
 }
+.footer-logo {
+  height: 90px;
+  width: auto;
+  opacity: .9;
+  margin-bottom: 10px;
+}
