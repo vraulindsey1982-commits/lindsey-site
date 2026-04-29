@@ -314,8 +314,9 @@ footer{text-align:center;padding:36px;color:var(--muted)}
   opacity: 1;
 }
 .logo {
-  height: 40px;
-  object-fit: contain;
+  height: 70px;
+  width: auto;
+  filter: contrast(1.1);
 }
 
 .brand {
