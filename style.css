@@ -731,3 +731,6 @@ footer a:hover{
   max-width:420px;   /* limite largeur de chaque carte */
   margin:auto;       /* centre chaque carte dans sa colonne */
 }
+#offres .cards{
+  grid-template-columns:repeat(2, minmax(260px, 380px));
+}
