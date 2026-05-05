@@ -421,3 +421,9 @@ body{
   object-fit:cover;
   border-radius:20px;
 }
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start; /* IMPORTANT */
+}
