@@ -435,3 +435,15 @@ body{
 }
 align-items: start;
 align-items: center;
+/* FIX SECTION POURQUOI + RÉSULTATS */
+.split{
+  display:block !important;
+}
+
+.split > div{
+  max-width:900px;
+}
+
+.split .checks{
+  margin-top:35px;
+}
