@@ -427,3 +427,9 @@ body{
   gap: 40px;
   align-items: start; /* IMPORTANT */
 }
+.section {
+  align-items: start;
+}
+.results {
+  margin-top: -20px;
+}
