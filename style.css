@@ -650,3 +650,32 @@ footer a:hover{
     grid-template-columns:1fr;
   }
 }
+/* ALIGNEMENT POURQUOI / RÉSULTATS */
+.why-results{
+  max-width:1180px;
+  margin:0 auto;
+}
+
+.why-results-head{
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:60px;
+  align-items:start !important;
+  margin-bottom:45px;
+}
+
+.why-results-head h2{
+  font-size:clamp(2.4rem,4.5vw,5rem);
+  margin:8px 0 0;
+}
+
+.why-results .checks{
+  display:grid !important;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+  margin-bottom:45px;
+}
+
+.results-cards{
+  grid-template-columns:repeat(3,1fr) !important;
+}
