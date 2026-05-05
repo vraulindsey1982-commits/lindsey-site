@@ -563,3 +563,12 @@ footer a:hover{
     height:100px;
   }
 }
+/* Séparation claire entre Pourquoi moi et Résultats */
+.split{
+  margin-bottom:80px !important;
+}
+
+.results-section{
+  padding-top:90px !important;
+  border-top:1px solid rgba(217,149,143,.18);
+}
