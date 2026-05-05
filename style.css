@@ -324,10 +324,16 @@ footer{
   color:var(--muted);
 }
 .footer-logo{
-  height:90px;
+  height:160px; /* + gros */
   width:auto;
-  opacity:.9;
-  margin-bottom:10px;
+  opacity:1;
+  margin-bottom:20px;
+  filter: drop-shadow(0 15px 40px rgba(0,0,0,0.2));
+  transition: transform 0.3s ease;
+}
+
+.footer-logo:hover{
+  transform: scale(1.05);
 }
 
 /* REVEAL */
