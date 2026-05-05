@@ -691,3 +691,6 @@ footer a:hover{
 .why-results-head > div{
   width: 100%;
 }
+.section{
+  display:block;
+}
