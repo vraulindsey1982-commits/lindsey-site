@@ -745,3 +745,10 @@ footer a:hover{
 #offres h2{
   text-align:center;
 }
+#offres .cards{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:28px;
+  margin-top:40px;
+  padding:0 10px; /* espace sur les côtés */
+}
