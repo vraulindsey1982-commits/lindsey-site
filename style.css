@@ -694,3 +694,27 @@ footer a:hover{
 .section{
   display:block;
 }
+/* FORMULES - cartes moins énormes */
+#offres .cards{
+  gap:22px !important;
+}
+
+#offres .card{
+  min-height:170px !important;
+  padding:30px 24px !important;
+  border-radius:26px !important;
+}
+
+#offres .card h3{
+  font-size:1.45rem !important;
+  margin-bottom:14px !important;
+}
+
+#offres .card p{
+  font-size:1.15rem !important;
+  margin-bottom:10px !important;
+}
+
+#offres .card span{
+  font-size:.95rem !important;
+}
