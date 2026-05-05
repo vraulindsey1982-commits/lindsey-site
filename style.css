@@ -629,3 +629,24 @@ footer a:hover{
     min-height:auto;
   }
 }
+.why-results-head{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:start;
+  margin-bottom:35px;
+}
+
+.why-results .checks{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+  margin-bottom:45px;
+}
+
+@media(max-width:850px){
+  .why-results-head,
+  .why-results .checks{
+    grid-template-columns:1fr;
+  }
+}
