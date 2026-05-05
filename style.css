@@ -679,3 +679,15 @@ footer a:hover{
 .results-cards{
   grid-template-columns:repeat(3,1fr) !important;
 }
+/* FORCE ALIGNEMENT POURQUOI / RESULTATS */
+.why-results-head{
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 80px !important;
+  align-items: start !important;
+}
+
+/* empêcher empilement vertical */
+.why-results-head > div{
+  width: 100%;
+}
