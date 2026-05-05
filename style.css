@@ -356,3 +356,62 @@ footer a:hover{text-decoration:underline}
   box-shadow:0 45px 110px rgba(217,149,143,.4);
   border:2px solid rgba(217,149,143,.4);
 }
+/* ===== LUXURY UGC UPGRADE ===== */
+
+body{
+  background:
+    radial-gradient(circle at 20% 10%, rgba(217,149,143,.18), transparent 28%),
+    linear-gradient(180deg,#fffaf7 0%, #f8f2ea 45%, #fff 100%);
+}
+
+.hero{
+  padding-top:75px;
+}
+
+.hero-copy{
+  max-width:780px;
+}
+
+.hero h1{
+  letter-spacing:-0.06em;
+}
+
+.hero p{
+  font-size:1.25rem;
+  line-height:1.7;
+}
+
+.eyebrow{
+  color:#c47f79;
+}
+
+.card,
+.price-box.premium{
+  backdrop-filter:blur(18px);
+}
+
+.card{
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255,255,255,.8), transparent 35%),
+    linear-gradient(135deg,#fff 0%,#f8e6e1 45%,#e6b0aa 100%);
+  border:1px solid rgba(255,255,255,.65);
+}
+
+.card:hover{
+  transform:translateY(-12px) scale(1.025);
+}
+
+.price-box.premium{
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,.95), transparent 38%),
+    linear-gradient(135deg,#fff 0%,#f8e6e1 48%,#d9958f 100%);
+  border:1px solid rgba(255,255,255,.7);
+}
+
+.btn.primary{
+  background:linear-gradient(135deg,#111,#5a3a3a);
+}
+
+.btn.primary:hover{
+  background:linear-gradient(135deg,#5a3a3a,#d9958f);
+}
