@@ -232,3 +232,31 @@ footer a:hover{text-decoration:underline}
   footer p, footer a{font-size:13px !important;line-height:1.7}
   .footer-logo{height:100px}
 }
+/* TARIFS PREMIUM */
+.price-box.premium{
+  text-align:center;
+  padding:50px 40px;
+  border-radius:30px;
+  background:linear-gradient(135deg,#fff7f4 0%,#f3d6cf 50%,#d9958f 100%);
+  box-shadow:0 25px 70px rgba(217,149,143,.25);
+  border:1px solid rgba(217,149,143,.2);
+  max-width:700px;
+  margin:auto;
+}
+
+.price-title{
+  font-size:28px;
+  font-weight:900;
+  margin-bottom:15px;
+  color:#3a2b2b;
+}
+
+.price-desc{
+  font-size:18px;
+  color:#5a3a3a;
+  margin-bottom:10px;
+}
+
+.price-box .btn{
+  margin-top:20px;
+}
