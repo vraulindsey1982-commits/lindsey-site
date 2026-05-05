@@ -293,3 +293,66 @@ footer a:hover{text-decoration:underline}
   margin-top:26px;
   padding:16px 28px;
 }
+/* CARDS PREMIUM VERSION AGENCE */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:30px;
+}
+
+.card{
+  position:relative;
+  overflow:hidden;
+  border-radius:32px;
+  padding:50px 35px;
+  background:linear-gradient(135deg,#fff 0%,#f8e6e1 40%,#f3d6cf 100%);
+  border:1px solid rgba(217,149,143,.25);
+  box-shadow:0 30px 80px rgba(217,149,143,.25);
+  transition:.35s ease;
+}
+
+.card h3{
+  font-size:1.8rem;
+  margin-bottom:20px;
+  color:#3a2b2b;
+}
+
+.card p{
+  font-size:1.4rem;
+  font-weight:900;
+  margin-bottom:15px;
+  color:#5a3a3a;
+}
+
+.card span{
+  font-size:1rem;
+  color:#6e625d;
+  font-weight:600;
+}
+
+/* effet hover luxe */
+.card:hover{
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 40px 100px rgba(217,149,143,.35);
+}
+
+/* effet lumière premium */
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 20% 0%,rgba(255,255,255,.6),transparent 40%);
+  opacity:0;
+  transition:.3s;
+}
+
+.card:hover::after{
+  opacity:1;
+}
+
+/* carte centrale boostée */
+.featured{
+  transform:scale(1.05);
+  box-shadow:0 45px 110px rgba(217,149,143,.4);
+  border:2px solid rgba(217,149,143,.4);
+}
