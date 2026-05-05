@@ -718,3 +718,16 @@ footer a:hover{
 #offres .card span{
   font-size:.95rem !important;
 }
+/* FORMULES - largeur plus élégante */
+#offres .cards{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:28px;
+  max-width:900px;   /* limite la largeur globale */
+  margin:auto;       /* centre la section */
+}
+
+#offres .card{
+  max-width:420px;   /* limite largeur de chaque carte */
+  margin:auto;       /* centre chaque carte dans sa colonne */
+}
