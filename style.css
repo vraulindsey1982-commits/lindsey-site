@@ -734,3 +734,14 @@ footer a:hover{
 #offres .cards{
   grid-template-columns:repeat(2, minmax(260px, 380px));
 }
+/* SECTION OFFRES - ALIGNEMENT PROPRE */
+#offres{
+  max-width:1100px;
+  margin:0 auto;
+  padding:80px 20px;
+}
+
+#offres .eyebrow,
+#offres h2{
+  text-align:center;
+}
