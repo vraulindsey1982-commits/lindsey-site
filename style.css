@@ -567,4 +567,22 @@ footer a{
   .footer-logo{
     height:100px;
   }
+/* PAGE LEGALE */
+.legal{
+  max-width:900px;
+  margin:0 auto;
+  padding:80px 20px;
+  line-height:1.7;
+}
+
+.back-home{
+  display:inline-block;
+  margin-bottom:25px;
+  font-weight:800;
+  color:#d9958f;
+  text-decoration:none;
+}
+
+.back-home:hover{
+  text-decoration:underline;
 }
