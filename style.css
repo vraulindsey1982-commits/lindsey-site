@@ -533,3 +533,16 @@ footer a{
     height:100px;
   }
 }
+/* REDUIRE L'ESPACE ENTRE LES SECTIONS */
+.section{
+  padding-top:60px;
+  padding-bottom:60px;
+}
+
+#offres{
+  padding-bottom:40px;
+}
+
+.seo-section{
+  padding-top:40px;
+}
