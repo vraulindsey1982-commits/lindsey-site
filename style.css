@@ -548,3 +548,20 @@ footer a{
 .seo-section{
   padding-top:40px;
 }
+/* PAGES LEGALES */
+.legal{
+  max-width:900px;
+  margin:40px auto;
+  padding:20px;
+  line-height:1.7;
+}
+
+.legal h1{
+  font-size:2.5rem;
+  margin-bottom:20px;
+}
+
+.legal h2{
+  font-size:1.5rem;
+  margin-top:30px;
+}
