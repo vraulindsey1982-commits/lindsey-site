@@ -796,7 +796,11 @@ footer a:hover{
 .seo-section h2{
   font-size:clamp(2rem,4vw,4rem);
 }
-
+.hero-copy {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: left; /* 🔥 important */
+}
 .seo-section p{
   color:var(--muted);
   font-size:1.1rem;
