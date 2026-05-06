@@ -806,3 +806,7 @@ footer a:hover{
   font-size:1.1rem;
   line-height:1.7;
 }
+.hero {
+  padding-left: 80px;
+  padding-right: 80px;
+}
