@@ -769,3 +769,8 @@ footer a:hover{
 .section .eyebrow {
   text-align: left;
 }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
