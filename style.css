@@ -787,3 +787,18 @@ footer a:hover{
   margin: 0 auto;
   padding: 0 20px;
 }
+.seo-section{
+  max-width:900px;
+  margin:0 auto;
+  text-align:center;
+}
+
+.seo-section h2{
+  font-size:clamp(2rem,4vw,4rem);
+}
+
+.seo-section p{
+  color:var(--muted);
+  font-size:1.1rem;
+  line-height:1.7;
+}
