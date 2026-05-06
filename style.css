@@ -59,13 +59,13 @@ body{
   border-radius:999px;
 }
 
-/* GLOBAL SECTIONS */
+/* GLOBAL */
 .section,
 .hero,
 .stats{
   max-width:1180px;
   margin:0 auto;
-  padding:80px 20px;
+  padding:60px 20px;
   text-align:left;
 }
 
@@ -350,6 +350,7 @@ blockquote{
 /* OFFRES */
 #offres{
   max-width:1180px;
+  padding-bottom:40px;
 }
 
 #offres .eyebrow,
@@ -407,14 +408,15 @@ blockquote{
 
 /* SEO SECTION */
 .seo-section{
+  max-width:1180px;
+  margin:0 auto;
+  padding-top:40px;
   text-align:left;
 }
 
-.seo-section{
-  max-width:1180px;
-  margin:0 auto;
-  text-align:left;
-}
+.seo-section p{
+  color:var(--muted);
+  max-width:850px;
 }
 
 /* CONTACT */
@@ -437,6 +439,37 @@ textarea{
 
 textarea{
   min-height:140px;
+}
+
+/* PAGES LEGALES */
+.legal{
+  max-width:900px;
+  margin:0 auto;
+  padding:70px 20px;
+  line-height:1.7;
+}
+
+.legal h1{
+  font-size:clamp(2.5rem,5vw,4.5rem);
+  margin-bottom:35px;
+}
+
+.legal h2{
+  font-size:clamp(1.6rem,3vw,2.5rem);
+  margin-top:35px;
+  margin-bottom:12px;
+}
+
+.back-home{
+  display:inline-block;
+  margin-bottom:30px;
+  font-weight:800;
+  color:var(--rose);
+  text-decoration:none;
+}
+
+.back-home:hover{
+  text-decoration:underline;
 }
 
 /* FOOTER */
@@ -534,63 +567,4 @@ footer a{
   .footer-logo{
     height:100px;
   }
-}
-/* REDUIRE L'ESPACE ENTRE LES SECTIONS */
-.section{
-  padding-top:60px;
-  padding-bottom:60px;
-}
-
-#offres{
-  padding-bottom:40px;
-}
-
-.seo-section{
-  padding-top:40px;
-}
-/* PAGES LEGALES */
-.legal{
-  max-width:900px;
-  margin:40px auto;
-  padding:20px;
-  line-height:1.7;
-}
-
-.legal h1{
-  font-size:2.5rem;
-  margin-bottom:20px;
-}
-
-.legal h2{
-  font-size:1.5rem;
-  margin-top:30px;
-}
-.legal{
-  max-width:900px;
-  margin:0 auto;
-  padding:70px 20px;
-  line-height:1.7;
-}
-
-.legal h1{
-  font-size:clamp(2.5rem,5vw,4.5rem);
-  margin-bottom:35px;
-}
-
-.legal h2{
-  font-size:clamp(1.6rem,3vw,2.5rem);
-  margin-top:35px;
-  margin-bottom:12px;
-}
-
-.back-home{
-  display:inline-block;
-  margin-bottom:30px;
-  font-weight:800;
-  color:var(--rose);
-  text-decoration:none;
-}
-
-.back-home:hover{
-  text-decoration:underline;
 }
