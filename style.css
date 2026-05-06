@@ -410,9 +410,11 @@ blockquote{
   text-align:left;
 }
 
-.seo-section p{
-  color:var(--muted);
-  max-width:850px;
+.seo-section{
+  max-width:1180px;
+  margin:0 auto;
+  text-align:left;
+}
 }
 
 /* CONTACT */
