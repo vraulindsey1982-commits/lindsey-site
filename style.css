@@ -107,8 +107,8 @@ p{
 }
 
 .hero-copy{
+  flex:1;
   max-width:720px;
-  text-align:left;
 }
 
 .hero p{
