@@ -3,34 +3,32 @@
 
   <url>
     <loc>https://lindsey-portfolio-ugc.vercel.app/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://lindsey-portfolio-ugc.vercel.app/#portfolio</loc>
+    <loc>https://lindsey-portfolio-ugc.vercel.app/portfolio.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://lindsey-portfolio-ugc.vercel.app/#offres</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://lindsey-portfolio-ugc.vercel.app/#tarifs</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://lindsey-portfolio-ugc.vercel.app/#contact</loc>
-  </url>
-
-  <url>
-    <loc>https://lindsey-portfolio-ugc.vercel.app/mentions-legales.html</loc>
-  </url>
-
-  <url>
-    <loc>https://lindsey-portfolio-ugc.vercel.app/confidentialite.html</loc>
-  </url>
-
-  <url>
-    <loc>https://lindsey-portfolio-ugc.vercel.app/cgv.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
 </urlset>

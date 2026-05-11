@@ -11,6 +11,20 @@
   <meta name="keywords" content="créatrice UGC France, UGC TikTok, UGC Instagram, contenu marque, UGC beauté, UGC lifestyle, créateur contenu freelance, gestion réseaux sociaux" />
   <meta name="author" content="Lindsey Créative Studio" />
 
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lindsey-portfolio-ugc.vercel.app/" />
+  <meta property="og:title" content="Créatrice UGC France | Lindsey Créative Studio" />
+  <meta property="og:description" content="Créatrice UGC spécialisée en vidéos TikTok & Instagram pour marques beauté, lifestyle et food. Contenu authentique, ads ready, livraison rapide." />
+  <meta property="og:image" content="https://lindsey-portfolio-ugc.vercel.app/affiche-lindsey.jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://lindsey-portfolio-ugc.vercel.app/" />
+
   <link rel="stylesheet" href="style.css" />
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PH16HZWF71"></script>
@@ -32,6 +46,9 @@
       <a href="#tarifs">Tarifs</a>
       <a href="#contact" class="pill">Devis</a>
     </nav>
+    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
   <main id="top">
@@ -55,7 +72,11 @@
 
         <p class="proof">+50 vidéos créées • Contenu utilisé en publicité • Livraison rapide</p>
 
-        
+        <div class="actions">
+          <a href="#contact" class="btn primary">Demander un devis</a>
+          <a href="portfolio.html" class="btn secondary">Voir le portfolio</a>
+        </div>
+      </div>
 
       <div class="hero-card">
         <div class="phone">
@@ -109,23 +130,20 @@
         <article>Lifestyle</article>
         <article>Food content</article>
         <article>Ads courtes</article>
-      <div class="photo-grid">
-  <img src="photo1.jpg" alt="Photo produit UGC">
-  <img src="photo2.jpg" alt="Photo lifestyle UGC">
-  <img src="photo3.jpg" alt="Photo contenu UGC">
-</div>
-<div style="text-align:center; margin-top:30px;">
-  <a href="portfolio.html" class="btn primary">
-    Voir tout le portfolio
-  </a>
-</div>
-
-
-        <div>
-          <p class="eyebrow">Résultats</p>
-          <h2>Du contenu qui performe vraiment.</h2>
-        </div>
       </div>
+
+      <div class="photo-grid">
+        <img src="photo1.jpg" alt="Photo produit UGC" loading="lazy">
+        <img src="photo2.jpg" alt="Photo lifestyle UGC" loading="lazy">
+        <img src="photo3.jpg" alt="Photo contenu UGC" loading="lazy">
+      </div>
+
+      <div style="text-align:center; margin-top:30px;">
+        <a href="portfolio.html" class="btn primary">Voir tout le portfolio</a>
+      </div>
+
+      <p class="eyebrow" style="margin-top:60px;">Résultats</p>
+      <h2>Du contenu qui performe vraiment.</h2>
 
       <div class="checks">
         <p>✓ Contenu optimisé pour capter l’attention dès les premières secondes</p>
@@ -275,5 +293,22 @@
   </script>
 
   <script src="script.js"></script>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Lindsey Créative Studio",
+    "description": "Créatrice UGC spécialisée en vidéos TikTok & Instagram pour marques beauté, lifestyle et food. Contenu authentique, ads ready.",
+    "url": "https://lindsey-portfolio-ugc.vercel.app/",
+    "email": "lindseyvrau@sfr.fr",
+    "areaServed": "FR",
+    "priceRange": "À partir de 50€",
+    "serviceType": ["Création de contenu UGC", "Vidéo TikTok", "Vidéo Instagram", "Gestion réseaux sociaux"],
+    "knowsAbout": ["UGC", "TikTok", "Instagram", "Beauté", "Lifestyle", "Food"],
+    "sameAs": []
+  }
+  </script>
 </body>
 </html>
