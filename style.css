@@ -160,12 +160,12 @@ p{
 
 /* PHONE */
 .hero-card{
-  position:relative;
-  min-height:500px;
+  position:sticky;
+  top:120px;
+  width:320px;
+  min-width:320px;
   display:flex;
   justify-content:flex-end;
-  align-items:flex-start;
-  padding-top:20px;
 }
 
 .phone{
