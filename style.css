@@ -588,7 +588,34 @@ footer a{
   .footer-logo{
     height:100px;
   }
-}
-.phone{
-  margin-top:0;
-}
+}@media(min-width:851px){
+  .hero{
+    position:relative;
+    display:block;
+    min-height:650px;
+    padding-right:390px;
+  }
+
+  .hero-copy{
+    max-width:720px;
+  }
+
+  .hero-card{
+    position:absolute;
+    top:80px;
+    right:20px;
+    width:340px;
+    min-width:340px;
+    min-height:500px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+  }
+
+  .phone{
+    width:270px;
+    height:480px;
+    margin:0;
+  }
+
+
