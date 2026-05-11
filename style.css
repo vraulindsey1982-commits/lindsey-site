@@ -617,5 +617,26 @@ footer a{
     height:480px;
     margin:0;
   }
+}
 
+/* FEATURED CARD */
+.card.featured{
+  background:
+    radial-gradient(circle at 20% 0%,rgba(255,255,255,.7),transparent 35%),
+    linear-gradient(135deg,#5a3a3a 0%,#3a2b2b 100%);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 26px 70px rgba(90,58,58,.35);
+}
 
+.card.featured h3{
+  color:#f8e6e1;
+}
+
+.card.featured p{
+  color:#e9cfc5;
+}
+
+.card.featured span{
+  color:#c9a8a2;
+}
