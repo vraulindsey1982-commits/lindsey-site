@@ -604,3 +604,30 @@ footer a{
     justify-content:flex-end !important;
   }
 }
+@media(min-width:851px){
+  .hero{
+    max-width:1180px !important;
+    display:grid !important;
+    grid-template-columns: 1fr 380px !important;
+    gap:60px !important;
+    align-items:center !important;
+  }
+
+  .hero-copy{
+    grid-column:1 !important;
+    width:100% !important;
+  }
+
+  .hero-card{
+    grid-column:2 !important;
+    width:380px !important;
+    min-height:520px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-end !important;
+  }
+
+  .phone{
+    margin-left:auto !important;
+  }
+}
