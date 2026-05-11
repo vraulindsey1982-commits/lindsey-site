@@ -2,10 +2,34 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio | Lindsey Creative Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="stylesheet" href="style.css"/>
+  <title>Portfolio UGC | Créations vidéo TikTok & Instagram | Lindsey Créative Studio</title>
+  <meta name="description" content="Découvrez le portfolio de Lindsey Créative Studio : vidéos UGC beauté, lifestyle et food pour TikTok, Instagram et publicité. Contenu authentique et ads ready." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://lindsey-portfolio-ugc.vercel.app/portfolio.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lindsey-portfolio-ugc.vercel.app/portfolio.html" />
+  <meta property="og:title" content="Portfolio UGC | Lindsey Créative Studio" />
+  <meta property="og:description" content="Vidéos UGC beauté, lifestyle et food pour TikTok, Instagram et publicité." />
+  <meta property="og:image" content="https://lindsey-portfolio-ugc.vercel.app/affiche-lindsey.jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PH16HZWF71"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PH16HZWF71');
+  </script>
 </head>
 
 <body>
@@ -18,6 +42,9 @@
     <a href="portfolio.html">Portfolio</a>
     <a href="index.html#contact" class="pill">Contact</a>
   </nav>
+  <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
 <main class="section">
@@ -36,10 +63,15 @@
 </main>
 
 <footer>
+  <img src="logo.png" alt="Lindsey Créative Studio" class="footer-logo" width="300" height="160">
   <p>
-    © Lindsey Creative Studio
+    © Lindsey Créative Studio
+    | <a href="mentions-legales.html">Mentions légales</a>
+    | <a href="confidentialite.html">Confidentialité</a>
+    | <a href="cgv.html">CGV</a>
   </p>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
