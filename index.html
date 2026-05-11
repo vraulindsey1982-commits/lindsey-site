@@ -11,6 +11,17 @@
   <meta name="keywords" content="créatrice UGC France, UGC TikTok, UGC Instagram, contenu marque, UGC beauté, UGC lifestyle, créateur contenu freelance, gestion réseaux sociaux" />
   <meta name="author" content="Lindsey Créative Studio" />
 
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+
+  <!-- Police Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Préchargement image hero -->
+  <link rel="preload" as="image" href="affiche-lindsey.jpeg" />
+
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://lindsey-portfolio-ugc.vercel.app/" />
@@ -80,7 +91,7 @@
 
       <div class="hero-card">
         <div class="phone">
-          <img src="affiche-lindsey.jpeg" alt="Affiche Lindsey Créative Studio" class="phone-image" width="270" height="480">
+          <img src="affiche-lindsey.jpeg" alt="Affiche Lindsey Créative Studio" class="phone-image" width="270" height="480" fetchpriority="high" decoding="sync">
         </div>
         <div class="floating one">Ads ready</div>
         <div class="floating two">Authentique</div>
@@ -133,9 +144,9 @@
       </div>
 
       <div class="photo-grid">
-        <img src="photo1.jpg" alt="Photo produit UGC" loading="lazy">
-        <img src="photo2.jpg" alt="Photo lifestyle UGC" loading="lazy">
-        <img src="photo3.jpg" alt="Photo contenu UGC" loading="lazy">
+        <img src="photo1.jpg" alt="Photo produit UGC" loading="lazy" decoding="async">
+        <img src="photo2.jpg" alt="Photo lifestyle UGC" loading="lazy" decoding="async">
+        <img src="photo3.jpg" alt="Photo contenu UGC" loading="lazy" decoding="async">
       </div>
 
       <div style="text-align:center; margin-top:30px;">
@@ -257,7 +268,7 @@
   </main>
 
   <footer>
-    <img src="logo.png" alt="Lindsey Creative Studio" class="footer-logo" width="300" height="160">
+    <img src="logo.png" alt="Lindsey Creative Studio" class="footer-logo" width="300" height="160" loading="lazy" decoding="async">
     <p>
       © Lindsey Créative Studio
       | <a href="mentions-legales.html">Mentions légales</a>
@@ -265,32 +276,6 @@
       | <a href="cgv.html">CGV</a>
     </p>
   </footer>
-
-  <script>
-    const form = document.getElementById("contact-form");
-    const successMsg = document.getElementById("form-success");
-
-    form.addEventListener("submit", async function(e) {
-      e.preventDefault();
-
-      const data = new FormData(form);
-
-      const response = await fetch(form.action, {
-        method: form.method,
-        body: data,
-        headers: {
-          "Accept": "application/json"
-        }
-      });
-
-      if (response.ok) {
-        form.reset();
-        successMsg.style.display = "block";
-      } else {
-        alert("Oops… il y a un problème. Réessaie !");
-      }
-    });
-  </script>
 
   <script src="script.js"></script>
 
