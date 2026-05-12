@@ -13,9 +13,10 @@
 
   <!-- Preconnect -->
   <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
-  <!-- Préchargement image hero -->
-  <link rel="preload" as="image" href="affiche-lindsey.jpeg" />
+  <!-- Préchargement image hero WebP -->
+  <link rel="preload" as="image" href="affiche-lindsey.webp" type="image/webp" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -32,15 +33,26 @@
   <link rel="canonical" href="https://lindsey-portfolio-ugc.vercel.app/" />
 
   <link rel="stylesheet" href="style.css" />
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PH16HZWF71"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-PH16HZWF71');
-</script>
+  <!-- Google Analytics chargé après interaction pour réduire le TBT -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PH16HZWF71');
+    function loadGA() {
+      if (window._gaLoaded) return;
+      window._gaLoaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-PH16HZWF71';
+      document.head.appendChild(s);
+    }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadGA, { timeout: 4000 });
+    } else {
+      window.addEventListener('load', loadGA);
+    }
+  </script>
 </head>
 
 <body>
@@ -69,11 +81,11 @@
         </p>
 
         <p>
-          J’accompagne les marques avec des contenus authentiques, stratégiques et prêts pour la publicité.
+          J'accompagne les marques avec des contenus authentiques, stratégiques et prêts pour la publicité.
         </p>
 
         <p style="margin-top:10px; font-weight:700;">
-          Un rendu professionnel, pensé pour capter l’attention dès les 3 premières secondes.
+          Un rendu professionnel, pensé pour capter l'attention dès les 3 premières secondes.
         </p>
 
         <p class="proof">+50 vidéos créées • Contenu utilisé en publicité • Livraison rapide</p>
@@ -130,7 +142,7 @@
 
     <section id="portfolio" class="section reveal">
       <p class="eyebrow">Portfolio</p>
-      <h2>Des contenus pensés pour capter l’attention.</h2>
+      <h2>Des contenus pensés pour capter l'attention.</h2>
 
       <div class="grid portfolio-grid">
         <article>Face cam</article>
@@ -144,15 +156,15 @@
       <div class="photo-grid">
         <picture>
           <source srcset="photo1.webp" type="image/webp">
-          <img src="photo1.jpg" alt="Photo produit UGC" loading="lazy" decoding="async">
+          <img src="photo1.jpg" alt="Photo produit UGC" loading="lazy" decoding="async" width="400" height="320">
         </picture>
         <picture>
           <source srcset="photo2.webp" type="image/webp">
-          <img src="photo2.jpg" alt="Photo lifestyle UGC" loading="lazy" decoding="async">
+          <img src="photo2.jpg" alt="Photo lifestyle UGC" loading="lazy" decoding="async" width="400" height="320">
         </picture>
         <picture>
           <source srcset="photo3.webp" type="image/webp">
-          <img src="photo3.jpg" alt="Photo contenu UGC" loading="lazy" decoding="async">
+          <img src="photo3.jpg" alt="Photo contenu UGC" loading="lazy" decoding="async" width="400" height="320">
         </picture>
       </div>
 
@@ -164,7 +176,7 @@
       <h2>Du contenu qui performe vraiment.</h2>
 
       <div class="checks">
-        <p>✓ Contenu optimisé pour capter l’attention dès les premières secondes</p>
+        <p>✓ Contenu optimisé pour capter l'attention dès les premières secondes</p>
         <p>✓ Vidéos adaptées aux codes TikTok & Instagram</p>
         <p>✓ Approche authentique qui renforce la confiance et les ventes</p>
         <p>✓ Livraison rapide, claire et professionnelle</p>
@@ -172,8 +184,8 @@
 
       <div class="cards results-cards">
         <div class="card">
-          <h3>+ d’attention</h3>
-          <p>Des vidéos conçues pour captiver dès les 3 premières secondes et retenir l’utilisateur</p>
+          <h3>+ d'attention</h3>
+          <p>Des vidéos conçues pour captiver dès les 3 premières secondes et retenir l'utilisateur</p>
         </div>
 
         <div class="card">
@@ -183,7 +195,7 @@
 
         <div class="card">
           <h3>+ de conversions</h3>
-          <p>Une approche stratégique pensée pour transformer l’attention en ventes</p>
+          <p>Une approche stratégique pensée pour transformer l'attention en ventes</p>
         </div>
       </div>
     </section>
@@ -242,15 +254,15 @@
       <p class="eyebrow">Avis clients</p>
       <h2>Ils pourraient parler de moi.</h2>
 
-      <blockquote>“Bonsoir à tous, je vous recommande à 100% "Creatrive Studio" Lyndsey est très professionnelle, et de bon conseil. Elle est à votre écoute, personnellement je trouve que c'est hyper important. Surtout si vous êtes comme moi assez nulle en informatique. Allez lui rendre une petite visite de courtoisie, elle sera contente de vous renseigner.”</blockquote>
-      <blockquote>“Contenu professionnel et authentique elle comprends nos besoins je recommande”</blockquote>
+      <blockquote>"Bonsoir à tous, je vous recommande à 100% "Creatrive Studio" Lyndsey est très professionnelle, et de bon conseil. Elle est à votre écoute, personnellement je trouve que c'est hyper important. Surtout si vous êtes comme moi assez nulle en informatique. Allez lui rendre une petite visite de courtoisie, elle sera contente de vous renseigner."</blockquote>
+      <blockquote>"Contenu professionnel et authentique elle comprends nos besoins je recommande"</blockquote>
     </section>
 
     <section class="section seo-section reveal">
       <p class="eyebrow">Créatrice UGC France</p>
       <h2>Création de contenu UGC pour marques.</h2>
       <p>
-        Je suis créatrice UGC en France et j’aide les marques beauté, lifestyle et food à booster leur visibilité grâce à des vidéos TikTok, Instagram et contenus publicitaires performants.
+        Je suis créatrice UGC en France et j'aide les marques beauté, lifestyle et food à booster leur visibilité grâce à des vidéos TikTok, Instagram et contenus publicitaires performants.
       </p>
     </section>
 
