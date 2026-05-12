@@ -299,12 +299,19 @@ blockquote{
   font-weight:900;
 }
 
+.eyebrow-sub{
+  font-size:.75rem;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--rose);
+  margin:40px 0 12px;
+}
+
 .photo-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:18px;
-  margin-top:40px;
-  align-items:start;
 }
 
 .photo-grid img{
@@ -314,10 +321,15 @@ blockquote{
   border-radius:22px;
 }
 
-.photo-grid video{
+.video-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.video-grid video{
   width:100%;
   aspect-ratio:9/16;
-  height:auto;
   object-fit:cover;
   border-radius:22px;
 }
