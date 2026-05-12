@@ -1,3 +1,43 @@
+// Avis Google
+async function loadReviews() {
+  try {
+    const res = await fetch('/api/reviews');
+    if (!res.ok) return;
+    const { reviews, rating, total } = await res.json();
+
+    if (rating) {
+      const stars = '★'.repeat(Math.round(rating)) + '☆'.repeat(5 - Math.round(rating));
+      document.getElementById('reviews-stars').textContent = stars;
+      document.getElementById('reviews-score').textContent = rating.toFixed(1);
+      document.getElementById('reviews-count').textContent = `(${total} avis)`;
+      document.getElementById('reviews-rating').style.display = 'flex';
+    }
+
+    if (reviews && reviews.length) {
+      const container = document.getElementById('reviews-container');
+      container.innerHTML = reviews.map(r => `
+        <blockquote>
+          <div class="review-meta">
+            <span class="review-author">${r.author_name}</span>
+            <span class="review-stars">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+          </div>
+          <p class="review-text">"${r.text}"</p>
+          <span class="review-date">${r.relative_time_description}</span>
+        </blockquote>
+      `).join('');
+    }
+
+    const link = document.getElementById('reviews-link');
+    if (link) link.style.display = 'inline-block';
+  } catch (e) {}
+}
+
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(loadReviews, { timeout: 5000 });
+} else {
+  window.addEventListener('load', loadReviews);
+}
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) entry.target.classList.add('visible');
