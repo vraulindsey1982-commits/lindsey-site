@@ -10,21 +10,35 @@ export default async function handler(req, res) {
   }
 
   try {
-    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews,rating,user_ratings_total&language=fr&key=${apiKey}`;
-    const response = await fetch(url);
-    const data = await response.json();
+    const url = `https://places.googleapis.com/v1/places/${placeId}`;
+    const response = await fetch(url, {
+      headers: {
+        'X-Goog-Api-Key': apiKey,
+        'X-Goog-FieldMask': 'reviews,rating,userRatingCount',
+        'Content-Type': 'application/json',
+      },
+    });
 
-    if (data.status !== 'OK') {
-      return res.status(502).json({ error: 'Erreur Google API', status: data.status });
+    if (!response.ok) {
+      const err = await response.json();
+      return res.status(502).json({ error: 'Erreur Google API', detail: err });
     }
 
-    const { reviews = [], rating, user_ratings_total } = data.result;
+    const data = await response.json();
+    const { reviews = [], rating, userRatingCount } = data;
+
     const topReviews = reviews
       .filter(r => r.rating >= 4)
       .sort((a, b) => b.rating - a.rating)
-      .slice(0, 5);
+      .slice(0, 5)
+      .map(r => ({
+        author_name: r.authorAttribution?.displayName ?? 'Anonyme',
+        rating: r.rating,
+        text: r.text?.text ?? '',
+        relative_time_description: r.relativePublishTimeDescription ?? '',
+      }));
 
-    res.status(200).json({ reviews: topReviews, rating, total: user_ratings_total });
+    res.status(200).json({ reviews: topReviews, rating, total: userRatingCount });
   } catch (err) {
     res.status(500).json({ error: 'Erreur serveur' });
   }
