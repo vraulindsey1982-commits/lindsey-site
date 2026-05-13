@@ -4,4 +4,4 @@ Disallow: /mentions-legales.html
 Disallow: /confidentialite.html
 Disallow: /cgv.html
 
-Sitemap: https://lindsey-portfolio-ugc.vercel.app/sitemap.xml
+Sitemap: https://www.lindsey-ugc.fr/sitemap.xml
