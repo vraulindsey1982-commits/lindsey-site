@@ -540,6 +540,25 @@ footer a{
   font-weight:600!important;
 }
 
+.social-links{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  margin-bottom:14px;
+}
+
+.social-links a{
+  font-size:15px!important;
+  font-weight:800!important;
+  color:var(--brown)!important;
+  text-decoration:none;
+  transition:.2s ease;
+}
+
+.social-links a:hover{
+  color:var(--rose)!important;
+}
+
 /* ANIMATION */
 .reveal{
   opacity:0;
