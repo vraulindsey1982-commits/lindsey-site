@@ -2,31 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://lindsey-portfolio-ugc.vercel.app/</loc>
+    <loc>https://www.lindsey-ugc.fr/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://lindsey-portfolio-ugc.vercel.app/portfolio.html</loc>
+    <loc>https://www.lindsey-ugc.fr/portfolio.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://lindsey-portfolio-ugc.vercel.app/#offres</loc>
+    <loc>https://www.lindsey-ugc.fr/#offres</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://lindsey-portfolio-ugc.vercel.app/#tarifs</loc>
+    <loc>https://www.lindsey-ugc.fr/#tarifs</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://lindsey-portfolio-ugc.vercel.app/#contact</loc>
+    <loc>https://www.lindsey-ugc.fr/#contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

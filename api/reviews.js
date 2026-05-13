@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://lindsey-portfolio-ugc.vercel.app');
+  res.setHeader('Access-Control-Allow-Origin', 'https://www.lindsey-ugc.fr');
   res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
 
   const apiKey = process.env.GOOGLE_PLACES_API_KEY;
