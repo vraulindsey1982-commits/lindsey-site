@@ -720,6 +720,22 @@ footer a{
   color:#c9a8a2;
 }
 
+#reviews-container { display: flex; flex-direction: column; gap: 20px; margin-bottom: 28px; }
+
+#reviews-container blockquote {
+  background: #faf6f4;
+  border-left: 3px solid #e8a87c;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin: 0;
+}
+
+.review-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.review-author { font-weight: 700; font-size: 0.95rem; }
+.review-stars { color: #e8a87c; }
+.review-text { margin: 0 0 6px; font-size: 0.95rem; line-height: 1.5; }
+.review-date { font-size: 0.82rem; color: #999; }
+
 /* ── FAQ ── */
 .faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 720px; }
 
