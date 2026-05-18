@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard – Lindsey CM</title>
+  <link rel="stylesheet" href="lindsey-cm.css">
+</head>
+<body>
+
+<div class="dash-layout">
+
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="nav-avatar">L</div>
+      <div class="nav-info">
+        <span class="brand-name">Lindsey <span class="gradient-text">CM</span></span>
+        <span class="brand-sub">Community Manager IA</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item active" onclick="showTab('dashboard')">
+        <span class="ni">📊</span> Tableau de bord
+      </button>
+      <button class="nav-item" onclick="showTab('generate')">
+        <span class="ni">✨</span> Générer du contenu
+      </button>
+      <button class="nav-item" onclick="showTab('validate')">
+        <span class="ni">✅</span> À valider
+        <span id="pending-count" style="margin-left:auto;background:var(--gradient);border-radius:50px;padding:1px 8px;font-size:11px;font-weight:700;">3</span>
+      </button>
+      <button class="nav-item" onclick="showTab('calendar')">
+        <span class="ni">📅</span> Calendrier
+      </button>
+      <button class="nav-item" onclick="showTab('networks')">
+        <span class="ni">🔗</span> Réseaux connectés
+      </button>
+      <button class="nav-item" onclick="showTab('settings')">
+        <span class="ni">⚙️</span> Paramètres
+      </button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="user-pill">
+        <div class="avatar">L</div>
+        <div>
+          <div class="uname">Lindsey</div>
+          <div class="uemail">lindsey@cm.fr</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main ── -->
+  <main class="dash-main">
+
+    <!-- ─ TAB: DASHBOARD ─ -->
+    <div id="tab-dashboard" class="tab-content">
+      <div class="dash-topbar">
+        <div>
+          <h1>Bonjour, Lindsey 👋</h1>
+          <p>Voici votre activité de la semaine</p>
+        </div>
+        <button class="btn-gradient" onclick="showTab('generate')">✨ Générer du contenu</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Posts publiés ce mois</div>
+          <div class="stat-value gradient-text">24</div>
+          <div class="stat-sub trend-up">↑ +8 vs mois dernier</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Posts programmés</div>
+          <div class="stat-value gradient-text">12</div>
+          <div class="stat-sub">sur les 3 prochaines semaines</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Taux d'engagement moyen</div>
+          <div class="stat-value gradient-text">4.7%</div>
+          <div class="stat-sub trend-up">↑ +1.2% ce mois</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Réseaux connectés</div>
+          <div class="stat-value gradient-text">3</div>
+          <div class="stat-sub">LinkedIn · Instagram · Facebook</div>
+        </div>
+      </div>
+
+      <!-- Quick grid -->
+      <div class="dash-grid">
+        <!-- Upcoming posts -->
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Posts à venir</h2>
+            <span class="badge-pill">12 programmés</span>
+          </div>
+          <div class="posts-list" id="upcoming-list"></div>
+        </div>
+
+        <!-- Quick generate -->
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Génération rapide</h2>
+          </div>
+          <div class="gen-form">
+            <div class="form-group">
+              <label>Sujet du post</label>
+              <input type="text" class="form-input" id="quick-topic" placeholder="Ex: lancement d'une nouvelle offre…">
+            </div>
+            <div class="form-group">
+              <label>Réseau</label>
+              <select class="form-select" id="quick-network">
+                <option value="linkedin">💼 LinkedIn</option>
+                <option value="instagram">📸 Instagram</option>
+                <option value="facebook">👥 Facebook</option>
+              </select>
+            </div>
+            <button class="btn-generate" onclick="quickGenerate()">
+              <span class="spinner" id="quick-spinner" style="display:none"></span>
+              <span id="quick-btn-text">✨ Générer maintenant</span>
+            </button>
+            <div id="quick-result" style="display:none; background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:14px; font-size:13px; color:var(--text-soft); line-height:1.6;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─ TAB: GENERATE ─ -->
+    <div id="tab-generate" class="tab-content" style="display:none">
+      <div class="dash-topbar">
+        <div>
+          <h1>Générer du contenu ✨</h1>
+          <p>Décrivez votre besoin, Lindsey crée le post parfait</p>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr; gap:20px;">
+        <div class="panel">
+          <div class="panel-header"><h2>Nouveau post</h2></div>
+          <div class="gen-form">
+            <div class="form-group">
+              <label>Sujet / idée principale</label>
+              <input type="text" class="form-input" id="gen-topic" placeholder="Ex: 5 conseils pour augmenter son engagement LinkedIn">
+            </div>
+            <div class="form-group">
+              <label>Ton de communication</label>
+              <select class="form-select" id="gen-tone">
+                <option value="professionnel">Professionnel et expert</option>
+                <option value="inspirant">Inspirant et motivant</option>
+                <option value="educatif">Éducatif et pédagogique</option>
+                <option value="humour">Décontracté avec humour</option>
+                <option value="storytelling">Storytelling personnel</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Format</label>
+              <select class="form-select" id="gen-format">
+                <option value="post">Post classique</option>
+                <option value="liste">Liste / Top X</option>
+                <option value="question">Post question / engagement</option>
+                <option value="storytelling">Storytelling</option>
+                <option value="carrousel">Plan carrousel</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Réseaux cibles</label>
+              <div class="network-checkboxes">
+                <label class="net-check selected" id="chk-li">
+                  <input type="checkbox" checked onchange="toggleCheck(this,'chk-li')">💼 LinkedIn
+                </label>
+                <label class="net-check" id="chk-ig">
+                  <input type="checkbox" onchange="toggleCheck(this,'chk-ig')">📸 Instagram
+                </label>
+                <label class="net-check" id="chk-fb">
+                  <input type="checkbox" onchange="toggleCheck(this,'chk-fb')">👥 Facebook
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Informations complémentaires (optionnel)</label>
+              <textarea class="form-textarea" id="gen-extra" placeholder="Contexte, chiffres clés, anecdote à intégrer…"></textarea>
+            </div>
+            <button class="btn-generate" id="gen-btn" onclick="generateContent()">
+              <span class="spinner" id="gen-spinner" style="display:none"></span>
+              <span id="gen-btn-text">✨ Générer le contenu</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div class="panel" id="gen-result-panel" style="display:none">
+          <div class="panel-header">
+            <h2>Contenu généré 🎉</h2>
+            <button class="btn-regen" onclick="generateContent()">🔄 Régénérer</button>
+          </div>
+          <div id="gen-result-content" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:18px;font-size:14px;color:var(--text-soft);line-height:1.7;margin-bottom:16px;white-space:pre-wrap;"></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn-approve" onclick="approveGenerated()" style="padding:10px 20px;font-size:13px;">✓ Valider et programmer</button>
+            <button class="btn-regen" onclick="generateContent()" style="padding:10px 20px;font-size:13px;">🔄 Régénérer</button>
+            <button class="btn-reject" onclick="document.getElementById('gen-result-panel').style.display='none'" style="padding:10px 20px;font-size:13px;">✕ Ignorer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─ TAB: VALIDATE ─ -->
+    <div id="tab-validate" class="tab-content" style="display:none">
+      <div class="dash-topbar">
+        <div>
+          <h1>Posts à valider ✅</h1>
+          <p>Approuvez, modifiez ou régénérez avant publication</p>
+        </div>
+      </div>
+      <div class="posts-list" id="validate-list"></div>
+    </div>
+
+    <!-- ─ TAB: CALENDAR ─ -->
+    <div id="tab-calendar" class="tab-content" style="display:none">
+      <div class="dash-topbar">
+        <div>
+          <h1>Calendrier éditorial 📅</h1>
+          <p>Visualisez et organisez vos publications</p>
+        </div>
+        <button class="btn-gradient" onclick="showTab('generate')">+ Nouveau post</button>
+      </div>
+      <div class="panel calendar-panel">
+        <div class="cal-header">
+          <div class="cal-nav">
+            <button onclick="changeMonth(-1)">←</button>
+            <span class="cal-month" id="cal-month-label"></span>
+            <button onclick="changeMonth(1)">→</button>
+          </div>
+          <div style="display:flex;gap:10px;font-size:12px;">
+            <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:3px;background:rgba(10,102,194,.5);display:inline-block"></span>LinkedIn</span>
+            <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:3px;background:rgba(220,39,67,.4);display:inline-block"></span>Instagram</span>
+            <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:3px;background:rgba(24,119,242,.4);display:inline-block"></span>Facebook</span>
+          </div>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+      </div>
+    </div>
+
+    <!-- ─ TAB: NETWORKS ─ -->
+    <div id="tab-networks" class="tab-content" style="display:none">
+      <div class="dash-topbar">
+        <div>
+          <h1>Réseaux connectés 🔗</h1>
+          <p>Gérez vos connexions aux réseaux sociaux</p>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;max-width:600px;">
+        <div class="panel" style="display:flex;align-items:center;gap:16px;">
+          <div class="network-icon li" style="width:52px;height:52px;border-radius:14px;font-size:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">💼</div>
+          <div style="flex:1">
+            <div style="font-weight:700;margin-bottom:2px;">LinkedIn</div>
+            <div style="font-size:13px;color:var(--text-muted);">Compte personnel · @lindsey</div>
+          </div>
+          <span class="post-status approved">Connecté</span>
+        </div>
+        <div class="panel" style="display:flex;align-items:center;gap:16px;">
+          <div class="network-icon ig" style="width:52px;height:52px;border-radius:14px;font-size:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">📸</div>
+          <div style="flex:1">
+            <div style="font-weight:700;margin-bottom:2px;">Instagram</div>
+            <div style="font-size:13px;color:var(--text-muted);">@lindsey.cm</div>
+          </div>
+          <span class="post-status approved">Connecté</span>
+        </div>
+        <div class="panel" style="display:flex;align-items:center;gap:16px;">
+          <div class="network-icon fb" style="width:52px;height:52px;border-radius:14px;font-size:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">👥</div>
+          <div style="flex:1">
+            <div style="font-weight:700;margin-bottom:2px;">Facebook</div>
+            <div style="font-size:13px;color:var(--text-muted);">Page professionnelle · Lindsey CM</div>
+          </div>
+          <span class="post-status approved">Connecté</span>
+        </div>
+        <div class="panel" style="text-align:center;color:var(--text-muted);padding:30px;border-style:dashed;">
+          <div style="font-size:28px;margin-bottom:10px;">+</div>
+          <div style="font-size:14px;font-weight:500;">Connecter un autre réseau</div>
+          <div style="font-size:12px;margin-top:4px;">TikTok, Twitter/X bientôt disponibles</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─ TAB: SETTINGS ─ -->
+    <div id="tab-settings" class="tab-content" style="display:none">
+      <div class="dash-topbar">
+        <div>
+          <h1>Paramètres ⚙️</h1>
+          <p>Configurez votre profil et vos préférences</p>
+        </div>
+      </div>
+      <div style="max-width:560px;display:flex;flex-direction:column;gap:20px;">
+        <div class="panel">
+          <div class="panel-header"><h2>Profil & activité</h2></div>
+          <div class="gen-form">
+            <div class="form-group">
+              <label>Nom / Prénom</label>
+              <input type="text" class="form-input" value="Lindsey">
+            </div>
+            <div class="form-group">
+              <label>Secteur d'activité</label>
+              <input type="text" class="form-input" value="Community Management & UGC" placeholder="Ex: Coach, consultant, e-commerce…">
+            </div>
+            <div class="form-group">
+              <label>Votre cible / audience</label>
+              <textarea class="form-textarea" placeholder="Ex: entrepreneurs, PME, créateurs de contenu…">Entrepreneurs, solopreneurs et marques qui veulent développer leur présence en ligne</textarea>
+            </div>
+            <div class="form-group">
+              <label>Ton de communication favori</label>
+              <select class="form-select">
+                <option>Professionnel et expert</option>
+                <option>Inspirant et motivant</option>
+                <option selected>Éducatif et pédagogique</option>
+                <option>Décontracté avec humour</option>
+              </select>
+            </div>
+            <button class="btn-generate">💾 Enregistrer les modifications</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><h2>Clé API (génération IA)</h2></div>
+          <div class="gen-form">
+            <div class="form-group">
+              <label>Clé Anthropic Claude</label>
+              <input type="password" class="form-input" id="api-key-input" placeholder="sk-ant-…" value="">
+              <small style="color:var(--text-muted);font-size:11px;">Nécessaire pour la génération IA réelle. Stockée localement uniquement.</small>
+            </div>
+            <button class="btn-generate" onclick="saveApiKey()">🔑 Enregistrer la clé API</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Data ──────────────────────────────────────────────────────────────────
+
+const POSTS = [
+  {
+    id: 1,
+    network: 'linkedin',
+    icon: '💼',
+    iconClass: 'li',
+    title: 'LinkedIn',
+    date: 'Lun 19 mai · 09h00',
+    scheduledDate: new Date(2025, 4, 19, 9, 0),
+    status: 'pending',
+    content: `🎯 3 erreurs que font 90% des solopreneurs sur LinkedIn\n\n→ Publier sans stratégie\n→ Parler d'eux, pas de leur audience\n→ Ignorer les commentaires\n\nLa bonne nouvelle ? Ces 3 erreurs se corrigent en une semaine.\n\nVoici comment ↓\n\n#LinkedIn #Solopreneur #CommunityManager`
+  },
+  {
+    id: 2,
+    network: 'instagram',
+    icon: '📸',
+    iconClass: 'ig',
+    title: 'Instagram',
+    date: 'Mar 20 mai · 18h30',
+    scheduledDate: new Date(2025, 4, 20, 18, 30),
+    status: 'pending',
+    content: `✨ Coulisses de mon quotidien de CM !\n\nCe matin : 3 posts générés, 2 reels planifiés et un calendrier éditorial complet — avant même mon premier café ☕\n\nC'est ça le pouvoir de l'IA dans mon métier.\n\n👉 Tu veux voir comment ? Lien en bio !\n\n#UGC #ContentCreator #CommunityManager #IA`
+  },
+  {
+    id: 3,
+    network: 'facebook',
+    icon: '👥',
+    iconClass: 'fb',
+    title: 'Facebook',
+    date: 'Mer 21 mai · 12h00',
+    scheduledDate: new Date(2025, 4, 21, 12, 0),
+    status: 'pending',
+    content: `📊 Résultats de ce mois : +340 nouveaux abonnés, 4.7% d'engagement moyen, 24 posts publiés.\n\nEt le plus fou ? J'ai passé moins de 30 minutes par semaine sur mes réseaux.\n\nCurieux de savoir comment ? Dites-moi en commentaire 👇`
+  },
+  {
+    id: 4,
+    network: 'linkedin',
+    icon: '💼',
+    iconClass: 'li',
+    title: 'LinkedIn',
+    date: 'Jeu 22 mai · 08h00',
+    scheduledDate: new Date(2025, 4, 22, 8, 0),
+    status: 'approved',
+    content: `💡 Le secret des profils LinkedIn qui cartonnent :\n\nIls ne vendent pas. Ils éduquent.\n\n5 règles d'or :\n1. 1 post = 1 idée claire\n2. Accroche = promesse tenue\n3. Toujours finir par une question\n4. Répondre à chaque commentaire\n5. Publier à la même heure\n\nSauvegardez ce post 📌\n\n#LinkedIn #PersonalBranding`
+  },
+];
+
+// Calendar posts data
+const CAL_POSTS = {
+  '2025-5-1':  [{net:'li',label:'Post LI'}],
+  '2025-5-5':  [{net:'ig',label:'Reel IG'},{net:'fb',label:'Post FB'}],
+  '2025-5-7':  [{net:'li',label:'Carrousel'}],
+  '2025-5-8':  [{net:'ig',label:'Story IG'}],
+  '2025-5-12': [{net:'li',label:'Post LI'},{net:'fb',label:'Post FB'}],
+  '2025-5-14': [{net:'ig',label:'Reel IG'}],
+  '2025-5-15': [{net:'li',label:'Post LI'}],
+  '2025-5-19': [{net:'li',label:'Post LI'}],
+  '2025-5-20': [{net:'ig',label:'Reel IG'}],
+  '2025-5-21': [{net:'fb',label:'Post FB'}],
+  '2025-5-22': [{net:'li',label:'Post LI'}],
+  '2025-5-26': [{net:'li',label:'Carrousel'},{net:'ig',label:'Reel IG'}],
+  '2025-5-28': [{net:'fb',label:'Post FB'}],
+};
+
+// ── Tab navigation ────────────────────────────────────────────────────────
+
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).style.display = 'block';
+  const idx = {'dashboard':0,'generate':1,'validate':2,'calendar':3,'networks':4,'settings':5}[name];
+  document.querySelectorAll('.nav-item')[idx]?.classList.add('active');
+  if (name === 'calendar') renderCalendar();
+  if (name === 'validate') renderValidateList();
+  if (name === 'dashboard') renderUpcoming();
+}
+
+// ── Render posts ──────────────────────────────────────────────────────────
+
+function renderUpcoming() {
+  const list = document.getElementById('upcoming-list');
+  const upcoming = POSTS.filter(p => p.status !== 'rejected').slice(0, 3);
+  list.innerHTML = upcoming.map(p => renderPostCard(p, false)).join('');
+}
+
+function renderValidateList() {
+  const list = document.getElementById('validate-list');
+  const pending = POSTS.filter(p => p.status !== 'rejected');
+  list.innerHTML = pending.length
+    ? pending.map(p => renderPostCard(p, true)).join('')
+    : `<div style="text-align:center;color:var(--text-muted);padding:40px;">Aucun post à valider ✓</div>`;
+  updatePendingCount();
+}
+
+function renderPostCard(p, showActions) {
+  const statusLabel = {pending:'En attente',approved:'Validé',rejected:'Rejeté'}[p.status];
+  return `
+    <div class="post-card" id="post-${p.id}">
+      <div class="post-header">
+        <div class="post-net-icon ${p.iconClass}">${p.icon}</div>
+        <div class="post-meta">
+          <strong>${p.title}</strong>
+          <span>${p.date}</span>
+        </div>
+        <span class="post-status ${p.status}">${statusLabel}</span>
+      </div>
+      <div class="post-content">${p.content.replace(/\n/g,'<br>')}</div>
+      ${showActions ? `
+        <div class="post-actions">
+          <button class="btn-approve" onclick="approvePost(${p.id})">✓ Valider</button>
+          <button class="btn-reject" onclick="rejectPost(${p.id})">✕ Rejeter</button>
+          <button class="btn-regen" onclick="regenPost(${p.id})">🔄 Régénérer</button>
+        </div>` : ''}
+    </div>`;
+}
+
+function approvePost(id) {
+  const p = POSTS.find(x => x.id === id);
+  if (p) { p.status = 'approved'; toast('Post validé et programmé ✓', 'success'); renderValidateList(); }
+}
+
+function rejectPost(id) {
+  const p = POSTS.find(x => x.id === id);
+  if (p) { p.status = 'rejected'; toast('Post rejeté', 'error'); renderValidateList(); }
+}
+
+function regenPost(id) {
+  const el = document.getElementById('post-' + id);
+  if (el) { el.style.opacity = '0.5'; setTimeout(() => { el.style.opacity = '1'; toast('Post régénéré ✓', 'success'); }, 1200); }
+}
+
+function updatePendingCount() {
+  const n = POSTS.filter(p => p.status === 'pending').length;
+  document.getElementById('pending-count').textContent = n;
+}
+
+// ── Content generation ────────────────────────────────────────────────────
+
+const MOCK_POSTS = [
+  `🎯 {TOPIC}\n\nVoici ce que j'ai appris après 2 ans de community management :\n\n→ La régularité bat la perfection\n→ L'authenticité bat le jargon\n→ L'engagement bat la portée\n\nUne seule règle : publiez pour votre audience, pas pour l'algorithme.\n\nQu'est-ce que vous en pensez ? 👇\n\n#CommunityManager #SocialMedia #ContentStrategy`,
+  `💡 {TOPIC}\n\nOn m'a posé cette question la semaine dernière et ça m'a fait réfléchir.\n\nRéponse courte : oui.\nRéponse longue : voici pourquoi ↓\n\n1/ Votre audience vous fait confiance\n2/ La cohérence crée l'autorité\n3/ Chaque post est un investissement\n\nSi vous lisez encore : sauvegardez ce post. Vous en aurez besoin. 📌\n\n#Marketing #PersonalBranding #LinkedIn`,
+  `📊 {TOPIC} — les chiffres qui changent tout.\n\nEtude récente : les marques qui publient 4x/semaine ont 3x plus d'engagement.\n\nMais la fréquence n'est rien sans la stratégie.\n\n3 piliers incontournables :\n✅ Éducation (40%)\n✅ Inspiration (35%)\n✅ Promotion (25%)\n\nVous appliquez cette règle ? Dites-moi en commentaire 💬\n\n#ContentMarketing #ReseauxSociaux`,
+];
+
+async function generateContent() {
+  const topic = document.getElementById('gen-topic')?.value || document.getElementById('quick-topic')?.value || '';
+  if (!topic.trim()) { toast('Veuillez entrer un sujet', 'error'); return; }
+
+  const isQuick = !!document.getElementById('quick-topic')?.value;
+  const spinner = document.getElementById(isQuick ? 'quick-spinner' : 'gen-spinner');
+  const btnText = document.getElementById(isQuick ? 'quick-btn-text' : 'gen-btn-text');
+
+  spinner.style.display = 'inline-block';
+  btnText.textContent = 'Génération en cours…';
+
+  const apiKey = localStorage.getItem('lcm_api_key') || document.getElementById('api-key-input')?.value;
+
+  await new Promise(r => setTimeout(r, isQuick ? 800 : 1400));
+
+  let result;
+  if (apiKey && apiKey.startsWith('sk-ant-')) {
+    result = await generateWithClaude(topic, apiKey);
+  } else {
+    const mock = MOCK_POSTS[Math.floor(Math.random() * MOCK_POSTS.length)];
+    result = mock.replace('{TOPIC}', topic);
+  }
+
+  spinner.style.display = 'none';
+  btnText.textContent = isQuick ? '✨ Générer maintenant' : '✨ Générer le contenu';
+
+  if (isQuick) {
+    const el = document.getElementById('quick-result');
+    el.style.display = 'block';
+    el.innerHTML = result.replace(/\n/g, '<br>');
+  } else {
+    const panel = document.getElementById('gen-result-panel');
+    const content = document.getElementById('gen-result-content');
+    panel.style.display = 'block';
+    content.textContent = result;
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  toast('Contenu généré avec succès ✨', 'success');
+}
+
+async function quickGenerate() {
+  await generateContent();
+}
+
+async function generateWithClaude(topic, apiKey) {
+  try {
+    const tone = document.getElementById('gen-tone')?.value || 'professionnel';
+    const format = document.getElementById('gen-format')?.value || 'post';
+    const network = document.getElementById('gen-network')?.value || document.getElementById('quick-network')?.value || 'linkedin';
+    const extra = document.getElementById('gen-extra')?.value || '';
+
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-calls': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 600,
+        messages: [{
+          role: 'user',
+          content: `Tu es un expert community manager. Rédige un post ${network} sur le sujet suivant : "${topic}".
+Ton : ${tone}. Format : ${format}.${extra ? '\nInfos complémentaires : ' + extra : ''}
+Utilise des emojis pertinents, des sauts de ligne pour la lisibilité, et termine par des hashtags adaptés.
+Réponds uniquement avec le post, sans introduction ni commentaire.`
+        }]
+      })
+    });
+    const data = await res.json();
+    return data.content?.[0]?.text || 'Erreur de génération';
+  } catch (e) {
+    return MOCK_POSTS[Math.floor(Math.random() * MOCK_POSTS.length)].replace('{TOPIC}', topic);
+  }
+}
+
+function approveGenerated() {
+  const content = document.getElementById('gen-result-content')?.textContent;
+  if (!content) return;
+  const newPost = {
+    id: Date.now(),
+    network: 'linkedin',
+    icon: '💼',
+    iconClass: 'li',
+    title: 'LinkedIn',
+    date: 'Prochainement',
+    status: 'approved',
+    content,
+  };
+  POSTS.unshift(newPost);
+  document.getElementById('gen-result-panel').style.display = 'none';
+  toast('Post validé et ajouté au calendrier ✓', 'success');
+}
+
+// ── Network checkboxes ────────────────────────────────────────────────────
+
+function toggleCheck(input, labelId) {
+  document.getElementById(labelId).classList.toggle('selected', input.checked);
+}
+
+// ── Calendar ──────────────────────────────────────────────────────────────
+
+let calYear = 2025, calMonth = 4; // May 2025 (0-indexed)
+const DAYS = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+const MONTHS = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+
+function changeMonth(delta) { calMonth += delta; if (calMonth > 11) { calMonth=0; calYear++; } if (calMonth<0) { calMonth=11; calYear--; } renderCalendar(); }
+
+function renderCalendar() {
+  document.getElementById('cal-month-label').textContent = `${MONTHS[calMonth]} ${calYear}`;
+  const grid = document.getElementById('cal-grid');
+  const today = new Date();
+
+  let html = DAYS.map(d => `<div class="cal-day-name">${d}</div>`).join('');
+
+  const firstDay = new Date(calYear, calMonth, 1);
+  let startDow = firstDay.getDay(); // 0=Sun
+  startDow = startDow === 0 ? 6 : startDow - 1; // Mon=0
+
+  for (let i = 0; i < startDow; i++) html += '<div class="cal-day empty"></div>';
+
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  for (let d = 1; d <= daysInMonth; d++) {
+    const isToday = today.getDate()===d && today.getMonth()===calMonth && today.getFullYear()===calYear;
+    const key = `${calYear}-${calMonth}-${d}`;
+    const dayPosts = CAL_POSTS[key] || [];
+    const dotsHtml = dayPosts.map(p => `<div class="cal-post-dot ${p.net}">${p.label}</div>`).join('');
+    html += `<div class="cal-day${isToday?' today':''}"><div class="cal-day-num">${d}</div><div class="cal-posts">${dotsHtml}</div></div>`;
+  }
+
+  grid.innerHTML = html;
+}
+
+// ── API Key ───────────────────────────────────────────────────────────────
+
+function saveApiKey() {
+  const key = document.getElementById('api-key-input').value.trim();
+  if (key) { localStorage.setItem('lcm_api_key', key); toast('Clé API enregistrée ✓', 'success'); }
+  else { toast('Entrez une clé valide', 'error'); }
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────
+
+function toast(msg, type = 'success') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `toast show ${type}`;
+  setTimeout(() => el.className = 'toast', 3000);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('lcm_api_key');
+  if (saved) document.getElementById('api-key-input').value = saved;
+  renderUpcoming();
+  updatePendingCount();
+});
+</script>
+</body>
+</html>

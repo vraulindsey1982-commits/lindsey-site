@@ -720,18 +720,6 @@ footer a{
   color:#c9a8a2;
 }
 
-#reviews-rating {
-  align-items: center;
-  gap: 10px;
-  font-size: 1.1rem;
-  margin-bottom: 24px;
-  justify-content: center;
-}
-
-#reviews-stars { color: #e8a87c; font-size: 1.3rem; }
-#reviews-score { font-weight: 700; font-size: 1.2rem; }
-#reviews-count { color: #888; font-size: 0.95rem; }
-
 #reviews-container { display: flex; flex-direction: column; gap: 20px; margin-bottom: 28px; }
 
 #reviews-container blockquote {
@@ -747,3 +735,41 @@ footer a{
 .review-stars { color: #e8a87c; }
 .review-text { margin: 0 0 6px; font-size: 0.95rem; line-height: 1.5; }
 .review-date { font-size: 0.82rem; color: #999; }
+
+/* ── FAQ ── */
+.faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 720px; }
+
+.faq-item {
+  border: 1px solid #e8ddd9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.faq-item summary {
+  padding: 18px 22px;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: '+'; font-size: 22px; color: #8d6e63; flex-shrink: 0; }
+.faq-item[open] summary::after { content: '−'; }
+
+.faq-item summary h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  color: #2d1f1f;
+}
+
+.faq-item p {
+  padding: 0 22px 18px;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.65;
+  margin: 0;
+}
