@@ -795,9 +795,7 @@ footer a{
 
 @media(max-width:600px){
   .about-float img {
-    float: none;
-    display: block;
-    width: 180px;
-    margin: 0 auto 24px;
+    width: 140px;
+    margin: 0 0 12px 20px;
   }
 }
