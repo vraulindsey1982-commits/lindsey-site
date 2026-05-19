@@ -773,3 +773,44 @@ footer a{
   line-height: 1.65;
   margin: 0;
 }
+
+/* À PROPOS */
+.about-inner {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.about-photo {
+  flex-shrink: 0;
+}
+
+.about-photo img {
+  width: 280px;
+  height: auto;
+  filter: drop-shadow(0 20px 40px rgba(90,58,58,.18));
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text h2 {
+  margin-bottom: 20px;
+}
+
+.about-text p {
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+@media(max-width:768px){
+  .about-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .about-photo img {
+    width: 200px;
+  }
+}
