@@ -775,42 +775,29 @@ footer a{
 }
 
 /* À PROPOS */
-.about-inner {
-  display: flex;
-  align-items: center;
-  gap: 60px;
+.about-float img {
+  float: right;
+  width: 260px;
+  margin: 0 0 20px 40px;
+  filter: drop-shadow(0 20px 40px rgba(90,58,58,.15));
 }
 
-.about-photo {
-  flex-shrink: 0;
-}
-
-.about-photo img {
-  width: 280px;
-  height: auto;
-  filter: drop-shadow(0 20px 40px rgba(90,58,58,.18));
-}
-
-.about-text {
-  flex: 1;
-}
-
-.about-text h2 {
-  margin-bottom: 20px;
-}
-
-.about-text p {
+.about-float p {
   color: var(--muted);
   margin-bottom: 14px;
 }
 
-@media(max-width:768px){
-  .about-inner {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .about-photo img {
-    width: 200px;
+.about-float::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+@media(max-width:600px){
+  .about-float img {
+    float: none;
+    display: block;
+    width: 180px;
+    margin: 0 auto 24px;
   }
 }
