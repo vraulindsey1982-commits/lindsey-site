@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', 'https://www.lindsey-ugc.fr');
-  res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
+  res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400');
 
   const apiKey = process.env.GOOGLE_PLACES_API_KEY;
   const placeId = process.env.GOOGLE_PLACE_ID;
@@ -9,9 +9,13 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Configuration manquante' });
   }
 
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 5000);
+
   try {
     const url = `https://places.googleapis.com/v1/places/${placeId}`;
     const response = await fetch(url, {
+      signal: controller.signal,
       headers: {
         'X-Goog-Api-Key': apiKey,
         'X-Goog-FieldMask': 'reviews,rating,userRatingCount',
@@ -41,5 +45,7 @@ export default async function handler(req, res) {
     res.status(200).json({ reviews: topReviews, rating, total: userRatingCount });
   } catch (err) {
     res.status(500).json({ error: 'Erreur serveur' });
+  } finally {
+    clearTimeout(timeout);
   }
 }
