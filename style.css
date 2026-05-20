@@ -19,6 +19,27 @@ body{
   color:var(--black);
 }
 
+/* BOUTON RETOUR ACCUEIL */
+.back-home{
+  position:fixed;
+  bottom:28px;
+  left:24px;
+  z-index:100;
+  background:linear-gradient(135deg,#111,#5a3a3a);
+  color:white;
+  text-decoration:none;
+  font-weight:800;
+  font-size:.88rem;
+  padding:11px 18px;
+  border-radius:999px;
+  box-shadow:0 6px 24px rgba(0,0,0,.22);
+  transition:.25s ease;
+}
+.back-home:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 32px rgba(0,0,0,.28);
+}
+
 /* NAV */
 .nav{
   position:sticky;
