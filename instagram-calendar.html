@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendrier Instagram – Lindsey CM</title>
+  <link rel="stylesheet" href="lindsey-cm.css">
+  <style>
+    :root {
+      --ig-post:     #E1306C;
+      --ig-reel:     #833AB4;
+      --ig-story:    #F77737;
+      --ig-carousel: #405DE6;
+      --ig-gradient: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      --theme-coulisses:   #f59e0b;
+      --theme-education:   #06b6d4;
+      --theme-promotion:   #ec4899;
+      --theme-engagement:  #34d399;
+      --theme-inspiration: #a78bfa;
+    }
+
+    .ig-page { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; }
+
+    /* ── Page header ── */
+    .ig-page-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 32px 0 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .ig-page-header h1 { font-size: clamp(22px,5vw,32px); font-weight: 800; margin-bottom: 4px; }
+    .ig-page-header p  { font-size: 14px; color: var(--text-muted); }
+
+    .ig-gradient-text {
+      background: var(--ig-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .ig-header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+    /* ── Month nav ── */
+    .ig-month-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 8px 16px;
+    }
+    .ig-month-nav button {
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 0 4px;
+      border-radius: 6px;
+      line-height: 1;
+      transition: background .15s;
+    }
+    .ig-month-nav button:hover { background: rgba(255,255,255,.08); }
+    .ig-month-nav span { font-size: 15px; font-weight: 700; min-width: 155px; text-align: center; }
+
+    /* ── Stats strip ── */
+    .ig-stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 640px) { .ig-stats-strip { grid-template-columns: repeat(2, 1fr); } }
+
+    .ig-stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: border-color .2s;
+    }
+    .ig-stat-card:hover { border-color: var(--border); }
+    .ig-stat-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .ig-stat-icon.post     { background: rgba(225,48,108,.15); }
+    .ig-stat-icon.reel     { background: rgba(131,58,180,.15); }
+    .ig-stat-icon.story    { background: rgba(247,119,55,.15); }
+    .ig-stat-icon.carousel { background: rgba(64,93,230,.15); }
+    .ig-stat-label { font-size: 11px; color: var(--text-muted); font-weight: 500; margin-bottom: 2px; }
+    .ig-stat-value { font-size: 24px; font-weight: 800; }
+
+    /* ── Main layout ── */
+    .ig-main-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 20px;
+      align-items: start;
+    }
+    @media (max-width: 900px) { .ig-main-layout { grid-template-columns: 1fr; } }
+
+    /* ── Calendar ── */
+    .ig-calendar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .ig-cal-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-soft);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .ig-legend { display: flex; gap: 12px; flex-wrap: wrap; }
+    .ig-legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-muted); }
+    .ig-legend-dot  { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+    .ig-day-names {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      background: var(--bg-card-2);
+    }
+    .ig-day-name {
+      text-align: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      padding: 10px 4px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      background: var(--border-soft);
+    }
+    .ig-cell {
+      background: var(--bg);
+      padding: 8px 6px;
+      min-height: 82px;
+      cursor: pointer;
+      transition: background .12s;
+      position: relative;
+      overflow: hidden;
+    }
+    .ig-cell:hover           { background: rgba(255,255,255,.03); }
+    .ig-cell.empty           { background: var(--bg-card); cursor: default; }
+    .ig-cell.empty:hover     { background: var(--bg-card); }
+    .ig-cell.today           { background: rgba(124,58,237,.07); }
+    .ig-cell.today:hover     { background: rgba(124,58,237,.11); }
+    .ig-cell.selected        { background: rgba(124,58,237,.14) !important; box-shadow: inset 0 0 0 1.5px var(--purple); }
+    .ig-cell.past            { opacity: .55; }
+
+    .ig-cell-num {
+      font-size: 12px; font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .ig-cell.today .ig-cell-num { color: var(--text); }
+    .today-badge {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--gradient);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 800; color: #fff;
+    }
+    .ig-cell-posts { display: flex; flex-direction: column; gap: 2px; }
+    .ig-chip {
+      font-size: 9px; border-radius: 3px;
+      padding: 2px 5px; font-weight: 600;
+      overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+      display: flex; align-items: center; gap: 3px;
+    }
+    .ig-chip.post     { background: rgba(225,48,108,.2);  color: #f9a8d4; }
+    .ig-chip.reel     { background: rgba(131,58,180,.2);  color: #c4b5fd; }
+    .ig-chip.story    { background: rgba(247,119,55,.2);  color: #fed7aa; }
+    .ig-chip.carousel { background: rgba(64,93,230,.2);   color: #93c5fd; }
+    .ig-chip.draft    { opacity: .55; }
+    .ig-cell-more { font-size: 9px; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── Pillar breakdown ── */
+    .ig-pillars {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-top: 16px;
+    }
+    .ig-pillars h3 { font-size: 14px; font-weight: 700; margin-bottom: 14px; }
+    .ig-pillar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .ig-pillar-row:last-child { margin-bottom: 0; }
+    .ig-pillar-label { font-size: 12px; width: 100px; flex-shrink: 0; color: var(--text-soft); }
+    .ig-pillar-bar-wrap { flex: 1; height: 6px; background: var(--bg-card-2); border-radius: 3px; overflow: hidden; }
+    .ig-pillar-bar { height: 100%; border-radius: 3px; transition: width .6s cubic-bezier(.4,0,.2,1); }
+    .ig-pillar-count { font-size: 12px; color: var(--text-muted); width: 20px; text-align: right; flex-shrink: 0; }
+
+    /* ── Side panel ── */
+    .ig-side-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: sticky;
+      top: 20px;
+    }
+    .ig-side-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .ig-side-header h3   { font-size: 15px; font-weight: 700; }
+    .ig-side-header span { font-size: 12px; color: var(--text-muted); }
+    .ig-side-body { padding: 14px; max-height: 520px; overflow-y: auto; }
+
+    .ig-no-posts { text-align: center; padding: 28px 16px; color: var(--text-muted); font-size: 13px; }
+    .ig-no-emoji { font-size: 32px; margin-bottom: 10px; }
+
+    .ig-post-item {
+      display: flex; gap: 10px;
+      padding: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: border-color .15s;
+    }
+    .ig-post-item:hover { border-color: var(--border); }
+    .ig-post-item:last-of-type { margin-bottom: 0; }
+
+    .ig-post-type-badge {
+      width: 34px; height: 34px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; flex-shrink: 0;
+    }
+    .ig-post-type-badge.post     { background: rgba(225,48,108,.2); }
+    .ig-post-type-badge.reel     { background: rgba(131,58,180,.2); }
+    .ig-post-type-badge.story    { background: rgba(247,119,55,.2); }
+    .ig-post-type-badge.carousel { background: rgba(64,93,230,.2); }
+
+    .ig-post-item-info { flex: 1; min-width: 0; }
+    .ig-post-item-title {
+      font-size: 12px; font-weight: 600;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .ig-post-item-meta {
+      font-size: 10px; color: var(--text-muted);
+      margin-top: 3px; display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .ig-status-dot {
+      width: 6px; height: 6px; border-radius: 50%; display: inline-block; vertical-align: middle;
+    }
+    .ig-status-dot.published { background: #34d399; }
+    .ig-status-dot.scheduled { background: #fbbf24; }
+    .ig-status-dot.draft     { background: #9ca3af; }
+
+    .ig-theme-tag {
+      display: inline-block;
+      font-size: 9px; border-radius: 4px; padding: 1px 6px; font-weight: 600; margin-top: 4px;
+    }
+    .ig-theme-tag.coulisses   { background: rgba(245,158,11,.15); color: var(--theme-coulisses); }
+    .ig-theme-tag.education   { background: rgba(6,182,212,.15);  color: var(--theme-education); }
+    .ig-theme-tag.promotion   { background: rgba(236,72,153,.15); color: var(--theme-promotion); }
+    .ig-theme-tag.engagement  { background: rgba(52,211,153,.15); color: var(--theme-engagement); }
+    .ig-theme-tag.inspiration { background: rgba(167,139,250,.15);color: var(--theme-inspiration); }
+
+    .ig-side-add-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 11px;
+      background: rgba(225,48,108,.08);
+      border: 1px dashed rgba(225,48,108,.3);
+      border-radius: 10px;
+      color: #f9a8d4; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: inherit;
+      transition: all .15s; margin-top: 12px;
+    }
+    .ig-side-add-btn:hover { background: rgba(225,48,108,.15); border-color: rgba(225,48,108,.5); }
+
+    /* ── Modal ── */
+    .ig-modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .2s;
+    }
+    .ig-modal-overlay.open { opacity: 1; pointer-events: all; }
+    .ig-modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      width: 100%; max-width: 520px;
+      max-height: 90vh; overflow-y: auto;
+      transform: translateY(24px);
+      transition: transform .2s;
+    }
+    .ig-modal-overlay.open .ig-modal { transform: translateY(0); }
+
+    .ig-modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-soft);
+      position: sticky; top: 0; background: var(--bg-card); z-index: 1;
+    }
+    .ig-modal-header h3 { font-size: 17px; font-weight: 700; }
+    .ig-modal-close {
+      background: none; border: none; color: var(--text-muted);
+      font-size: 24px; cursor: pointer; padding: 0 6px; border-radius: 6px;
+      line-height: 1; transition: all .15s;
+    }
+    .ig-modal-close:hover { background: rgba(255,255,255,.08); color: var(--text); }
+
+    .ig-modal-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+    .ig-modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border-soft);
+      display: flex; justify-content: flex-end; gap: 10px;
+      position: sticky; bottom: 0; background: var(--bg-card); z-index: 1;
+    }
+
+    /* Type selector */
+    .ig-type-group {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+    }
+    @media (max-width: 480px) { .ig-type-group { grid-template-columns: repeat(2, 1fr); } }
+
+    .ig-type-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      padding: 10px 6px; border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg); cursor: pointer;
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+      font-family: inherit; transition: all .15s;
+    }
+    .ig-type-btn .ig-tb-icon { font-size: 20px; }
+    .ig-type-btn:hover { border-color: var(--border); color: var(--text); }
+    .ig-type-btn.active.post     { border-color: var(--ig-post);     background: rgba(225,48,108,.12);  color: #f9a8d4; }
+    .ig-type-btn.active.reel     { border-color: var(--ig-reel);     background: rgba(131,58,180,.12);  color: #c4b5fd; }
+    .ig-type-btn.active.story    { border-color: var(--ig-story);    background: rgba(247,119,55,.12);  color: #fed7aa; }
+    .ig-type-btn.active.carousel { border-color: var(--ig-carousel); background: rgba(64,93,230,.12);   color: #93c5fd; }
+
+    /* Date/time row */
+    .ig-dt-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 480px) { .ig-dt-row { grid-template-columns: 1fr; } }
+
+    /* Theme buttons */
+    .ig-theme-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .ig-theme-btn {
+      padding: 5px 12px; border-radius: 50px;
+      border: 1px solid var(--border-soft); background: var(--bg);
+      cursor: pointer; font-size: 12px; font-weight: 600; color: var(--text-muted);
+      font-family: inherit; transition: all .15s;
+    }
+    .ig-theme-btn:hover { border-color: var(--border); color: var(--text); }
+    .ig-theme-btn.active.coulisses   { border-color: var(--theme-coulisses); background: rgba(245,158,11,.12); color: var(--theme-coulisses); }
+    .ig-theme-btn.active.education   { border-color: var(--theme-education); background: rgba(6,182,212,.12);  color: var(--theme-education); }
+    .ig-theme-btn.active.promotion   { border-color: var(--theme-promotion); background: rgba(236,72,153,.12); color: var(--theme-promotion); }
+    .ig-theme-btn.active.engagement  { border-color: var(--theme-engagement);background: rgba(52,211,153,.12); color: var(--theme-engagement); }
+    .ig-theme-btn.active.inspiration { border-color: var(--theme-inspiration);background:rgba(167,139,250,.12);color: var(--theme-inspiration); }
+
+    /* AI button */
+    .btn-ig-ai {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(225,48,108,.1); border: 1px solid rgba(225,48,108,.25);
+      border-radius: 8px; color: #f9a8d4;
+      font-size: 12px; font-weight: 600; padding: 6px 12px;
+      cursor: pointer; font-family: inherit; transition: all .15s;
+    }
+    .btn-ig-ai:hover { background: rgba(225,48,108,.18); border-color: rgba(225,48,108,.45); }
+
+    .ig-hashtag-hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+  </style>
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<nav class="lcm-nav">
+  <a class="nav-brand" href="lindsey-cm-dashboard.html">
+    <div class="nav-avatar">L</div>
+    <div class="nav-info">
+      <span class="brand-name">Lindsey <span class="gradient-text">CM</span></span>
+      <span class="brand-sub">Community Manager IA</span>
+    </div>
+  </a>
+  <div class="nav-actions">
+    <a href="lindsey-cm-dashboard.html" class="btn-outline" style="padding:8px 18px;font-size:13px;">← Dashboard</a>
+    <button class="btn-gradient" style="padding:9px 18px;font-size:13px;" onclick="openAddModal(null)">+ Nouveau post</button>
+  </div>
+</nav>
+
+<div class="ig-page">
+
+  <!-- ── Page header ── -->
+  <div class="ig-page-header">
+    <div>
+      <h1>Calendrier <span class="ig-gradient-text">Instagram</span> 📸</h1>
+      <p>Planifiez et organisez votre stratégie de contenu mensuelle</p>
+    </div>
+    <div class="ig-header-right">
+      <div class="ig-month-nav">
+        <button onclick="changeMonth(-1)" aria-label="Mois précédent">&#8249;</button>
+        <span id="month-label"></span>
+        <button onclick="changeMonth(1)" aria-label="Mois suivant">&#8250;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Stats ── -->
+  <div class="ig-stats-strip">
+    <div class="ig-stat-card">
+      <div class="ig-stat-icon post">📸</div>
+      <div><div class="ig-stat-label">Posts</div><div class="ig-stat-value" id="count-post">0</div></div>
+    </div>
+    <div class="ig-stat-card">
+      <div class="ig-stat-icon reel">🎬</div>
+      <div><div class="ig-stat-label">Reels</div><div class="ig-stat-value" id="count-reel">0</div></div>
+    </div>
+    <div class="ig-stat-card">
+      <div class="ig-stat-icon story">📖</div>
+      <div><div class="ig-stat-label">Stories</div><div class="ig-stat-value" id="count-story">0</div></div>
+    </div>
+    <div class="ig-stat-card">
+      <div class="ig-stat-icon carousel">🎠</div>
+      <div><div class="ig-stat-label">Carrousels</div><div class="ig-stat-value" id="count-carousel">0</div></div>
+    </div>
+  </div>
+
+  <!-- ── Main layout ── -->
+  <div class="ig-main-layout">
+
+    <!-- Left: calendar + pillars -->
+    <div>
+      <div class="ig-calendar">
+        <div class="ig-cal-toolbar">
+          <div class="ig-legend">
+            <div class="ig-legend-item"><span class="ig-legend-dot" style="background:var(--ig-post)"></span>Post</div>
+            <div class="ig-legend-item"><span class="ig-legend-dot" style="background:var(--ig-reel)"></span>Reel</div>
+            <div class="ig-legend-item"><span class="ig-legend-dot" style="background:var(--ig-story)"></span>Story</div>
+            <div class="ig-legend-item"><span class="ig-legend-dot" style="background:var(--ig-carousel)"></span>Carrousel</div>
+          </div>
+          <div class="ig-legend">
+            <div class="ig-legend-item"><span class="ig-status-dot published"></span>Publié</div>
+            <div class="ig-legend-item"><span class="ig-status-dot scheduled"></span>Programmé</div>
+            <div class="ig-legend-item"><span class="ig-status-dot draft"></span>Brouillon</div>
+          </div>
+        </div>
+        <div class="ig-day-names" id="ig-day-names"></div>
+        <div class="ig-grid" id="ig-grid"></div>
+      </div>
+
+      <div class="ig-pillars" id="ig-pillars">
+        <h3>Répartition par pilier — <span id="pillars-month-label"></span></h3>
+        <div id="ig-pillars-bars"></div>
+      </div>
+    </div>
+
+    <!-- Right: side panel -->
+    <div class="ig-side-panel">
+      <div class="ig-side-header">
+        <h3 id="side-title">Sélectionnez un jour</h3>
+        <span id="side-weekday"></span>
+      </div>
+      <div class="ig-side-body" id="ig-side-body">
+        <div class="ig-no-posts">
+          <div class="ig-no-emoji">📅</div>
+          Cliquez sur un jour<br>pour voir ou ajouter<br>du contenu.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Modal ── -->
+<div class="ig-modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="ig-modal" id="ig-modal">
+    <div class="ig-modal-header">
+      <h3 id="modal-heading">Nouveau post Instagram</h3>
+      <button class="ig-modal-close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="ig-modal-body">
+
+      <!-- Type -->
+      <div class="form-group">
+        <label>Type de contenu</label>
+        <div class="ig-type-group">
+          <button class="ig-type-btn active post" id="type-post" onclick="selectType('post')">
+            <span class="ig-tb-icon">📸</span>Post
+          </button>
+          <button class="ig-type-btn reel" id="type-reel" onclick="selectType('reel')">
+            <span class="ig-tb-icon">🎬</span>Reel
+          </button>
+          <button class="ig-type-btn story" id="type-story" onclick="selectType('story')">
+            <span class="ig-tb-icon">📖</span>Story
+          </button>
+          <button class="ig-type-btn carousel" id="type-carousel" onclick="selectType('carousel')">
+            <span class="ig-tb-icon">🎠</span>Carrousel
+          </button>
+        </div>
+      </div>
+
+      <!-- Title -->
+      <div class="form-group">
+        <label>Titre / idée</label>
+        <input type="text" class="form-input" id="modal-title-input"
+          placeholder="Ex: Coulisses d'une journée de tournage…">
+      </div>
+
+      <!-- Caption -->
+      <div class="form-group">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <label style="margin-bottom:0;">Légende (caption)</label>
+          <button class="btn-ig-ai" onclick="generateCaption()">
+            <span id="ai-spinner" class="spinner" style="display:none;width:12px;height:12px;border-width:1.5px;"></span>
+            ✨ Générer avec IA
+          </button>
+        </div>
+        <textarea class="form-textarea" id="modal-caption"
+          placeholder="Votre caption Instagram…" style="min-height:100px;"></textarea>
+      </div>
+
+      <!-- Date & time -->
+      <div class="ig-dt-row">
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" class="form-input" id="modal-date">
+        </div>
+        <div class="form-group">
+          <label>Heure ⭐ = créneaux optimaux</label>
+          <select class="form-select" id="modal-time">
+            <option value="08:00">08:00 – Matin</option>
+            <option value="09:00">09:00 – Matin</option>
+            <option value="12:00">12:00 – Midi ⭐</option>
+            <option value="15:00">15:00 – Après-midi</option>
+            <option value="17:00">17:00 – Fin de journée</option>
+            <option value="18:00" selected>18:00 – Soirée ⭐</option>
+            <option value="19:00">19:00 – Soirée</option>
+            <option value="21:00">21:00 – Nuit</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Theme/Pillar -->
+      <div class="form-group">
+        <label>Pilier de contenu</label>
+        <div class="ig-theme-group">
+          <button class="ig-theme-btn active coulisses" id="theme-coulisses" onclick="selectTheme('coulisses')">🎬 Coulisses</button>
+          <button class="ig-theme-btn education"  id="theme-education"  onclick="selectTheme('education')">📚 Éducation</button>
+          <button class="ig-theme-btn promotion"  id="theme-promotion"  onclick="selectTheme('promotion')">🛒 Promotion</button>
+          <button class="ig-theme-btn engagement" id="theme-engagement" onclick="selectTheme('engagement')">💬 Engagement</button>
+          <button class="ig-theme-btn inspiration"id="theme-inspiration"onclick="selectTheme('inspiration')">🌟 Inspiration</button>
+        </div>
+      </div>
+
+      <!-- Hashtags -->
+      <div class="form-group">
+        <label>Hashtags</label>
+        <textarea class="form-textarea" id="modal-hashtags"
+          placeholder="#ugc #contentcreator #communitymanager…" style="min-height:60px;"></textarea>
+        <div class="ig-hashtag-hint">Recommandé : 5–10 hashtags ciblés</div>
+      </div>
+
+      <!-- Status -->
+      <div class="form-group">
+        <label>Statut</label>
+        <select class="form-select" id="modal-status">
+          <option value="draft">Brouillon</option>
+          <option value="scheduled" selected>Programmé</option>
+          <option value="published">Publié</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="ig-modal-footer">
+      <button class="btn-reject" style="padding:10px 20px;font-size:13px;" onclick="closeModal()">Annuler</button>
+      <button class="btn-approve" style="padding:10px 20px;font-size:13px;" onclick="savePost()">✓ Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Data (mai 2026 = monthIndex 4) ────────────────────────────────
+// Clé : "année-moisIndex-jour"
+let igPosts = {
+  '2026-4-3':  [{id:1, type:'post',     title:'Témoignage client ⭐',           theme:'engagement',  status:'published', time:'09:00', caption:'Quand un client partage ses résultats… ça motive pour continuer ! 🙌\n\nMerci à Charlotte pour cette belle prise de parole. Si toi aussi tu veux démarrer ton aventure avec Lindsey CM, le lien est en bio ✨\n\n#ugc #testimonial #communitymanager', hashtags:'#ugc #testimonial #communitymanager #contentcreator'}],
+  '2026-4-5':  [{id:2, type:'reel',     title:'Avant / Après création contenu',  theme:'education',   status:'published', time:'18:00', caption:'De 0 à un feed cohérent en 30 jours — voici comment 🎬\n\nLe secret ? Un bon système, 30 min/jour max, et Lindsey CM pour automatiser ✨\n\nSave ce reel !\n\n#contentcreator #instagram #communitymanager', hashtags:'#contentcreator #instagram #communitymanager #ugc'}],
+  '2026-4-7':  [{id:3, type:'story',    title:'Sondage : vos objectifs 2026',    theme:'engagement',  status:'published', time:'12:00', caption:'', hashtags:''}],
+  '2026-4-8':  [{id:4, type:'carousel', title:'5 erreurs Instagram à éviter',    theme:'education',   status:'published', time:'12:00', caption:'Tu fais peut-être ces erreurs sans le savoir 👀\n\nJ\'ai analysé des centaines de comptes — voici les 5 patterns qui bloquent la croissance.\n\n→ Swipe pour découvrir !\n\n#instagram #marketingdigital #contentcreator', hashtags:'#instagram #marketingdigital #contentcreator #reseauxsociaux'}],
+  '2026-4-12': [{id:5, type:'reel',     title:'Coulisses tournage UGC',          theme:'coulisses',   status:'published', time:'18:30', caption:'POV : ma journée de tournage UGC 🎬\n\nDe la lumière au montage, voilà comment je crée du contenu authentique pour mes clients 📱\n\n#ugc #ugccreator #contentcreator #tournage', hashtags:'#ugc #ugccreator #contentcreator #tournage #coulisses'}],
+  '2026-4-14': [{id:6, type:'post',     title:'Citation inspirante',             theme:'inspiration', status:'published', time:'08:00', caption:'"Publie imparfaitement plutôt que de ne pas publier du tout."\n\nC\'est le mantra que j\'applique chaque jour 🌸\n\n#inspiration #contentcreator #mindset', hashtags:'#inspiration #contentcreator #mindset #quote'}],
+  '2026-4-15': [{id:7, type:'story',    title:'Quiz : connaissez-vous l\'algo ?', theme:'engagement',  status:'published', time:'12:00', caption:'', hashtags:''}],
+  '2026-4-19': [
+    {id:8, type:'carousel', title:'1h de travail = 1 mois de contenu',  theme:'education',   status:'published', time:'09:00', caption:'1 heure de travail = 1 mois de contenu 🤯\n\nVoici ma méthode exacte pour planifier tout mon calendrier éditorial en un seul bloc.\n\n→ Swipe pour la méthode !\n\n#productivite #contentcreator #planning', hashtags:'#productivite #contentcreator #planning #instagram #calendriereditorial'},
+    {id:9, type:'story',    title:'Countdown lancement nouvelle offre',   theme:'promotion',   status:'published', time:'18:00', caption:'', hashtags:''}
+  ],
+  '2026-4-21': [{id:10, type:'reel',    title:'Morning routine CM',              theme:'coulisses',   status:'published', time:'17:00', caption:'Ma morning routine de CM 🌅\n\n6h30 : café + analytics\n7h00 : validation posts du jour\n7h30 : veille contenu\n8h00 : première publication\n\nEt vous ? 👇\n\n#morningroutine #contentcreator #communitymanager', hashtags:'#morningroutine #contentcreator #communitymanager #quotidien'}],
+  '2026-4-22': [{id:11, type:'post',    title:'Résultats clients ce mois',        theme:'promotion',   status:'published', time:'10:00', caption:'Les chiffres parlent d\'eux-mêmes 📊\n\nCe mois avec Lindsey CM :\n✅ +340 abonnés en moyenne\n✅ 4.7% d\'engagement\n✅ 24 posts publiés\n✅ 30 min/semaine max\n\nTu veux les mêmes résultats ? Lien en bio 🔗\n\n#resultats #socialmedia #communitymanager', hashtags:'#resultats #socialmedia #communitymanager #ugc'}],
+  '2026-4-24': [
+    {id:12, type:'story',   title:'Coulisses de ma journée',              theme:'coulisses',   status:'published', time:'08:00', caption:'', hashtags:''},
+    {id:13, type:'reel',    title:'Transformation en 30 jours',           theme:'inspiration', status:'draft',     time:'18:00', caption:'30 jours. C\'est tout ce qu\'il faut pour transformer son compte Instagram ✨\n\nAvant : 0 stratégie, posting aléatoire\nAprès : calendrier béton, contenu cohérent, croissance organique\n\nSave et dis-moi en commentaire ! 👇', hashtags:'#transformation #instagram #contentcreator #growth'}
+  ],
+  '2026-4-26': [{id:14, type:'carousel','title':'IA vs Humain en CM',             theme:'education',   status:'scheduled', time:'12:00', caption:'IA ou humain — qui gagne en Community Management ? 🤖 vs 👤\n\nJ\'ai testé les deux pendant 6 mois. Le verdict va vous surprendre.\n\n→ Swipe pour chaque round !\n\n#ia #intelligenceartificielle #communitymanager', hashtags:'#ia #intelligenceartificielle #communitymanager #contentcreator #futur'}],
+  '2026-4-28': [{id:15, type:'post',    title:'Post engagé : votre avis ?',       theme:'engagement',  status:'scheduled', time:'18:00', caption:'Question du jour : planifiez-vous votre contenu à l\'avance ? 🤔\n\nA) Oui, j\'ai un calendrier\nB) Non, j\'improvise\nC) J\'essaie mais j\'abandonne\n\nDites-moi en commentaire 💬\n\n#question #instagram #contentcreator', hashtags:'#question #instagram #contentcreator #engagement'}],
+  '2026-4-29': [{id:16, type:'reel',    title:'3 outils IA indispensables',       theme:'education',   status:'scheduled', time:'17:00', caption:'3 outils IA qui ont changé mon quotidien de CM 🤖✨\n\n1. Lindsey CM — génération de contenu\n2. Canva IA — visuels\n3. Otter.ai — transcriptions\n\nLesquels vous manquent ? 👇\n\n#ia #tools #contentcreator #communitymanager', hashtags:'#ia #tools #contentcreator #communitymanager #productivity'}],
+  '2026-4-31': [{id:17, type:'story',   title:'Teaser juin : grosse annonce !',   theme:'promotion',   status:'scheduled', time:'10:00', caption:'', hashtags:''}],
+};
+
+// ── State ─────────────────────────────────────────────────────────
+let calYear = 2026, calMonth = 4;
+let selectedDay = null;
+let editingPostId = null;
+let modalType  = 'post';
+let modalTheme = 'coulisses';
+let nextId = 200;
+
+const MONTHS     = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+const DAYS       = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+const DAYS_LONG  = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+const TYPE_ICONS = { post:'📸', reel:'🎬', story:'📖', carousel:'🎠' };
+const TYPE_LABELS= { post:'Post', reel:'Reel', story:'Story', carousel:'Carrousel' };
+const THEME_LABELS={ coulisses:'🎬 Coulisses', education:'📚 Éducation', promotion:'🛒 Promotion', engagement:'💬 Engagement', inspiration:'🌟 Inspiration' };
+const STATUS_LABELS={ published:'Publié', scheduled:'Programmé', draft:'Brouillon' };
+const THEME_COLORS={ coulisses:'var(--theme-coulisses)', education:'var(--theme-education)', promotion:'var(--theme-promotion)', engagement:'var(--theme-engagement)', inspiration:'var(--theme-inspiration)' };
+
+const MOCK_CAPTIONS = {
+  post:     `✨ {TITLE}\n\nQuelle que soit votre niche, la constance sur Instagram crée la confiance. Et la confiance crée les résultats.\n\n👉 Dites-moi en commentaire : quelle est votre plus grande difficulté en ce moment ?\n\n#instagram #contentcreator #communitymanager #socialmedia`,
+  reel:     `🎬 {TITLE}\n\nPOV : vous regardez ce reel et vous décidez enfin de passer à l'action 💪\n\nSave pour y revenir quand vous en aurez besoin !\n\n#reel #contentcreator #ugc #instagram`,
+  story:    `(Story interactive — ajoutez un sondage, quiz ou question sticker pour maximiser l'engagement 🔥)`,
+  carousel: `👆 Swipe jusqu'à la fin — le dernier slide va tout changer pour vous.\n\n✅ {TITLE}\n\nSave ce carrousel et tague quelqu'un qui en a besoin !\n\n#instagram #carrousel #contentcreator #tips`,
+};
+
+// ── Helpers ───────────────────────────────────────────────────────
+function dateKey(y, m, d) { return `${y}-${m}-${d}`; }
+
+function formatInput(date) {
+  return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+}
+
+// ── Calendar render ───────────────────────────────────────────────
+function renderDayNames() {
+  document.getElementById('ig-day-names').innerHTML = DAYS.map(d => `<div class="ig-day-name">${d}</div>`).join('');
+}
+
+function renderCalendar() {
+  document.getElementById('month-label').textContent = `${MONTHS[calMonth]} ${calYear}`;
+  document.getElementById('pillars-month-label').textContent = `${MONTHS[calMonth]} ${calYear}`;
+
+  const today = new Date();
+  const tY = today.getFullYear(), tM = today.getMonth(), tD = today.getDate();
+
+  let firstDow = new Date(calYear, calMonth, 1).getDay();
+  firstDow = firstDow === 0 ? 6 : firstDow - 1; // Mon = 0
+
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  let html = '';
+
+  for (let i = 0; i < firstDow; i++) html += '<div class="ig-cell empty"></div>';
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const key   = dateKey(calYear, calMonth, d);
+    const posts = igPosts[key] || [];
+    const isToday    = tY === calYear && tM === calMonth && tD === d;
+    const isPast     = new Date(calYear, calMonth, d) < new Date(tY, tM, tD);
+    const isSelected = selectedDay && selectedDay.y === calYear && selectedDay.m === calMonth && selectedDay.d === d;
+
+    const cls = ['ig-cell'];
+    if (isToday) cls.push('today');
+    else if (isPast) cls.push('past');
+    if (isSelected) cls.push('selected');
+
+    const numHtml = isToday
+      ? `<div class="ig-cell-num"><span class="today-badge">${d}</span></div>`
+      : `<div class="ig-cell-num">${d}</div>`;
+
+    const MAX = 3;
+    const chips = posts.slice(0, MAX).map(p =>
+      `<div class="ig-chip ${p.type}${p.status==='draft'?' draft':''}">${TYPE_ICONS[p.type]} <span>${p.title}</span></div>`
+    ).join('');
+    const more  = posts.length > MAX ? `<div class="ig-cell-more">+${posts.length - MAX}</div>` : '';
+
+    html += `<div class="${cls.join(' ')}" onclick="selectDay(${d})">${numHtml}<div class="ig-cell-posts">${chips}${more}</div></div>`;
+  }
+
+  document.getElementById('ig-grid').innerHTML = html;
+  updateStats();
+  renderPillars();
+}
+
+function changeMonth(delta) {
+  calMonth += delta;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  if (calMonth < 0)  { calMonth = 11; calYear--; }
+  selectedDay = null;
+  renderCalendar();
+  renderSideDefault();
+}
+
+// ── Day selection ─────────────────────────────────────────────────
+function selectDay(d) {
+  selectedDay = { y: calYear, m: calMonth, d };
+  renderCalendar();
+  renderSidePanel();
+}
+
+function renderSideDefault() {
+  document.getElementById('side-title').textContent  = 'Sélectionnez un jour';
+  document.getElementById('side-weekday').textContent = '';
+  document.getElementById('ig-side-body').innerHTML   = `
+    <div class="ig-no-posts">
+      <div class="ig-no-emoji">📅</div>
+      Cliquez sur un jour<br>pour voir ou ajouter<br>du contenu.
+    </div>`;
+}
+
+function renderSidePanel() {
+  if (!selectedDay) { renderSideDefault(); return; }
+  const { y, m, d } = selectedDay;
+  const key   = dateKey(y, m, d);
+  const posts = igPosts[key] || [];
+  const date  = new Date(y, m, d);
+
+  document.getElementById('side-title').textContent   = `${d} ${MONTHS[m]}`;
+  document.getElementById('side-weekday').textContent  = DAYS_LONG[date.getDay()];
+
+  let html = '';
+  if (posts.length === 0) {
+    html = `<div class="ig-no-posts"><div class="ig-no-emoji">✨</div>Aucun contenu planifié<br>pour ce jour.</div>`;
+  } else {
+    html = posts.map(p => `
+      <div class="ig-post-item" onclick="openEditModal(${p.id},'${key}')">
+        <div class="ig-post-type-badge ${p.type}">${TYPE_ICONS[p.type]}</div>
+        <div class="ig-post-item-info">
+          <div class="ig-post-item-title">${p.title}</div>
+          <div class="ig-post-item-meta">
+            <span><span class="ig-status-dot ${p.status}"></span> ${STATUS_LABELS[p.status]}</span>
+            <span>⏰ ${p.time}</span>
+          </div>
+          <span class="ig-theme-tag ${p.theme}">${THEME_LABELS[p.theme]}</span>
+        </div>
+      </div>`).join('');
+  }
+
+  html += `<button class="ig-side-add-btn" onclick="openAddModal('${key}')">+ Ajouter un post ce jour</button>`;
+  document.getElementById('ig-side-body').innerHTML = html;
+}
+
+// ── Stats ─────────────────────────────────────────────────────────
+function updateStats() {
+  const cnt = { post:0, reel:0, story:0, carousel:0 };
+  Object.entries(igPosts).forEach(([k, posts]) => {
+    const [y, m] = k.split('-').map(Number);
+    if (y === calYear && m === calMonth) posts.forEach(p => { if (p.type in cnt) cnt[p.type]++; });
+  });
+  ['post','reel','story','carousel'].forEach(t => {
+    document.getElementById('count-' + t).textContent = cnt[t];
+  });
+}
+
+// ── Pillars ───────────────────────────────────────────────────────
+function renderPillars() {
+  const cnt = { coulisses:0, education:0, promotion:0, engagement:0, inspiration:0 };
+  let total = 0;
+  Object.entries(igPosts).forEach(([k, posts]) => {
+    const [y, m] = k.split('-').map(Number);
+    if (y === calYear && m === calMonth) posts.forEach(p => { if (p.theme in cnt) { cnt[p.theme]++; total++; } });
+  });
+
+  document.getElementById('ig-pillars-bars').innerHTML =
+    Object.entries(cnt).map(([theme, n]) => {
+      const pct = total ? Math.round((n/total)*100) : 0;
+      return `
+        <div class="ig-pillar-row">
+          <div class="ig-pillar-label">${THEME_LABELS[theme]}</div>
+          <div class="ig-pillar-bar-wrap">
+            <div class="ig-pillar-bar" style="width:${pct}%;background:${THEME_COLORS[theme]}"></div>
+          </div>
+          <div class="ig-pillar-count">${n}</div>
+        </div>`;
+    }).join('');
+}
+
+// ── Modal ─────────────────────────────────────────────────────────
+function openAddModal(keyOrNull) {
+  editingPostId = null;
+  document.getElementById('modal-heading').textContent = 'Nouveau post Instagram';
+  document.getElementById('modal-title-input').value   = '';
+  document.getElementById('modal-caption').value       = '';
+  document.getElementById('modal-hashtags').value      = '';
+  document.getElementById('modal-status').value        = 'scheduled';
+  selectType('post');
+  selectTheme('coulisses');
+
+  let defaultDate;
+  if (keyOrNull) {
+    const [y, m, d] = keyOrNull.split('-').map(Number);
+    defaultDate = new Date(y, m, d);
+  } else if (selectedDay) {
+    defaultDate = new Date(selectedDay.y, selectedDay.m, selectedDay.d);
+  } else {
+    defaultDate = new Date(calYear, calMonth, 1);
+  }
+  document.getElementById('modal-date').value = formatInput(defaultDate);
+  document.getElementById('modal-time').value = '18:00';
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function openEditModal(postId, key) {
+  const post = (igPosts[key] || []).find(p => p.id === postId);
+  if (!post) return;
+
+  editingPostId = postId;
+  document.getElementById('modal-heading').textContent    = 'Modifier le post';
+  document.getElementById('modal-title-input').value      = post.title;
+  document.getElementById('modal-caption').value          = post.caption  || '';
+  document.getElementById('modal-hashtags').value         = post.hashtags || '';
+  document.getElementById('modal-status').value           = post.status;
+  selectType(post.type);
+  selectTheme(post.theme);
+
+  const [y, m, d] = key.split('-').map(Number);
+  document.getElementById('modal-date').value = formatInput(new Date(y, m, d));
+  document.getElementById('modal-time').value = post.time || '18:00';
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal()         { document.getElementById('modal-overlay').classList.remove('open'); }
+function closeModalOutside(e) { if (e.target === document.getElementById('modal-overlay')) closeModal(); }
+
+function selectType(type) {
+  modalType = type;
+  ['post','reel','story','carousel'].forEach(t => {
+    document.getElementById('type-'+t).className = `ig-type-btn ${t}${t===type?' active':''}`;
+  });
+}
+
+function selectTheme(theme) {
+  modalTheme = theme;
+  ['coulisses','education','promotion','engagement','inspiration'].forEach(t => {
+    document.getElementById('theme-'+t).className = `ig-theme-btn ${t}${t===theme?' active':''}`;
+  });
+}
+
+function savePost() {
+  const title = document.getElementById('modal-title-input').value.trim();
+  const dateV = document.getElementById('modal-date').value;
+  if (!title) { toast('Veuillez saisir un titre', 'error'); return; }
+  if (!dateV) { toast('Veuillez choisir une date',  'error'); return; }
+
+  const [yyyy, mm, dd] = dateV.split('-').map(Number);
+  const key = dateKey(yyyy, mm - 1, dd);
+
+  const post = {
+    id:       editingPostId || nextId++,
+    type:     modalType,
+    title,
+    caption:  document.getElementById('modal-caption').value,
+    hashtags: document.getElementById('modal-hashtags').value,
+    theme:    modalTheme,
+    status:   document.getElementById('modal-status').value,
+    time:     document.getElementById('modal-time').value,
+  };
+
+  if (editingPostId) {
+    Object.keys(igPosts).forEach(k => {
+      igPosts[k] = igPosts[k].filter(p => p.id !== editingPostId);
+      if (!igPosts[k].length) delete igPosts[k];
+    });
+  }
+
+  if (!igPosts[key]) igPosts[key] = [];
+  igPosts[key].push(post);
+  igPosts[key].sort((a, b) => a.time.localeCompare(b.time));
+
+  closeModal();
+  selectedDay = { y: yyyy, m: mm - 1, d: dd };
+  renderCalendar();
+  renderSidePanel();
+  toast(editingPostId ? 'Post modifié ✓' : 'Post ajouté au calendrier ✓', 'success');
+}
+
+// ── AI caption ────────────────────────────────────────────────────
+async function generateCaption() {
+  const title   = document.getElementById('modal-title-input').value.trim() || 'contenu Instagram';
+  const spinner = document.getElementById('ai-spinner');
+  spinner.style.display = 'inline-block';
+
+  const apiKey = localStorage.getItem('lcm_api_key');
+  let caption;
+
+  if (apiKey && apiKey.startsWith('sk-ant-')) {
+    caption = await callClaudeForCaption(title, modalType, apiKey);
+  } else {
+    await new Promise(r => setTimeout(r, 900));
+    caption = MOCK_CAPTIONS[modalType].replace('{TITLE}', title);
+  }
+
+  spinner.style.display = 'none';
+  document.getElementById('modal-caption').value = caption;
+  toast('Caption générée ✨', 'success');
+}
+
+async function callClaudeForCaption(title, type, apiKey) {
+  const desc = { post:'post photo', reel:'Reel vidéo', story:'Story interactive', carousel:'carrousel multi-slides' };
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-calls': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 400,
+        messages: [{ role: 'user', content:
+          `Rédige une caption Instagram pour un ${desc[type]} sur le thème : "${title}".
+Utilise des emojis, une accroche forte et un appel à l'action.
+Ne génère PAS les hashtags (champ séparé).
+Réponds uniquement avec la caption, sans préambule.` }]
+      })
+    });
+    const data = await res.json();
+    return data.content?.[0]?.text || MOCK_CAPTIONS[type].replace('{TITLE}', title);
+  } catch {
+    return MOCK_CAPTIONS[type].replace('{TITLE}', title);
+  }
+}
+
+// ── Toast ─────────────────────────────────────────────────────────
+function toast(msg, type = 'success') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `toast show ${type}`;
+  setTimeout(() => el.className = 'toast', 3000);
+}
+
+// ── Keyboard ──────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ── Init ──────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  renderDayNames();
+  renderCalendar();
+});
+</script>
+</body>
+</html>
