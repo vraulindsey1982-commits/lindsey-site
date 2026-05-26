@@ -690,12 +690,16 @@ footer a{
   .stats,
   .grid,
   .cards,
-  .photo-grid,
   .why-results-head,
   .why-results .checks,
   .results-cards,
   #offres .cards{
     grid-template-columns:1fr;
+  }
+
+  .photo-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
   }
 
   h1{
