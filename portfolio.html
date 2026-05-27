@@ -4,10 +4,73 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Portfolio UGC | Créations vidéo TikTok & Instagram | Lindsey Créative Studio</title>
-  <meta name="description" content="Découvrez le portfolio de Lindsey Créative Studio : vidéos UGC beauté, lifestyle et food pour TikTok, Instagram et publicité. Contenu authentique et ads ready." />
+  <title>Portfolio Créatrice UGC | Lindsey — Vidéos TikTok & Instagram</title>
+  <meta name="description" content="Portfolio de Lindsey, créatrice UGC France : vidéos face cam, unboxing, lifestyle et food pour TikTok, Instagram et Meta Ads. Contenu authentique, ads ready." />
+  <meta name="keywords" content="portfolio créatrice UGC, vidéo UGC France, UGC TikTok, UGC Instagram, face cam, unboxing, UGC beauté, UGC lifestyle, UGC food, Meta Ads, TikTok Ads" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.lindsey-ugc.fr/portfolio.html" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Portfolio créatrice UGC — Lindsey",
+    "description": "Vidéos UGC beauté, lifestyle et food réalisées pour des marques françaises. Face cam, unboxing, démonstration produit — contenu authentique prêt pour TikTok, Instagram et publicité Meta Ads.",
+    "url": "https://www.lindsey-ugc.fr/portfolio.html",
+    "author": {
+      "@type": "Person",
+      "name": "Lindsey",
+      "jobTitle": "Créatrice UGC France",
+      "url": "https://www.lindsey-ugc.fr/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Accueil",
+        "item": "https://www.lindsey-ugc.fr/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Portfolio",
+        "item": "https://www.lindsey-ugc.fr/portfolio.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": "Vidéo UGC face cam lifestyle — Lindsey créatrice UGC France",
+      "description": "Vidéo UGC face cam réalisée par Lindsey pour une marque lifestyle. Contenu authentique filmé au DJI Osmo Pocket 3, prêt pour TikTok Reels et Meta Ads.",
+      "contentUrl": "https://www.lindsey-ugc.fr/Video1.mp4",
+      "thumbnailUrl": "https://www.lindsey-ugc.fr/photo1.webp",
+      "uploadDate": "2025-01-01",
+      "author": { "@type": "Person", "name": "Lindsey" }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": "Vidéo UGC démonstration produit — Lindsey créatrice UGC France",
+      "description": "Vidéo UGC démonstration produit réalisée par Lindsey. Format court, ads ready, optimisé pour TikTok Ads et Instagram Reels.",
+      "contentUrl": "https://www.lindsey-ugc.fr/video2.mp4",
+      "thumbnailUrl": "https://www.lindsey-ugc.fr/photo2.webp",
+      "uploadDate": "2025-01-01",
+      "author": { "@type": "Person", "name": "Lindsey" }
+    }
+  ]
+  </script>
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -22,12 +85,10 @@
 
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Google Analytics chargé après interaction pour réduire le TBT -->
+  <!-- Google Analytics chargé uniquement sur interaction utilisateur pour réduire le TBT -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-PH16HZWF71');
     function loadGA() {
       if (window._gaLoaded) return;
       window._gaLoaded = true;
@@ -35,16 +96,20 @@
       s.async = true;
       s.src = 'https://www.googletagmanager.com/gtag/js?id=G-PH16HZWF71';
       document.head.appendChild(s);
+      s.onload = function() {
+        gtag('js', new Date());
+        gtag('config', 'G-PH16HZWF71');
+      };
     }
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(loadGA, { timeout: 4000 });
-    } else {
-      window.addEventListener('load', loadGA);
-    }
+    ['click','scroll','touchstart','keydown'].forEach(function(e){
+      document.addEventListener(e, loadGA, {once: true, passive: true});
+    });
   </script>
 </head>
 
 <body>
+
+<a href="/" class="back-home" aria-label="Retour à l'accueil">← Accueil</a>
 
 <header class="nav">
   <a class="brand" href="index.html">Lindsey Creative Studio</a>
@@ -61,33 +126,83 @@
 
 <main class="section">
 
-  <p class="eyebrow">Portfolio</p>
-  <h1>Mes créations UGC</h1>
+  <nav aria-label="Fil d'Ariane" style="font-size:13px; color:#888; margin-bottom:16px;">
+    <a href="/" style="color:#888;">Accueil</a> &rsaquo; <span>Portfolio</span>
+  </nav>
 
-  <p class="eyebrow-sub">Photos</p>
+  <p class="eyebrow">Créatrice UGC France</p>
+  <h1>Portfolio créatrice UGC — Lindsey</h1>
+  <p style="max-width:640px; margin-bottom:16px; color:#666;">
+    Vidéos UGC beauté, lifestyle et food réalisées pour des marques françaises. Face cam, unboxing, démonstration produit — contenu authentique prêt pour TikTok, Instagram et publicité Meta Ads.
+  </p>
+  <p style="max-width:640px; margin-bottom:32px; color:#666;">
+    Chaque contenu est filmé avec du matériel professionnel (DJI Osmo Pocket 3, Samsung Galaxy S25 Ultra) et livré prêt à l'emploi sous 5 à 7 jours ouvrés. Adapté aux codes TikTok Reels, Instagram Reels, Meta Ads et TikTok Ads.
+  </p>
+
+  <p class="eyebrow-sub">Photos — Mises en situation produit</p>
+  <p style="max-width:600px; margin-bottom:20px; color:#666; font-size:14px;">
+    Contenus photo authentiques dans les niches beauté &amp; skincare, lifestyle, et food &amp; boissons. Chaque visuel est pensé pour renforcer la confiance et l'authenticité de la marque.<br>
+    Certaines photos sont également visibles dans leur format original sur Instagram <a href="https://www.instagram.com/lindsey.ugc.fr/" target="_blank" rel="noopener" style="color:#c47f79; font-weight:700;">@lindsey.ugc.fr</a>.
+  </p>
   <div class="photo-grid">
-    <picture>
-      <source srcset="photo1.webp" type="image/webp">
-      <img src="photo1.jpg" alt="UGC beauté" loading="lazy" decoding="async" width="400" height="320">
-    </picture>
-    <picture>
-      <source srcset="photo2.webp" type="image/webp">
-      <img src="photo2.jpg" alt="UGC lifestyle" loading="lazy" decoding="async" width="400" height="320">
-    </picture>
-    <picture>
-      <source srcset="photo3.webp" type="image/webp">
-      <img src="photo3.jpg" alt="UGC skincare" loading="lazy" decoding="async" width="400" height="320">
-    </picture>
-    <picture>
-      <source srcset="photo4.webp" type="image/webp">
-      <img src="photo4.jpg" alt="UGC food & boissons" loading="lazy" decoding="async" width="400" height="320">
-    </picture>
+    <div class="photo-item">
+      <picture>
+        <source srcset="photo-magnesium.webp" type="image/webp">
+        <img src="photo-magnesium.jpg" alt="UGC santé — Triple Magnesium Natnatura mise en situation produit" loading="lazy" decoding="async" width="400" height="500">
+      </picture>
+      <img src="logo.webp" class="photo-logo" alt="" loading="lazy">
+    </div>
+    <div class="photo-item">
+      <picture>
+        <source srcset="photo1.webp" type="image/webp">
+        <img src="photo1.jpg" alt="Contenu UGC beauté — mise en situation produit skincare" loading="lazy" decoding="async" width="400" height="320">
+      </picture>
+      <img src="logo.webp" class="photo-logo" alt="" loading="lazy">
+    </div>
+    <div class="photo-item">
+      <picture>
+        <source srcset="photo2.webp" type="image/webp">
+        <img src="photo2.jpg" alt="Contenu UGC lifestyle — photo authentique pour marque" loading="lazy" decoding="async" width="400" height="320">
+      </picture>
+      <img src="logo.webp" class="photo-logo" alt="" loading="lazy">
+    </div>
+    <div class="photo-item">
+      <picture>
+        <source srcset="photo3.webp" type="image/webp">
+        <img src="photo3.jpg" alt="Contenu UGC skincare — démonstration produit cosmétique" loading="lazy" decoding="async" width="400" height="320">
+      </picture>
+      <img src="logo.webp" class="photo-logo" alt="" loading="lazy">
+    </div>
+    <div class="photo-item">
+      <picture>
+        <source srcset="photo4.webp" type="image/webp">
+        <img src="photo4.jpg" alt="Contenu UGC food &amp; boissons — mise en scène produit alimentaire" loading="lazy" decoding="async" width="400" height="320">
+      </picture>
+      <img src="logo.webp" class="photo-logo" alt="" loading="lazy">
+    </div>
   </div>
 
-  <p class="eyebrow-sub">Vidéos</p>
+  <p class="eyebrow-sub" style="margin-top:48px;">Vidéos UGC — Formats TikTok & Instagram</p>
+  <p style="max-width:600px; margin-bottom:20px; color:#666; font-size:14px;">
+    Vidéos courtes format vertical, optimisées pour capter l'attention dès les 3 premières secondes. Face cam, unboxing, démonstration produit et lifestyle — tous les formats sont ads ready.
+  </p>
   <div class="video-grid">
-    <video src="Video1.mp4" autoplay muted loop playsinline preload="none"></video>
-    <video src="video2.mp4" autoplay muted loop playsinline preload="none"></video>
+    <video src="Video1.mp4" title="Vidéo UGC face cam lifestyle — Lindsey créatrice UGC" autoplay muted loop playsinline preload="metadata"></video>
+    <video src="video2.mp4" title="Vidéo UGC démonstration produit — Lindsey créatrice UGC" autoplay muted loop playsinline preload="metadata"></video>
+  </div>
+
+  <div class="checks" style="margin-top:48px;">
+    <p>✓ Face cam, unboxing, démonstration produit, lifestyle, food content</p>
+    <p>✓ Format vertical 9:16 adapté TikTok & Instagram Reels</p>
+    <p>✓ Optimisé Meta Ads et TikTok Ads — contenu ads ready</p>
+    <p>✓ Filmé au DJI Osmo Pocket 3 et Samsung Galaxy S25 Ultra</p>
+    <p>✓ Livraison sous 5 à 7 jours ouvrés</p>
+  </div>
+
+  <div style="text-align:center; margin-top:48px;">
+    <p style="margin-bottom:16px; font-weight:600;">Vous avez un projet UGC ?</p>
+    <a href="/#contact" class="btn primary">Demander un devis</a>
+    <a href="/" class="btn secondary" style="margin-left:12px;">Retour à l'accueil</a>
   </div>
 
 </main>
@@ -98,8 +213,8 @@
     <img src="logo.png" alt="Lindsey Créative Studio" class="footer-logo" width="300" height="160" loading="lazy" decoding="async">
   </picture>
   <div class="social-links">
-    <a href="https://www.instagram.com/lylytestfamily/" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://www.linkedin.com/in/lindsey-vrau-b259983a4" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/lindsey.ugc.fr/" target="_blank" rel="noopener me">Instagram</a>
+    <a href="https://www.linkedin.com/in/lindsey-vrau-b259983a4" target="_blank" rel="noopener me">LinkedIn</a>
   </div>
   <p>
     © Lindsey Créative Studio
@@ -109,7 +224,7 @@
   </p>
 </footer>
 
-<script src="script.js"></script>
+<script src="script.js" defer></script>
 
 <!-- Vercel Speed Insights -->
 <script>window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };</script>
