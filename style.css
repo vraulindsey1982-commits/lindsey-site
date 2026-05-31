@@ -859,3 +859,44 @@ footer a{
     margin: 0 0 12px 16px;
   }
 }
+
+/* MARQUES PARTENAIRES */
+.brands-section {
+  background: #faf8f5;
+  padding: 48px 20px;
+  text-align: center;
+  border-top: 1px solid #ede8e3;
+}
+
+.brands-section .eyebrow { margin-bottom: 8px; }
+.brands-section h2 { margin-bottom: 32px; font-size: clamp(18px,3vw,22px); }
+
+.brands-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px 28px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.brand-pill {
+  padding: 10px 20px;
+  border: 1.5px solid #e0d8d2;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #5a3a3a;
+  letter-spacing: 0.04em;
+  background: #fff;
+  transition: border-color .2s, color .2s, transform .2s;
+  white-space: nowrap;
+}
+
+.brand-pill:hover {
+  border-color: #c47f79;
+  color: #c47f79;
+  transform: translateY(-2px);
+}
+
