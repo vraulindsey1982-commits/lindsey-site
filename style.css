@@ -309,6 +309,7 @@ blockquote{
   flex-wrap:wrap;
   gap:14px;
   margin-top: 8px;
+  margin-bottom: 28px;
 }
 
 .portfolio-grid article{
