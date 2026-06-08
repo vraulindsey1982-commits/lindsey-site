@@ -1067,3 +1067,70 @@ footer a{
   color: #c47f79;
   font-weight: 700;
 }
+
+/* CERTIFICATION */
+.cert-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: linear-gradient(135deg, #fffaf6 0%, #fff 100%);
+  border: 1.5px solid #e2cfc7;
+  border-radius: 16px;
+  padding: 18px 22px;
+  margin-top: 28px;
+  max-width: 540px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cert-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #c47f79, #e8b89b);
+}
+
+.cert-icon {
+  font-size: 30px;
+  flex-shrink: 0;
+}
+
+.cert-info { flex: 1; }
+
+.cert-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: #c47f79;
+  margin: 0 0 4px;
+}
+
+.cert-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 4px;
+}
+
+.cert-issuer {
+  font-size: 12px;
+  color: #888;
+  margin: 0;
+}
+
+.cert-stamp {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c47f79, #e8b89b);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
