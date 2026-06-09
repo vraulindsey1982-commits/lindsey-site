@@ -701,23 +701,23 @@ footer a{
 /* FEATURED CARD */
 .card.featured{
   background:
-    radial-gradient(circle at 20% 0%,rgba(255,255,255,.7),transparent 35%),
-    linear-gradient(135deg,#5a3a3a 0%,#3a2b2b 100%);
-  color:#fff;
-  border:1px solid rgba(255,255,255,.15);
-  box-shadow:0 26px 70px rgba(90,58,58,.35);
+    radial-gradient(circle at 20% 0%,rgba(255,255,255,.85),transparent 35%),
+    linear-gradient(135deg,#e8b5b0 0%,#d4918b 100%);
+  color:#3a2b2b;
+  border:1px solid rgba(255,255,255,.65);
+  box-shadow:0 26px 70px rgba(217,149,143,.35);
 }
 
 .card.featured h3{
-  color:#f8e6e1;
+  color:#3a2b2b;
 }
 
 .card.featured p{
-  color:#e9cfc5;
+  color:#5a3a3a;
 }
 
 .card.featured span{
-  color:#c9a8a2;
+  color:#6e4a45;
 }
 
 #reviews-container { display: flex; flex-direction: column; gap: 20px; margin-bottom: 28px; }
