@@ -36,8 +36,15 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/blog.html</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-06-21</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.lindsey-ugc.fr/erreurs-marques-contenu-ugc.html</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
 
