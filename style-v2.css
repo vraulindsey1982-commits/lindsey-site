@@ -624,7 +624,6 @@ footer a{
 
   .nav.nav-open nav{display:flex}
 
-  .hero,
   .section,
   .stats{
     padding:60px 20px;
@@ -633,7 +632,8 @@ footer a{
   .hero{
     flex-direction:column;
     align-items:center;
-    gap:24px;
+    gap:20px;
+    padding:16px 20px 40px;
   }
 
   .hero-copy{
@@ -647,17 +647,22 @@ footer a{
 
   .hero-card{
     position:relative;
-    width:auto;
+    width:160px;
     min-width:0;
+    height:280px;
+    overflow:hidden;
+    display:flex;
     justify-content:center;
+    align-items:center;
     min-height:auto;
     padding-top:0;
     order:-1;
   }
 
   .phone{
-    width:180px;
-    height:320px;
+    position:absolute;
+    width:160px;
+    height:280px;
     transform:none;
   }
 
