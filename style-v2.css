@@ -647,6 +647,7 @@ footer a{
 
   .hero-card{
     position:relative;
+    top:0;
     width:160px;
     min-width:0;
     height:280px;
@@ -660,6 +661,8 @@ footer a{
 
   .phone{
     position:absolute;
+    top:0;
+    left:0;
     width:160px;
     height:280px;
     transform:none;
