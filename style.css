@@ -656,8 +656,13 @@ footer a{
   }
 
   .phone{
-    width:230px;
-    height:400px;
+    width:180px;
+    height:320px;
+    transform:none;
+  }
+
+  .floating{
+    display:none;
   }
 
   .stats,
