@@ -635,6 +635,9 @@ footer a{
   }
 
   .hero-card{
+    position:relative;
+    width:100%;
+    min-width:0;
     justify-content:center;
     min-height:auto;
     padding-top:0;
