@@ -16,7 +16,8 @@
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
   <!-- Préchargement image hero WebP -->
-  <link rel="preload" as="image" href="affiche-lindsey-2.webp" type="image/webp" />
+  <link rel="preload" as="image" href="affiche-lindsey-2-mobile.webp" type="image/webp" media="(max-width:850px)" />
+  <link rel="preload" as="image" href="affiche-lindsey-2.webp" type="image/webp" media="(min-width:851px)" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -166,8 +167,9 @@
       <div class="hero-card">
         <div class="phone">
           <picture>
-            <source srcset="affiche-lindsey-2.webp" type="image/webp" sizes="270px">
-            <img src="affiche-lindsey-2.jpeg" alt="Affiche Lindsey Créative Studio" class="phone-image" width="270" height="480" fetchpriority="high" decoding="sync" sizes="270px">
+            <source srcset="affiche-lindsey-2-mobile.webp" type="image/webp" media="(max-width:850px)" width="160" height="285">
+            <source srcset="affiche-lindsey-2.webp" type="image/webp" media="(min-width:851px)" width="270" height="480">
+            <img src="affiche-lindsey-2.jpeg" alt="Affiche Lindsey Créative Studio" class="phone-image" width="270" height="480" fetchpriority="high" decoding="sync">
           </picture>
         </div>
         <div class="floating one">Ads ready</div>
