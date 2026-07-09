@@ -227,6 +227,32 @@ blockquote{
   color:var(--muted);
 }
 
+/* INSTAGRAM PROOF */
+.ig-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  margin-top:32px;
+}
+
+.ig-stats div{
+  background:white;
+  border:1px solid rgba(0,0,0,.07);
+  border-radius:28px;
+  padding:28px;
+  box-shadow:0 18px 50px rgba(0,0,0,.06);
+  text-align:center;
+}
+
+.ig-stats strong{
+  font-size:2rem;
+  display:block;
+}
+
+.ig-stats span{
+  color:var(--muted);
+}
+
 /* GRIDS */
 .grid{
   display:grid;
@@ -673,6 +699,7 @@ footer a{
   }
 
   .stats,
+  .ig-stats,
   .grid,
   .cards,
   .photo-grid,
@@ -1065,6 +1092,17 @@ footer a{
 .service-page-header h2 {
   margin: 4px 0 0;
   font-size: 1.35rem;
+}
+
+.service-page-price {
+  display: inline-block;
+  margin: 10px 0 0;
+  padding: 6px 14px;
+  background: linear-gradient(135deg, #111, #5a3a3a);
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+  border-radius: 999px;
 }
 
 .service-page-grid {
