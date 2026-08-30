@@ -66,6 +66,39 @@ if (form) {
   });
 }
 
+// Embeds Instagram : chargés seulement quand la section approche du viewport,
+// puis on ajoute un title accessible aux iframes générées par le script Instagram
+const igGrid = document.querySelector('.instagram-embed-grid');
+if (igGrid) {
+  const titleIgIframes = () => {
+    igGrid.querySelectorAll('iframe:not([title])').forEach((iframe, i) => {
+      const post = iframe.closest('.instagram-media');
+      const permalink = post ? post.getAttribute('data-instgrm-permalink') : null;
+      const match = permalink && permalink.match(/\/reel\/([^/]+)/);
+      iframe.title = match ? `Publication Instagram Lindsey : ${match[1]}` : `Publication Instagram Lindsey ${i + 1}`;
+    });
+  };
+  new MutationObserver(titleIgIframes).observe(igGrid, { childList: true, subtree: true });
+
+  const loadIgEmbed = () => {
+    if (window._igEmbedLoaded) return;
+    window._igEmbedLoaded = true;
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.instagram.com/embed.js';
+    document.body.appendChild(s);
+  };
+  const igObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        loadIgEmbed();
+        igObserver.disconnect();
+      }
+    });
+  }, { rootMargin: '200px' });
+  igObserver.observe(igGrid);
+}
+
 // Hamburger menu
 const burger = document.querySelector('.burger');
 const navHeader = document.querySelector('.nav');
