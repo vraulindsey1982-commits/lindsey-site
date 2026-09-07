@@ -99,6 +99,25 @@ if (igGrid) {
   igObserver.observe(igGrid);
 }
 
+// Vidéos du portfolio : chargées et lancées seulement quand elles
+// approchent du viewport, mises en pause quand on les quitte, pour éviter
+// de télécharger toutes les vidéos d'un coup au chargement de la page.
+const lazyVideos = document.querySelectorAll('.video-grid video[data-src]');
+if (lazyVideos.length) {
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        if (!video.src) video.src = video.dataset.src;
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, { rootMargin: '200px' });
+  lazyVideos.forEach(video => videoObserver.observe(video));
+}
+
 // Hamburger menu
 const burger = document.querySelector('.burger');
 const navHeader = document.querySelector('.nav');

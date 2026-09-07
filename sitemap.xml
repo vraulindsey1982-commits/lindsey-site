@@ -56,6 +56,13 @@
   </url>
 
   <url>
+    <loc>https://www.lindsey-ugc.fr/lindsey-cm.html</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://www.lindsey-ugc.fr/contenu-ugc-c-est-quoi.html</loc>
     <lastmod>2026-09-04</lastmod>
     <changefreq>yearly</changefreq>
@@ -200,27 +207,6 @@
     <lastmod>2026-07-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://www.lindsey-ugc.fr/mentions-legales.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-
-  <url>
-    <loc>https://www.lindsey-ugc.fr/confidentialite.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-
-  <url>
-    <loc>https://www.lindsey-ugc.fr/cgv.html</loc>
-    <lastmod>2026-06-04</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
   </url>
 
 </urlset>
