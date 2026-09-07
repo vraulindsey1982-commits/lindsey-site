@@ -359,6 +359,10 @@ blockquote{
   gap:18px;
 }
 
+.video-grid a{
+  display:block;
+}
+
 .video-grid video{
   width:100%;
   aspect-ratio:9/16;
