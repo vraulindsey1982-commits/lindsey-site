@@ -635,6 +635,20 @@ async function uploadImageFile(fileInput, targetInputId, statusElId) {
   }
 }
 
+async function publishToFacebook(imageUrl, caption) {
+  const res = await fetch('/api/facebook-publish', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-dashboard-key': sessionStorage.getItem('lcm_dashboard_key') || '',
+    },
+    body: JSON.stringify({ imageUrl, caption }),
+  });
+  const data = await res.json();
+  if (!res.ok || !data.success) throw new Error(data.error || 'Échec de la publication');
+  return data.postId;
+}
+
 async function publishToInstagram(imageUrl, caption) {
   const res = await fetch('/api/instagram-publish', {
     method: 'POST',
@@ -683,17 +697,35 @@ async function approveGenerated() {
     approveBtn.disabled = false;
   }
 
-  // LinkedIn et Facebook : publication automatique pas encore branchée,
+  if (wantsFacebook) {
+    const imageUrl = document.getElementById('gen-image-url').value.trim();
+    const approveBtn = document.querySelector('#gen-result-panel .btn-approve');
+    const originalText = approveBtn.textContent;
+    approveBtn.textContent = 'Publication en cours…';
+    approveBtn.disabled = true;
+    try {
+      const postId = await publishToFacebook(imageUrl, content);
+      POSTS.unshift({
+        id: Date.now() + 1, network: 'facebook', icon: '👥', iconClass: 'fb',
+        title: 'Facebook', date: 'Publié à l\'instant', status: 'approved',
+        content, fbPostId: postId,
+      });
+      toast(`Publié sur Facebook ✓ (ID: ${postId})`, 'success');
+    } catch (e) {
+      toast(`Échec Facebook : ${e.message}`, 'error');
+    }
+    approveBtn.textContent = originalText;
+    approveBtn.disabled = false;
+  }
+
+  // LinkedIn : publication automatique pas encore branchée,
   // on ajoute au calendrier comme "à publier manuellement" pour l'instant.
   if (wantsLinkedIn) {
-    POSTS.unshift({ id: Date.now() + 1, network: 'linkedin', icon: '💼', iconClass: 'li', title: 'LinkedIn', date: 'À publier manuellement', status: 'approved', content });
-  }
-  if (wantsFacebook) {
-    POSTS.unshift({ id: Date.now() + 2, network: 'facebook', icon: '👥', iconClass: 'fb', title: 'Facebook', date: 'À publier manuellement', status: 'approved', content });
+    POSTS.unshift({ id: Date.now() + 2, network: 'linkedin', icon: '💼', iconClass: 'li', title: 'LinkedIn', date: 'À publier manuellement', status: 'approved', content });
   }
 
   document.getElementById('gen-result-panel').style.display = 'none';
-  if (!wantsInstagram) toast('Post validé et ajouté au calendrier ✓', 'success');
+  if (!wantsInstagram && !wantsFacebook) toast('Post validé et ajouté au calendrier ✓', 'success');
 }
 
 // ── Network checkboxes ────────────────────────────────────────────────────
