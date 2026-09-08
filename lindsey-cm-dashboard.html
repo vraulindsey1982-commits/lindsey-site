@@ -273,6 +273,21 @@
       </div>
     </div>
 
+    <!-- Post preview modal -->
+    <div id="post-preview-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9998;align-items:center;justify-content:center;" onclick="if(event.target===this) closePostPreview()">
+      <div style="background:var(--panel,#16161f);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px;max-width:420px;width:90%;max-height:85vh;overflow-y:auto;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <div id="preview-network" style="font-weight:800;font-size:16px;"></div>
+          <button onclick="closePostPreview()" style="background:none;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;">✕</button>
+        </div>
+        <div id="preview-status" style="font-size:12px;margin-bottom:12px;"></div>
+        <img id="preview-image" style="display:none;width:100%;border-radius:10px;margin-bottom:12px;">
+        <div id="preview-content" style="font-size:14px;line-height:1.6;white-space:pre-wrap;color:var(--text-soft);margin-bottom:16px;"></div>
+        <div id="preview-error" style="display:none;font-size:12px;color:#f26d6d;margin-bottom:16px;"></div>
+        <button id="preview-cancel-btn" class="btn-reject" style="width:100%;">✕ Annuler cette programmation</button>
+      </div>
+    </div>
+
     <!-- ─ TAB: NETWORKS ─ -->
     <div id="tab-networks" class="tab-content" style="display:none">
       <div class="dash-topbar">
@@ -443,6 +458,7 @@ const POSTS = [
 
 // Calendar posts data (chargées depuis /api/scheduled-posts, voir loadScheduledPosts)
 let CAL_POSTS = {};
+let SCHEDULED_POSTS_BY_ID = {};
 
 // ── Tab navigation ────────────────────────────────────────────────────────
 
@@ -773,20 +789,86 @@ async function loadScheduledPosts() {
     });
     const data = await res.json();
     const grouped = {};
+    SCHEDULED_POSTS_BY_ID = {};
     (data.posts || []).forEach(p => {
       const d = new Date(p.scheduledDate + 'T00:00:00');
       const key = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
       if (!grouped[key]) grouped[key] = [];
       grouped[key].push({
+        id: p.id,
         net: CAL_NET_MAP[p.network] || 'fb',
         label: `${CAL_NET_LABEL[p.network] || p.network} ${CAL_STATUS_ICON[p.status] || ''}`.trim(),
       });
+      SCHEDULED_POSTS_BY_ID[p.id] = p;
     });
     CAL_POSTS = grouped;
   } catch (e) {
     console.error('Erreur chargement calendrier', e);
   }
   renderCalendar();
+}
+
+const PREVIEW_NETWORK_LABEL = { instagram: '📸 Instagram', facebook: '👥 Facebook', linkedin: '💼 LinkedIn' };
+const PREVIEW_STATUS_LABEL = {
+  pending: { text: '⏳ En attente de publication', color: 'var(--text-muted)' },
+  published: { text: '✓ Publié', color: '#3ec878' },
+  failed: { text: '✕ Échec de la publication', color: '#f26d6d' },
+};
+
+function showPostPreview(id) {
+  const post = SCHEDULED_POSTS_BY_ID[id];
+  if (!post) return;
+
+  document.getElementById('preview-network').textContent = `${PREVIEW_NETWORK_LABEL[post.network] || post.network} · ${post.scheduledDate}`;
+
+  const statusInfo = PREVIEW_STATUS_LABEL[post.status] || PREVIEW_STATUS_LABEL.pending;
+  const statusEl = document.getElementById('preview-status');
+  statusEl.textContent = statusInfo.text;
+  statusEl.style.color = statusInfo.color;
+
+  const imgEl = document.getElementById('preview-image');
+  if (post.imageUrl) { imgEl.src = post.imageUrl; imgEl.style.display = 'block'; }
+  else { imgEl.style.display = 'none'; }
+
+  document.getElementById('preview-content').textContent = post.content;
+
+  const errorEl = document.getElementById('preview-error');
+  if (post.status === 'failed' && post.error) { errorEl.textContent = `Erreur : ${post.error}`; errorEl.style.display = 'block'; }
+  else { errorEl.style.display = 'none'; }
+
+  const cancelBtn = document.getElementById('preview-cancel-btn');
+  if (post.status === 'pending') {
+    cancelBtn.style.display = 'block';
+    cancelBtn.onclick = () => cancelScheduledPost(post.id);
+  } else {
+    cancelBtn.style.display = 'none';
+  }
+
+  document.getElementById('post-preview-overlay').style.display = 'flex';
+}
+
+function closePostPreview() {
+  document.getElementById('post-preview-overlay').style.display = 'none';
+}
+
+async function cancelScheduledPost(id) {
+  try {
+    const res = await fetch('/api/scheduled-posts', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-dashboard-key': sessionStorage.getItem('lcm_dashboard_key') || '',
+      },
+      body: JSON.stringify({ id }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.success) throw new Error(data.error || 'Échec de l\'annulation');
+    toast('Programmation annulée ✓', 'success');
+    closePostPreview();
+    loadScheduledPosts();
+  } catch (e) {
+    toast(`Erreur : ${e.message}`, 'error');
+  }
 }
 
 function changeMonth(delta) { calMonth += delta; if (calMonth > 11) { calMonth=0; calYear++; } if (calMonth<0) { calMonth=11; calYear--; } renderCalendar(); }
@@ -809,7 +891,7 @@ function renderCalendar() {
     const isToday = today.getDate()===d && today.getMonth()===calMonth && today.getFullYear()===calYear;
     const key = `${calYear}-${calMonth}-${d}`;
     const dayPosts = CAL_POSTS[key] || [];
-    const dotsHtml = dayPosts.map(p => `<div class="cal-post-dot ${p.net}">${p.label}</div>`).join('');
+    const dotsHtml = dayPosts.map(p => `<div class="cal-post-dot ${p.net}" style="cursor:pointer" onclick="showPostPreview('${p.id}')">${p.label}</div>`).join('');
     html += `<div class="cal-day${isToday?' today':''}"><div class="cal-day-num">${d}</div><div class="cal-posts">${dotsHtml}</div></div>`;
   }
 
