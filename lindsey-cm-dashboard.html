@@ -9,7 +9,17 @@
 </head>
 <body>
 
-<div class="dash-layout">
+<div id="lock-screen" style="position:fixed;inset:0;background:#0b0b12;z-index:9999;display:flex;align-items:center;justify-content:center;">
+  <div style="background:#16161f;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:32px;max-width:340px;width:90%;text-align:center;">
+    <div style="font-weight:800;font-size:18px;color:#fff;margin-bottom:6px;">Accès privé</div>
+    <p style="color:#9a94a8;font-size:13px;margin:0 0 18px;">Entre le code d'accès pour ouvrir le dashboard.</p>
+    <input type="password" id="lock-input" class="form-input" placeholder="Code d'accès" style="width:100%;margin-bottom:12px;box-sizing:border-box;">
+    <button class="btn-generate" style="width:100%;" onclick="unlockDashboard()">Déverrouiller</button>
+    <div id="lock-error" style="display:none;color:#f26d6d;font-size:12px;margin-top:10px;">Code incorrect ou pas encore vérifié — réessaie.</div>
+  </div>
+</div>
+
+<div class="dash-layout" style="display:none" id="dash-layout">
 
   <!-- ── Sidebar ── -->
   <aside class="sidebar">
@@ -282,6 +292,25 @@
           <div style="font-size:28px;margin-bottom:10px;">+</div>
           <div style="font-size:14px;font-weight:500;">Connecter un autre réseau</div>
           <div style="font-size:12px;margin-top:4px;">TikTok, Twitter/X bientôt disponibles</div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><h2>🧪 Test de publication réelle sur Instagram</h2></div>
+          <div class="gen-form">
+            <div class="form-group">
+              <label>URL de l'image (doit être publique)</label>
+              <input type="text" class="form-input" id="ig-test-image" placeholder="https://www.lindsey-ugc.fr/affiche-lindsey-2.jpeg">
+            </div>
+            <div class="form-group">
+              <label>Légende</label>
+              <textarea class="form-textarea" id="ig-test-caption" placeholder="Texte du post de test…"></textarea>
+            </div>
+            <button class="btn-generate" onclick="testInstagramPublish()">
+              <span class="spinner" id="ig-test-spinner" style="display:none"></span>
+              <span id="ig-test-btn-text">🚀 Publier ce test sur Instagram</span>
+            </button>
+            <div id="ig-test-result" style="display:none; border-radius:12px; padding:14px; font-size:13px; line-height:1.6;"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -641,9 +670,72 @@ function toast(msg, type = 'success') {
   setTimeout(() => el.className = 'toast', 3000);
 }
 
+// ── Lock screen ───────────────────────────────────────────────────────────
+
+function unlockDashboard() {
+  const code = document.getElementById('lock-input').value.trim();
+  if (!code) { document.getElementById('lock-error').style.display = 'block'; return; }
+  sessionStorage.setItem('lcm_dashboard_key', code);
+  document.getElementById('lock-screen').style.display = 'none';
+  document.getElementById('dash-layout').style.display = '';
+}
+
+// ── Instagram real publish (test) ────────────────────────────────────────
+
+async function testInstagramPublish() {
+  const imageUrl = document.getElementById('ig-test-image').value.trim();
+  const caption = document.getElementById('ig-test-caption').value.trim();
+  const resultEl = document.getElementById('ig-test-result');
+  if (!imageUrl) { toast('Renseigne une URL d\'image publique', 'error'); return; }
+
+  const spinner = document.getElementById('ig-test-spinner');
+  const btnText = document.getElementById('ig-test-btn-text');
+  spinner.style.display = 'inline-block';
+  btnText.textContent = 'Publication en cours…';
+
+  try {
+    const res = await fetch('/api/instagram-publish', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-dashboard-key': sessionStorage.getItem('lcm_dashboard_key') || '',
+      },
+      body: JSON.stringify({ imageUrl, caption }),
+    });
+    const data = await res.json();
+    resultEl.style.display = 'block';
+    if (res.ok && data.success) {
+      resultEl.style.background = 'rgba(60,200,120,.1)';
+      resultEl.style.border = '1px solid rgba(60,200,120,.3)';
+      resultEl.style.color = '#3ec878';
+      resultEl.textContent = `✓ Publié sur Instagram ! ID du post : ${data.postId}`;
+      toast('Post publié sur Instagram ✓', 'success');
+    } else {
+      resultEl.style.background = 'rgba(240,90,90,.1)';
+      resultEl.style.border = '1px solid rgba(240,90,90,.3)';
+      resultEl.style.color = '#f26d6d';
+      resultEl.textContent = `✕ Erreur : ${data.error || 'inconnue'}`;
+      toast('Échec de la publication', 'error');
+    }
+  } catch (e) {
+    resultEl.style.display = 'block';
+    resultEl.style.background = 'rgba(240,90,90,.1)';
+    resultEl.style.color = '#f26d6d';
+    resultEl.textContent = '✕ Erreur réseau, réessaie.';
+    toast('Erreur réseau', 'error');
+  } finally {
+    spinner.style.display = 'none';
+    btnText.textContent = '🚀 Publier ce test sur Instagram';
+  }
+}
+
 // ── Init ──────────────────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (sessionStorage.getItem('lcm_dashboard_key')) {
+    document.getElementById('lock-screen').style.display = 'none';
+    document.getElementById('dash-layout').style.display = '';
+  }
   const saved = localStorage.getItem('lcm_api_key');
   if (saved) document.getElementById('api-key-input').value = saved;
   renderUpcoming();
