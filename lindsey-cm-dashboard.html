@@ -215,6 +215,18 @@
             <button class="btn-regen" onclick="generateContent()">🔄 Régénérer</button>
           </div>
           <div id="gen-result-content" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:18px;font-size:14px;color:var(--text-soft);line-height:1.7;margin-bottom:16px;white-space:pre-wrap;"></div>
+          <div class="form-group">
+            <label>Quand publier ?</label>
+            <div style="display:flex;gap:16px;align-items:center;margin-bottom:8px;">
+              <label style="display:flex;align-items:center;gap:6px;font-weight:500;">
+                <input type="radio" name="gen-when" value="now" checked onchange="toggleScheduleDate(this)"> Maintenant
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;font-weight:500;">
+                <input type="radio" name="gen-when" value="later" onchange="toggleScheduleDate(this)"> Programmer pour une date
+              </label>
+            </div>
+            <input type="date" class="form-input" id="gen-schedule-date" style="display:none;max-width:220px;">
+          </div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
             <button class="btn-approve" onclick="approveGenerated()" style="padding:10px 20px;font-size:13px;">✓ Valider et programmer</button>
             <button class="btn-regen" onclick="generateContent()" style="padding:10px 20px;font-size:13px;">🔄 Régénérer</button>
@@ -429,22 +441,8 @@ const POSTS = [
   },
 ];
 
-// Calendar posts data
-const CAL_POSTS = {
-  '2025-5-1':  [{net:'li',label:'Post LI'}],
-  '2025-5-5':  [{net:'ig',label:'Reel IG'},{net:'fb',label:'Post FB'}],
-  '2025-5-7':  [{net:'li',label:'Carrousel'}],
-  '2025-5-8':  [{net:'ig',label:'Story IG'}],
-  '2025-5-12': [{net:'li',label:'Post LI'},{net:'fb',label:'Post FB'}],
-  '2025-5-14': [{net:'ig',label:'Reel IG'}],
-  '2025-5-15': [{net:'li',label:'Post LI'}],
-  '2025-5-19': [{net:'li',label:'Post LI'}],
-  '2025-5-20': [{net:'ig',label:'Reel IG'}],
-  '2025-5-21': [{net:'fb',label:'Post FB'}],
-  '2025-5-22': [{net:'li',label:'Post LI'}],
-  '2025-5-26': [{net:'li',label:'Carrousel'},{net:'ig',label:'Reel IG'}],
-  '2025-5-28': [{net:'fb',label:'Post FB'}],
-};
+// Calendar posts data (chargées depuis /api/scheduled-posts, voir loadScheduledPosts)
+let CAL_POSTS = {};
 
 // ── Tab navigation ────────────────────────────────────────────────────────
 
@@ -454,7 +452,7 @@ function showTab(name) {
   document.getElementById('tab-' + name).style.display = 'block';
   const idx = {'dashboard':0,'generate':1,'validate':2,'calendar':3,'networks':4,'settings':5}[name];
   document.querySelectorAll('.nav-item')[idx]?.classList.add('active');
-  if (name === 'calendar') renderCalendar();
+  if (name === 'calendar') loadScheduledPosts();
   if (name === 'validate') renderValidateList();
   if (name === 'dashboard') renderUpcoming();
 }
@@ -663,6 +661,20 @@ async function publishToInstagram(imageUrl, caption) {
   return data.postId;
 }
 
+async function schedulePost(network, imageUrl, content, scheduledDate) {
+  const res = await fetch('/api/schedule-post', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-dashboard-key': sessionStorage.getItem('lcm_dashboard_key') || '',
+    },
+    body: JSON.stringify({ network, imageUrl, content, scheduledDate }),
+  });
+  const data = await res.json();
+  if (!res.ok || !data.success) throw new Error(data.error || 'Échec de la programmation');
+  return data.post;
+}
+
 async function approveGenerated() {
   const content = document.getElementById('gen-result-content')?.textContent;
   if (!content) return;
@@ -670,52 +682,54 @@ async function approveGenerated() {
   const wantsInstagram = document.getElementById('chk-ig')?.querySelector('input')?.checked;
   const wantsLinkedIn = document.getElementById('chk-li')?.querySelector('input')?.checked;
   const wantsFacebook = document.getElementById('chk-fb')?.querySelector('input')?.checked;
+  const imageUrl = document.getElementById('gen-image-url').value.trim();
 
-  if (wantsInstagram) {
-    const imageUrl = document.getElementById('gen-image-url').value.trim();
-    if (!imageUrl) { toast('Renseigne une URL d\'image pour Instagram', 'error'); return; }
+  const when = document.querySelector('input[name="gen-when"]:checked')?.value || 'now';
+  const scheduleDate = document.getElementById('gen-schedule-date').value;
+  if (when === 'later' && !scheduleDate) { toast('Choisis une date de programmation', 'error'); return; }
+  if (wantsInstagram && !imageUrl) { toast('Renseigne une photo pour Instagram', 'error'); return; }
 
-    const approveBtn = document.querySelector('#gen-result-panel .btn-approve');
-    const originalText = approveBtn.textContent;
-    approveBtn.textContent = 'Publication en cours…';
-    approveBtn.disabled = true;
+  const approveBtn = document.querySelector('#gen-result-panel .btn-approve');
+  const originalText = approveBtn.textContent;
+  approveBtn.disabled = true;
+
+  if (when === 'later') {
+    approveBtn.textContent = 'Programmation en cours…';
     try {
-      const postId = await publishToInstagram(imageUrl, content);
-      POSTS.unshift({
-        id: Date.now(), network: 'instagram', icon: '📸', iconClass: 'ig',
-        title: 'Instagram', date: 'Publié à l\'instant', status: 'approved',
-        content, igPostId: postId,
-      });
-      toast(`Publié sur Instagram ✓ (ID: ${postId})`, 'success');
+      if (wantsInstagram) await schedulePost('instagram', imageUrl, content, scheduleDate);
+      if (wantsFacebook) await schedulePost('facebook', imageUrl || null, content, scheduleDate);
+      if (wantsInstagram || wantsFacebook) {
+        toast(`Post programmé pour le ${scheduleDate} ✓`, 'success');
+      }
     } catch (e) {
-      toast(`Échec Instagram : ${e.message}`, 'error');
+      toast(`Échec de la programmation : ${e.message}`, 'error');
       approveBtn.textContent = originalText;
       approveBtn.disabled = false;
       return;
     }
-    approveBtn.textContent = originalText;
-    approveBtn.disabled = false;
-  }
-
-  if (wantsFacebook) {
-    const imageUrl = document.getElementById('gen-image-url').value.trim();
-    const approveBtn = document.querySelector('#gen-result-panel .btn-approve');
-    const originalText = approveBtn.textContent;
+  } else {
     approveBtn.textContent = 'Publication en cours…';
-    approveBtn.disabled = true;
-    try {
-      const postId = await publishToFacebook(imageUrl, content);
-      POSTS.unshift({
-        id: Date.now() + 1, network: 'facebook', icon: '👥', iconClass: 'fb',
-        title: 'Facebook', date: 'Publié à l\'instant', status: 'approved',
-        content, fbPostId: postId,
-      });
-      toast(`Publié sur Facebook ✓ (ID: ${postId})`, 'success');
-    } catch (e) {
-      toast(`Échec Facebook : ${e.message}`, 'error');
+    if (wantsInstagram) {
+      try {
+        const postId = await publishToInstagram(imageUrl, content);
+        POSTS.unshift({ id: Date.now(), network: 'instagram', icon: '📸', iconClass: 'ig', title: 'Instagram', date: 'Publié à l\'instant', status: 'approved', content, igPostId: postId });
+        toast(`Publié sur Instagram ✓ (ID: ${postId})`, 'success');
+      } catch (e) {
+        toast(`Échec Instagram : ${e.message}`, 'error');
+        approveBtn.textContent = originalText;
+        approveBtn.disabled = false;
+        return;
+      }
     }
-    approveBtn.textContent = originalText;
-    approveBtn.disabled = false;
+    if (wantsFacebook) {
+      try {
+        const postId = await publishToFacebook(imageUrl, content);
+        POSTS.unshift({ id: Date.now() + 1, network: 'facebook', icon: '👥', iconClass: 'fb', title: 'Facebook', date: 'Publié à l\'instant', status: 'approved', content, fbPostId: postId });
+        toast(`Publié sur Facebook ✓ (ID: ${postId})`, 'success');
+      } catch (e) {
+        toast(`Échec Facebook : ${e.message}`, 'error');
+      }
+    }
   }
 
   // LinkedIn : publication automatique pas encore branchée,
@@ -724,8 +738,14 @@ async function approveGenerated() {
     POSTS.unshift({ id: Date.now() + 2, network: 'linkedin', icon: '💼', iconClass: 'li', title: 'LinkedIn', date: 'À publier manuellement', status: 'approved', content });
   }
 
+  approveBtn.textContent = originalText;
+  approveBtn.disabled = false;
   document.getElementById('gen-result-panel').style.display = 'none';
   if (!wantsInstagram && !wantsFacebook) toast('Post validé et ajouté au calendrier ✓', 'success');
+}
+
+function toggleScheduleDate(radio) {
+  document.getElementById('gen-schedule-date').style.display = radio.value === 'later' ? 'block' : 'none';
 }
 
 // ── Network checkboxes ────────────────────────────────────────────────────
@@ -739,9 +759,35 @@ function toggleCheck(input, labelId) {
 
 // ── Calendar ──────────────────────────────────────────────────────────────
 
-let calYear = 2025, calMonth = 4; // May 2025 (0-indexed)
+let calYear = new Date().getFullYear(), calMonth = new Date().getMonth();
 const DAYS = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
 const MONTHS = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+const CAL_NET_MAP = { instagram: 'ig', facebook: 'fb', linkedin: 'li' };
+const CAL_NET_LABEL = { instagram: 'IG', facebook: 'FB', linkedin: 'LI' };
+const CAL_STATUS_ICON = { published: '✓', failed: '✕', pending: '' };
+
+async function loadScheduledPosts() {
+  try {
+    const res = await fetch('/api/scheduled-posts', {
+      headers: { 'x-dashboard-key': sessionStorage.getItem('lcm_dashboard_key') || '' },
+    });
+    const data = await res.json();
+    const grouped = {};
+    (data.posts || []).forEach(p => {
+      const d = new Date(p.scheduledDate + 'T00:00:00');
+      const key = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+      if (!grouped[key]) grouped[key] = [];
+      grouped[key].push({
+        net: CAL_NET_MAP[p.network] || 'fb',
+        label: `${CAL_NET_LABEL[p.network] || p.network} ${CAL_STATUS_ICON[p.status] || ''}`.trim(),
+      });
+    });
+    CAL_POSTS = grouped;
+  } catch (e) {
+    console.error('Erreur chargement calendrier', e);
+  }
+  renderCalendar();
+}
 
 function changeMonth(delta) { calMonth += delta; if (calMonth > 11) { calMonth=0; calYear++; } if (calMonth<0) { calMonth=11; calYear--; } renderCalendar(); }
 
