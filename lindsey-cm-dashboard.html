@@ -192,8 +192,10 @@
               </div>
             </div>
             <div class="form-group" id="gen-image-group" style="display:none">
-              <label>URL de l'image (nécessaire pour publier sur Instagram)</label>
-              <input type="text" class="form-input" id="gen-image-url" placeholder="https://www.lindsey-ugc.fr/mon-image.jpeg">
+              <label>Photo (nécessaire pour publier sur Instagram)</label>
+              <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" id="gen-image-file" onchange="uploadImageFile(this, 'gen-image-url', 'gen-image-status')">
+              <input type="hidden" id="gen-image-url">
+              <div id="gen-image-status" style="font-size:12px;color:var(--text-muted);margin-top:6px;"></div>
             </div>
             <div class="form-group">
               <label>Informations complémentaires (optionnel)</label>
@@ -302,8 +304,10 @@
           <div class="panel-header"><h2>🧪 Test de publication réelle sur Instagram</h2></div>
           <div class="gen-form">
             <div class="form-group">
-              <label>URL de l'image (doit être publique)</label>
-              <input type="text" class="form-input" id="ig-test-image" placeholder="https://www.lindsey-ugc.fr/affiche-lindsey-2.jpeg">
+              <label>Photo</label>
+              <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" id="ig-test-file" onchange="uploadImageFile(this, 'ig-test-image', 'ig-test-upload-status')">
+              <input type="hidden" id="ig-test-image">
+              <div id="ig-test-upload-status" style="font-size:12px;color:var(--text-muted);margin-top:6px;"></div>
             </div>
             <div class="form-group">
               <label>Légende</label>
@@ -597,6 +601,37 @@ Réponds uniquement avec le post, sans introduction ni commentaire.`
     return data.content?.[0]?.text || 'Erreur de génération';
   } catch (e) {
     return MOCK_POSTS[Math.floor(Math.random() * MOCK_POSTS.length)].replace('{TOPIC}', topic);
+  }
+}
+
+// ── Image upload ──────────────────────────────────────────────────────────
+
+async function uploadImageFile(fileInput, targetInputId, statusElId) {
+  const file = fileInput.files?.[0];
+  const statusEl = document.getElementById(statusElId);
+  const targetInput = document.getElementById(targetInputId);
+  if (!file) return;
+
+  statusEl.textContent = '⏳ Envoi de la photo…';
+  statusEl.style.color = 'var(--text-muted)';
+  try {
+    const res = await fetch('/api/upload-image', {
+      method: 'POST',
+      headers: {
+        'Content-Type': file.type,
+        'x-dashboard-key': sessionStorage.getItem('lcm_dashboard_key') || '',
+      },
+      body: file,
+    });
+    const data = await res.json();
+    if (!res.ok || !data.url) throw new Error(data.error || 'Échec de l\'envoi');
+    targetInput.value = data.url;
+    statusEl.textContent = '✓ Photo envoyée';
+    statusEl.style.color = '#3ec878';
+  } catch (e) {
+    targetInput.value = '';
+    statusEl.textContent = `✕ ${e.message}`;
+    statusEl.style.color = '#f26d6d';
   }
 }
 
