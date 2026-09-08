@@ -1,6 +1,7 @@
 import { readSchedule, writeSchedule } from '../_lib/scheduleStore.js';
 import { publishInstagram } from '../_lib/instagram.js';
 import { publishFacebook } from '../_lib/facebook.js';
+import { publishLinkedIn } from '../_lib/linkedin.js';
 
 export default async function handler(req, res) {
   const cronSecret = process.env.CRON_SECRET;
@@ -21,7 +22,9 @@ export default async function handler(req, res) {
       try {
         const postId = post.network === 'instagram'
           ? await publishInstagram(post.imageUrl, post.content)
-          : await publishFacebook(post.imageUrl, post.content);
+          : post.network === 'facebook'
+          ? await publishFacebook(post.imageUrl, post.content)
+          : await publishLinkedIn(post.content);
         post.status = 'published';
         post.publishedPostId = postId;
         post.error = null;

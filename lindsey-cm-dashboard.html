@@ -301,9 +301,21 @@
           <div class="network-icon li" style="width:52px;height:52px;border-radius:14px;font-size:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">💼</div>
           <div style="flex:1">
             <div style="font-weight:700;margin-bottom:2px;">LinkedIn</div>
-            <div style="font-size:13px;color:var(--text-muted);">Compte personnel · @lindsey</div>
+            <div style="font-size:13px;color:var(--text-muted);" id="li-connect-status">Non connecté</div>
           </div>
-          <span class="post-status approved">Connecté</span>
+          <button class="btn-generate" style="padding:8px 16px;font-size:13px;" onclick="connectLinkedIn()">Connecter</button>
+        </div>
+        <div class="panel" id="li-oauth-result" style="display:none;">
+          <div class="panel-header"><h2>🔑 Identifiants LinkedIn obtenus</h2></div>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">Copie ces deux valeurs dans Vercel (variables <code>LI_ACCESS_TOKEN</code> et <code>LI_PERSON_URN</code>), jamais ici dans le dashboard ni dans le chat.</p>
+          <div class="form-group">
+            <label>LI_ACCESS_TOKEN</label>
+            <input type="text" class="form-input" id="li-token-output" readonly onclick="this.select()">
+          </div>
+          <div class="form-group">
+            <label>LI_PERSON_URN</label>
+            <input type="text" class="form-input" id="li-urn-output" readonly onclick="this.select()">
+          </div>
         </div>
         <div class="panel" style="display:flex;align-items:center;gap:16px;">
           <div class="network-icon ig" style="width:52px;height:52px;border-radius:14px;font-size:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">📸</div>
@@ -677,6 +689,20 @@ async function publishToInstagram(imageUrl, caption) {
   return data.postId;
 }
 
+async function publishToLinkedIn(caption) {
+  const res = await fetch('/api/linkedin-publish', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-dashboard-key': sessionStorage.getItem('lcm_dashboard_key') || '',
+    },
+    body: JSON.stringify({ caption }),
+  });
+  const data = await res.json();
+  if (!res.ok || !data.success) throw new Error(data.error || 'Échec de la publication');
+  return data.postId;
+}
+
 async function schedulePost(network, imageUrl, content, scheduledDate) {
   const res = await fetch('/api/schedule-post', {
     method: 'POST',
@@ -714,7 +740,8 @@ async function approveGenerated() {
     try {
       if (wantsInstagram) await schedulePost('instagram', imageUrl, content, scheduleDate);
       if (wantsFacebook) await schedulePost('facebook', imageUrl || null, content, scheduleDate);
-      if (wantsInstagram || wantsFacebook) {
+      if (wantsLinkedIn) await schedulePost('linkedin', null, content, scheduleDate);
+      if (wantsInstagram || wantsFacebook || wantsLinkedIn) {
         toast(`Post programmé pour le ${scheduleDate} ✓`, 'success');
       }
     } catch (e) {
@@ -746,18 +773,21 @@ async function approveGenerated() {
         toast(`Échec Facebook : ${e.message}`, 'error');
       }
     }
-  }
-
-  // LinkedIn : publication automatique pas encore branchée,
-  // on ajoute au calendrier comme "à publier manuellement" pour l'instant.
-  if (wantsLinkedIn) {
-    POSTS.unshift({ id: Date.now() + 2, network: 'linkedin', icon: '💼', iconClass: 'li', title: 'LinkedIn', date: 'À publier manuellement', status: 'approved', content });
+    if (wantsLinkedIn) {
+      try {
+        const postId = await publishToLinkedIn(content);
+        POSTS.unshift({ id: Date.now() + 2, network: 'linkedin', icon: '💼', iconClass: 'li', title: 'LinkedIn', date: 'Publié à l\'instant', status: 'approved', content, liPostId: postId });
+        toast(`Publié sur LinkedIn ✓`, 'success');
+      } catch (e) {
+        toast(`Échec LinkedIn : ${e.message}`, 'error');
+      }
+    }
   }
 
   approveBtn.textContent = originalText;
   approveBtn.disabled = false;
   document.getElementById('gen-result-panel').style.display = 'none';
-  if (!wantsInstagram && !wantsFacebook) toast('Post validé et ajouté au calendrier ✓', 'success');
+  if (!wantsInstagram && !wantsFacebook && !wantsLinkedIn) toast('Choisis au moins un réseau', 'error');
 }
 
 function toggleScheduleDate(radio) {
@@ -980,6 +1010,52 @@ async function testInstagramPublish() {
 
 // ── Init ──────────────────────────────────────────────────────────────────
 
+// ── LinkedIn OAuth ────────────────────────────────────────────────────────
+
+function connectLinkedIn() {
+  const clientId = '78vo2r6v500r49';
+  const redirectUri = 'https://www.lindsey-ugc.fr/lindsey-cm-dashboard.html';
+  const scope = encodeURIComponent('openid profile w_member_social');
+  const state = Math.random().toString(36).slice(2);
+  sessionStorage.setItem('li_oauth_state', state);
+  window.location.href = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}&state=${state}`;
+}
+
+async function handleLinkedInCallback() {
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  if (!code) return;
+
+  window.history.replaceState({}, document.title, window.location.pathname);
+
+  if (!sessionStorage.getItem('lcm_dashboard_key')) {
+    toast('Reconnecte-toi au dashboard puis reclique sur "Connecter" pour LinkedIn', 'error');
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/linkedin-oauth-callback', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-dashboard-key': sessionStorage.getItem('lcm_dashboard_key') || '',
+      },
+      body: JSON.stringify({ code }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.success) throw new Error(data.error || 'Échec de la connexion LinkedIn');
+
+    showTab('networks');
+    document.getElementById('li-oauth-result').style.display = 'block';
+    document.getElementById('li-token-output').value = data.accessToken;
+    document.getElementById('li-urn-output').value = data.personUrn;
+    document.getElementById('li-connect-status').textContent = 'Connecté — colle les identifiants dans Vercel ci-dessous';
+    toast('LinkedIn connecté ✓ — copie les identifiants dans Vercel', 'success');
+  } catch (e) {
+    toast(`Erreur LinkedIn : ${e.message}`, 'error');
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   if (sessionStorage.getItem('lcm_dashboard_key')) {
     document.getElementById('lock-screen').style.display = 'none';
@@ -990,6 +1066,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (saved) document.getElementById('api-key-input').value = saved;
   renderUpcoming();
   updatePendingCount();
+  handleLinkedInCallback();
 });
 </script>
 </body>

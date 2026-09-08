@@ -14,8 +14,8 @@ export default async function handler(req, res) {
   }
 
   const { network, content, imageUrl, scheduledDate } = req.body || {};
-  if (!['instagram', 'facebook'].includes(network)) {
-    return res.status(400).json({ error: 'network doit être "instagram" ou "facebook"' });
+  if (!['instagram', 'facebook', 'linkedin'].includes(network)) {
+    return res.status(400).json({ error: 'network doit être "instagram", "facebook" ou "linkedin"' });
   }
   if (!content || typeof content !== 'string') {
     return res.status(400).json({ error: 'content requis' });

@@ -70,7 +70,8 @@ export default async function handler(req, res) {
       avgEngagementRate = rates.reduce((a, b) => a + b, 0) / rates.length;
     }
 
-    const networksConnected = (igToken && igUserId ? 1 : 0) + (fbToken && fbPageId ? 1 : 0);
+    const liConnected = !!(process.env.LI_ACCESS_TOKEN && process.env.LI_PERSON_URN);
+    const networksConnected = (igToken && igUserId ? 1 : 0) + (fbToken && fbPageId ? 1 : 0) + (liConnected ? 1 : 0);
 
     return res.status(200).json({
       postsThisMonth,
