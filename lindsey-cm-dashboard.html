@@ -192,7 +192,7 @@
               </div>
             </div>
             <div class="form-group" id="gen-image-group" style="display:none">
-              <label>Photo (nécessaire pour publier sur Instagram)</label>
+              <label>Photo (nécessaire pour Instagram, optionnelle pour Facebook)</label>
               <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" id="gen-image-file" onchange="uploadImageFile(this, 'gen-image-url', 'gen-image-status')">
               <input type="hidden" id="gen-image-url">
               <div id="gen-image-status" style="font-size:12px;color:var(--text-muted);margin-top:6px;"></div>
@@ -732,9 +732,9 @@ async function approveGenerated() {
 
 function toggleCheck(input, labelId) {
   document.getElementById(labelId).classList.toggle('selected', input.checked);
-  if (labelId === 'chk-ig') {
-    document.getElementById('gen-image-group').style.display = input.checked ? 'block' : 'none';
-  }
+  const igChecked = document.getElementById('chk-ig').querySelector('input').checked;
+  const fbChecked = document.getElementById('chk-fb').querySelector('input').checked;
+  document.getElementById('gen-image-group').style.display = (igChecked || fbChecked) ? 'block' : 'none';
 }
 
 // ── Calendar ──────────────────────────────────────────────────────────────
