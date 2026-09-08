@@ -191,6 +191,10 @@
                 </label>
               </div>
             </div>
+            <div class="form-group" id="gen-image-group" style="display:none">
+              <label>URL de l'image (nécessaire pour publier sur Instagram)</label>
+              <input type="text" class="form-input" id="gen-image-url" placeholder="https://www.lindsey-ugc.fr/mon-image.jpeg">
+            </div>
             <div class="form-group">
               <label>Informations complémentaires (optionnel)</label>
               <textarea class="form-textarea" id="gen-extra" placeholder="Contexte, chiffres clés, anecdote à intégrer…"></textarea>
@@ -596,28 +600,74 @@ Réponds uniquement avec le post, sans introduction ni commentaire.`
   }
 }
 
-function approveGenerated() {
+async function publishToInstagram(imageUrl, caption) {
+  const res = await fetch('/api/instagram-publish', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-dashboard-key': sessionStorage.getItem('lcm_dashboard_key') || '',
+    },
+    body: JSON.stringify({ imageUrl, caption }),
+  });
+  const data = await res.json();
+  if (!res.ok || !data.success) throw new Error(data.error || 'Échec de la publication');
+  return data.postId;
+}
+
+async function approveGenerated() {
   const content = document.getElementById('gen-result-content')?.textContent;
   if (!content) return;
-  const newPost = {
-    id: Date.now(),
-    network: 'linkedin',
-    icon: '💼',
-    iconClass: 'li',
-    title: 'LinkedIn',
-    date: 'Prochainement',
-    status: 'approved',
-    content,
-  };
-  POSTS.unshift(newPost);
+
+  const wantsInstagram = document.getElementById('chk-ig')?.querySelector('input')?.checked;
+  const wantsLinkedIn = document.getElementById('chk-li')?.querySelector('input')?.checked;
+  const wantsFacebook = document.getElementById('chk-fb')?.querySelector('input')?.checked;
+
+  if (wantsInstagram) {
+    const imageUrl = document.getElementById('gen-image-url').value.trim();
+    if (!imageUrl) { toast('Renseigne une URL d\'image pour Instagram', 'error'); return; }
+
+    const approveBtn = document.querySelector('#gen-result-panel .btn-approve');
+    const originalText = approveBtn.textContent;
+    approveBtn.textContent = 'Publication en cours…';
+    approveBtn.disabled = true;
+    try {
+      const postId = await publishToInstagram(imageUrl, content);
+      POSTS.unshift({
+        id: Date.now(), network: 'instagram', icon: '📸', iconClass: 'ig',
+        title: 'Instagram', date: 'Publié à l\'instant', status: 'approved',
+        content, igPostId: postId,
+      });
+      toast(`Publié sur Instagram ✓ (ID: ${postId})`, 'success');
+    } catch (e) {
+      toast(`Échec Instagram : ${e.message}`, 'error');
+      approveBtn.textContent = originalText;
+      approveBtn.disabled = false;
+      return;
+    }
+    approveBtn.textContent = originalText;
+    approveBtn.disabled = false;
+  }
+
+  // LinkedIn et Facebook : publication automatique pas encore branchée,
+  // on ajoute au calendrier comme "à publier manuellement" pour l'instant.
+  if (wantsLinkedIn) {
+    POSTS.unshift({ id: Date.now() + 1, network: 'linkedin', icon: '💼', iconClass: 'li', title: 'LinkedIn', date: 'À publier manuellement', status: 'approved', content });
+  }
+  if (wantsFacebook) {
+    POSTS.unshift({ id: Date.now() + 2, network: 'facebook', icon: '👥', iconClass: 'fb', title: 'Facebook', date: 'À publier manuellement', status: 'approved', content });
+  }
+
   document.getElementById('gen-result-panel').style.display = 'none';
-  toast('Post validé et ajouté au calendrier ✓', 'success');
+  if (!wantsInstagram) toast('Post validé et ajouté au calendrier ✓', 'success');
 }
 
 // ── Network checkboxes ────────────────────────────────────────────────────
 
 function toggleCheck(input, labelId) {
   document.getElementById(labelId).classList.toggle('selected', input.checked);
+  if (labelId === 'chk-ig') {
+    document.getElementById('gen-image-group').style.display = input.checked ? 'block' : 'none';
+  }
 }
 
 // ── Calendar ──────────────────────────────────────────────────────────────
@@ -694,35 +744,20 @@ async function testInstagramPublish() {
   btnText.textContent = 'Publication en cours…';
 
   try {
-    const res = await fetch('/api/instagram-publish', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-dashboard-key': sessionStorage.getItem('lcm_dashboard_key') || '',
-      },
-      body: JSON.stringify({ imageUrl, caption }),
-    });
-    const data = await res.json();
+    const postId = await publishToInstagram(imageUrl, caption);
     resultEl.style.display = 'block';
-    if (res.ok && data.success) {
-      resultEl.style.background = 'rgba(60,200,120,.1)';
-      resultEl.style.border = '1px solid rgba(60,200,120,.3)';
-      resultEl.style.color = '#3ec878';
-      resultEl.textContent = `✓ Publié sur Instagram ! ID du post : ${data.postId}`;
-      toast('Post publié sur Instagram ✓', 'success');
-    } else {
-      resultEl.style.background = 'rgba(240,90,90,.1)';
-      resultEl.style.border = '1px solid rgba(240,90,90,.3)';
-      resultEl.style.color = '#f26d6d';
-      resultEl.textContent = `✕ Erreur : ${data.error || 'inconnue'}`;
-      toast('Échec de la publication', 'error');
-    }
+    resultEl.style.background = 'rgba(60,200,120,.1)';
+    resultEl.style.border = '1px solid rgba(60,200,120,.3)';
+    resultEl.style.color = '#3ec878';
+    resultEl.textContent = `✓ Publié sur Instagram ! ID du post : ${postId}`;
+    toast('Post publié sur Instagram ✓', 'success');
   } catch (e) {
     resultEl.style.display = 'block';
     resultEl.style.background = 'rgba(240,90,90,.1)';
+    resultEl.style.border = '1px solid rgba(240,90,90,.3)';
     resultEl.style.color = '#f26d6d';
-    resultEl.textContent = '✕ Erreur réseau, réessaie.';
-    toast('Erreur réseau', 'error');
+    resultEl.textContent = `✕ Erreur : ${e.message}`;
+    toast('Échec de la publication', 'error');
   } finally {
     spinner.style.display = 'none';
     btnText.textContent = '🚀 Publier ce test sur Instagram';
