@@ -45,6 +45,18 @@ export default async function handler(req, res) {
       return res.status(502).json({ error: createData.error?.message || 'Échec de la création du média' });
     }
 
+    let statusCode = 'IN_PROGRESS';
+    for (let attempt = 0; attempt < 8 && statusCode === 'IN_PROGRESS'; attempt++) {
+      if (attempt > 0) await new Promise(r => setTimeout(r, 2000));
+      const statusRes = await fetch(`https://graph.instagram.com/v21.0/${createData.id}?fields=status_code&access_token=${accessToken}`, { signal: controller.signal });
+      const statusData = await statusRes.json();
+      statusCode = statusData.status_code || 'ERROR';
+    }
+    if (statusCode !== 'FINISHED') {
+      console.error('Média Instagram non prêt', statusCode);
+      return res.status(502).json({ error: `Le média n'était pas prêt à temps (statut : ${statusCode})` });
+    }
+
     const publishRes = await fetch(`${graphBase}/media_publish`, {
       method: 'POST',
       signal: controller.signal,
