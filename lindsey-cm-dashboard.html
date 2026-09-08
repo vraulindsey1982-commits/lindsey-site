@@ -81,23 +81,23 @@
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-label">Posts publiés ce mois</div>
-          <div class="stat-value gradient-text">24</div>
-          <div class="stat-sub trend-up">↑ +8 vs mois dernier</div>
+          <div class="stat-value gradient-text" id="stat-posts-month">…</div>
+          <div class="stat-sub">Instagram + Facebook, données réelles</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Posts programmés</div>
-          <div class="stat-value gradient-text">12</div>
-          <div class="stat-sub">sur les 3 prochaines semaines</div>
+          <div class="stat-label">Abonnés Instagram</div>
+          <div class="stat-value gradient-text" id="stat-ig-followers">…</div>
+          <div class="stat-sub" id="stat-fb-fans-sub">…</div>
         </div>
         <div class="stat-card">
           <div class="stat-label">Taux d'engagement moyen</div>
-          <div class="stat-value gradient-text">4.7%</div>
-          <div class="stat-sub trend-up">↑ +1.2% ce mois</div>
+          <div class="stat-value gradient-text" id="stat-engagement">…</div>
+          <div class="stat-sub">sur les 25 derniers posts</div>
         </div>
         <div class="stat-card">
           <div class="stat-label">Réseaux connectés</div>
-          <div class="stat-value gradient-text">3</div>
-          <div class="stat-sub">LinkedIn · Instagram · Facebook</div>
+          <div class="stat-value gradient-text" id="stat-networks">…</div>
+          <div class="stat-sub">Instagram · Facebook (LinkedIn à venir)</div>
         </div>
       </div>
 
@@ -795,6 +795,25 @@ function unlockDashboard() {
   sessionStorage.setItem('lcm_dashboard_key', code);
   document.getElementById('lock-screen').style.display = 'none';
   document.getElementById('dash-layout').style.display = '';
+  loadSocialStats();
+}
+
+// ── Real social stats ────────────────────────────────────────────────────
+
+async function loadSocialStats() {
+  try {
+    const res = await fetch('/api/social-stats', {
+      headers: { 'x-dashboard-key': sessionStorage.getItem('lcm_dashboard_key') || '' },
+    });
+    const data = await res.json();
+    document.getElementById('stat-posts-month').textContent = data.postsThisMonth ?? '—';
+    document.getElementById('stat-ig-followers').textContent = data.igFollowers != null ? data.igFollowers.toLocaleString('fr-FR') : '—';
+    document.getElementById('stat-fb-fans-sub').textContent = data.fbFans != null ? `${data.fbFans.toLocaleString('fr-FR')} fans Facebook` : 'Facebook non connecté';
+    document.getElementById('stat-engagement').textContent = data.avgEngagementRate != null ? `${data.avgEngagementRate.toFixed(1)}%` : '—';
+    document.getElementById('stat-networks').textContent = data.networksConnected ?? '—';
+  } catch (e) {
+    console.error('Erreur chargement stats', e);
+  }
 }
 
 // ── Instagram real publish (test) ────────────────────────────────────────
@@ -837,6 +856,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sessionStorage.getItem('lcm_dashboard_key')) {
     document.getElementById('lock-screen').style.display = 'none';
     document.getElementById('dash-layout').style.display = '';
+    loadSocialStats();
   }
   const saved = localStorage.getItem('lcm_api_key');
   if (saved) document.getElementById('api-key-input').value = saved;
