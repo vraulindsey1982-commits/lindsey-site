@@ -24,7 +24,7 @@ export default async function handler(req, res) {
           ? await publishInstagram(post.imageUrl, post.content)
           : post.network === 'facebook'
           ? await publishFacebook(post.imageUrl, post.content)
-          : await publishLinkedIn(post.content);
+          : await publishLinkedIn(post.content, post.imageUrl);
         post.status = 'published';
         post.publishedPostId = postId;
         post.error = null;

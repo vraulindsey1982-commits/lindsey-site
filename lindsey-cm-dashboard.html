@@ -192,7 +192,7 @@
               </div>
             </div>
             <div class="form-group" id="gen-image-group" style="display:none">
-              <label>Photo (nécessaire pour Instagram, optionnelle pour Facebook)</label>
+              <label>Photo (nécessaire pour Instagram, optionnelle pour Facebook/LinkedIn)</label>
               <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" id="gen-image-file" onchange="uploadImageFile(this, 'gen-image-url', 'gen-image-status')">
               <input type="hidden" id="gen-image-url">
               <div id="gen-image-status" style="font-size:12px;color:var(--text-muted);margin-top:6px;"></div>
@@ -690,14 +690,14 @@ async function publishToInstagram(imageUrl, caption) {
   return data.postId;
 }
 
-async function publishToLinkedIn(caption) {
+async function publishToLinkedIn(caption, imageUrl) {
   const res = await fetch('/api/linkedin-publish', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'x-dashboard-key': sessionStorage.getItem('lcm_dashboard_key') || '',
     },
-    body: JSON.stringify({ caption }),
+    body: JSON.stringify({ caption, imageUrl }),
   });
   const data = await res.json();
   if (!res.ok || !data.success) throw new Error(data.error || 'Échec de la publication');
@@ -741,7 +741,7 @@ async function approveGenerated() {
     try {
       if (wantsInstagram) await schedulePost('instagram', imageUrl, content, scheduleDate);
       if (wantsFacebook) await schedulePost('facebook', imageUrl || null, content, scheduleDate);
-      if (wantsLinkedIn) await schedulePost('linkedin', null, content, scheduleDate);
+      if (wantsLinkedIn) await schedulePost('linkedin', imageUrl || null, content, scheduleDate);
       if (wantsInstagram || wantsFacebook || wantsLinkedIn) {
         toast(`Post programmé pour le ${scheduleDate} ✓`, 'success');
       }
@@ -776,7 +776,7 @@ async function approveGenerated() {
     }
     if (wantsLinkedIn) {
       try {
-        const postId = await publishToLinkedIn(content);
+        const postId = await publishToLinkedIn(content, imageUrl || null);
         POSTS.unshift({ id: Date.now() + 2, network: 'linkedin', icon: '💼', iconClass: 'li', title: 'LinkedIn', date: 'Publié à l\'instant', status: 'approved', content, liPostId: postId });
         toast(`Publié sur LinkedIn ✓`, 'success');
       } catch (e) {
@@ -801,7 +801,8 @@ function toggleCheck(input, labelId) {
   document.getElementById(labelId).classList.toggle('selected', input.checked);
   const igChecked = document.getElementById('chk-ig').querySelector('input').checked;
   const fbChecked = document.getElementById('chk-fb').querySelector('input').checked;
-  document.getElementById('gen-image-group').style.display = (igChecked || fbChecked) ? 'block' : 'none';
+  const liChecked = document.getElementById('chk-li').querySelector('input').checked;
+  document.getElementById('gen-image-group').style.display = (igChecked || fbChecked || liChecked) ? 'block' : 'none';
 }
 
 // ── Calendar ──────────────────────────────────────────────────────────────

@@ -34,7 +34,48 @@ export async function exchangeLinkedInCode(code) {
   return { accessToken: tokenData.access_token, personUrn: `urn:li:person:${userData.sub}` };
 }
 
-export async function publishLinkedIn(caption) {
+async function uploadLinkedInImage(imageUrl, accessToken, personUrn) {
+  const registerRes = await fetch('https://api.linkedin.com/v2/assets?action=registerUpload', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` },
+    body: JSON.stringify({
+      registerUploadRequest: {
+        recipes: ['urn:li:digitalmediaRecipe:feedshare-image'],
+        owner: personUrn,
+        serviceRelationships: [{ relationshipType: 'OWNER', identifier: 'urn:li:userGeneratedContent' }],
+      },
+    }),
+  });
+  const registerData = await registerRes.json();
+  if (!registerRes.ok) {
+    throw new Error(registerData.message || 'Échec de l\'enregistrement de l\'image LinkedIn');
+  }
+
+  const uploadUrl = registerData.value?.uploadMechanism?.['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest']?.uploadUrl;
+  const asset = registerData.value?.asset;
+  if (!uploadUrl || !asset) {
+    throw new Error('Réponse LinkedIn inattendue pour l\'enregistrement de l\'image');
+  }
+
+  const imgRes = await fetch(imageUrl);
+  if (!imgRes.ok) {
+    throw new Error('Impossible de récupérer l\'image à envoyer sur LinkedIn');
+  }
+  const imgBuffer = Buffer.from(await imgRes.arrayBuffer());
+
+  const putRes = await fetch(uploadUrl, {
+    method: 'PUT',
+    headers: { Authorization: `Bearer ${accessToken}` },
+    body: imgBuffer,
+  });
+  if (!putRes.ok) {
+    throw new Error('Échec de l\'envoi de l\'image vers LinkedIn');
+  }
+
+  return asset;
+}
+
+export async function publishLinkedIn(caption, imageUrl) {
   const accessToken = process.env.LI_ACCESS_TOKEN;
   const personUrn = process.env.LI_PERSON_URN;
   if (!accessToken || !personUrn) {
@@ -45,9 +86,19 @@ export async function publishLinkedIn(caption) {
   }
 
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15000);
+  const timeout = setTimeout(() => controller.abort(), 30000);
 
   try {
+    const shareContent = {
+      shareCommentary: { text: caption },
+      shareMediaCategory: imageUrl ? 'IMAGE' : 'NONE',
+    };
+
+    if (imageUrl) {
+      const asset = await uploadLinkedInImage(imageUrl, accessToken, personUrn);
+      shareContent.media = [{ status: 'READY', media: asset }];
+    }
+
     const res = await fetch('https://api.linkedin.com/v2/ugcPosts', {
       method: 'POST',
       signal: controller.signal,
@@ -59,12 +110,7 @@ export async function publishLinkedIn(caption) {
       body: JSON.stringify({
         author: personUrn,
         lifecycleState: 'PUBLISHED',
-        specificContent: {
-          'com.linkedin.ugc.ShareContent': {
-            shareCommentary: { text: caption },
-            shareMediaCategory: 'NONE',
-          },
-        },
+        specificContent: { 'com.linkedin.ugc.ShareContent': shareContent },
         visibility: { 'com.linkedin.ugc.MemberNetworkVisibility': 'PUBLIC' },
       }),
     });
@@ -72,8 +118,7 @@ export async function publishLinkedIn(caption) {
       const errData = await res.json().catch(() => ({}));
       throw new Error(errData.message || 'Échec de la publication LinkedIn');
     }
-    const postId = res.headers.get('x-restli-id') || 'ok';
-    return postId;
+    return res.headers.get('x-restli-id') || 'ok';
   } finally {
     clearTimeout(timeout);
   }

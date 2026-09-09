@@ -13,10 +13,10 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'Code d\'accès invalide' });
   }
 
-  const { caption } = req.body || {};
+  const { caption, imageUrl } = req.body || {};
 
   try {
-    const postId = await publishLinkedIn(caption);
+    const postId = await publishLinkedIn(caption, imageUrl);
     return res.status(200).json({ success: true, postId });
   } catch (err) {
     console.error('Erreur linkedin-publish', err);
