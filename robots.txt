@@ -3,5 +3,6 @@ Allow: /
 Disallow: /mentions-legales.html
 Disallow: /confidentialite.html
 Disallow: /cgv.html
+Disallow: /paris-sportifs.html
 
 Sitemap: https://www.lindsey-ugc.fr/sitemap.xml
