@@ -243,6 +243,7 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#top">Aller au contenu principal</a>
   <header class="nav">
     <a class="brand" href="#top">Lindsey Créative Studio</a>
     <nav>
@@ -689,10 +690,17 @@
       <p>Expliquez-moi votre projet, votre produit et vos objectifs. Je vous réponds rapidement avec une proposition adaptée.</p>
 
       <form action="https://formspree.io/f/mrernnyw" method="POST" id="contact-form">
-        <input name="nom" placeholder="Votre nom" required />
-        <input type="email" name="email" placeholder="Votre email" required />
-        <input name="marque" placeholder="Nom de votre marque" />
-        <textarea name="besoin" placeholder="Votre besoin : vidéo, photo, pack, gestion réseaux sociaux, délai..." required></textarea>
+        <label class="sr-only" for="contact-nom">Votre nom</label>
+        <input id="contact-nom" name="nom" placeholder="Votre nom" required />
+
+        <label class="sr-only" for="contact-email">Votre email</label>
+        <input id="contact-email" type="email" name="email" placeholder="Votre email" required />
+
+        <label class="sr-only" for="contact-marque">Nom de votre marque</label>
+        <input id="contact-marque" name="marque" placeholder="Nom de votre marque" />
+
+        <label class="sr-only" for="contact-besoin">Votre besoin</label>
+        <textarea id="contact-besoin" name="besoin" placeholder="Votre besoin : vidéo, photo, pack, gestion réseaux sociaux, délai..." required></textarea>
 
         <button type="submit" class="btn primary">Envoyer ma demande</button>
 
