@@ -5,6 +5,7 @@
   --nude:#e9cfc5;
   --rose:#d9958f;
   --rose-light:#f8e6e1;
+  --rose-text:#b04539;
   --brown:#5a3a3a;
   --muted:#6e625d;
 }
@@ -26,7 +27,7 @@ html{scroll-behavior:smooth}
   position:absolute;
   left:8px;top:-48px;
   z-index:1000;
-  background:var(--rose);
+  background:var(--rose-text);
   color:var(--white);
   padding:12px 18px;
   border-radius:8px;
@@ -99,7 +100,7 @@ body{
   letter-spacing:.16em;
   font-size:.78rem;
   font-weight:900;
-  color:#c47f79;
+  color:var(--rose-text);
   margin-bottom:12px;
 }
 
@@ -144,7 +145,7 @@ p{
 .proof{
   margin-top:10px;
   font-size:14px!important;
-  color:#777!important;
+  color:#757575!important;
 }
 
 /* BUTTONS */
@@ -362,7 +363,7 @@ blockquote{
   font-weight:600;
   letter-spacing:.12em;
   text-transform:uppercase;
-  color:var(--rose);
+  color:var(--rose-text);
   margin:40px 0 12px;
 }
 
@@ -566,7 +567,7 @@ textarea{
   display:inline-block;
   margin-bottom:25px;
   font-weight:800;
-  color:#d9958f;
+  color:var(--rose-text);
   text-decoration:none;
 }
 
@@ -598,7 +599,7 @@ footer p{
 
 footer a{
   font-size:14px!important;
-  color:var(--rose)!important;
+  color:var(--rose-text)!important;
   text-decoration:none;
   font-weight:600!important;
 }
@@ -619,7 +620,7 @@ footer a{
 }
 
 .social-links a:hover{
-  color:var(--rose)!important;
+  color:var(--rose-text)!important;
 }
 
 /* ANIMATION */
@@ -931,8 +932,8 @@ footer a{
 }
 
 .brand-pill:hover {
-  border-color: #c47f79;
-  color: #c47f79;
+  border-color: var(--rose-text);
+  color: var(--rose-text);
   transform: translateY(-2px);
 }
 
@@ -969,7 +970,7 @@ footer a{
   text-decoration: none;
 }
 
-.blog-card h2 a:hover { color: #c47f79; }
+.blog-card h2 a:hover { color: var(--rose-text); }
 
 .blog-card p { color: #666; font-size: 14px; line-height: 1.6; margin: 0 0 12px; }
 
@@ -979,7 +980,7 @@ footer a{
   font-weight: 700;
   letter-spacing: .06em;
   text-transform: uppercase;
-  color: #c47f79;
+  color: var(--rose-text);
   background: #fdf4f3;
   padding: 4px 10px;
   border-radius: 20px;
@@ -987,7 +988,7 @@ footer a{
 }
 
 .blog-read-more {
-  color: #c47f79;
+  color: var(--rose-text);
   font-weight: 700;
   font-size: 14px;
   text-decoration: none;
@@ -1098,7 +1099,7 @@ footer a{
   content: "✓";
   position: absolute;
   left: 0;
-  color: #c47f79;
+  color: var(--rose-text);
   font-weight: 700;
 }
 
@@ -1154,7 +1155,7 @@ footer a{
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .07em;
-  color: #c47f79;
+  color: var(--rose-text);
   margin: 0 0 8px;
 }
 
@@ -1210,7 +1211,7 @@ footer a{
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .07em;
-  color: #c47f79;
+  color: var(--rose-text);
   margin: 0 0 4px;
 }
 
@@ -1223,7 +1224,7 @@ footer a{
 
 .cert-issuer {
   font-size: 12px;
-  color: #888;
+  color: #757575;
   margin: 0;
 }
 
@@ -1231,7 +1232,7 @@ footer a{
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #c47f79, #e8b89b);
+  background: linear-gradient(135deg, #8a3428, #b8594b);
   color: #fff;
   font-size: 18px;
   font-weight: 700;
