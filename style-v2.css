@@ -39,6 +39,23 @@ html{scroll-behavior:smooth}
   top:8px;
 }
 
+/* FOCUS VISIBLE (accessibilité clavier) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+summary:focus-visible{
+  outline:3px solid var(--rose-text);
+  outline-offset:-3px;
+}
+
+.primary:focus-visible,
+.btn.primary:focus-visible,
+.pill:focus-visible{
+  outline:3px solid #fff;
+  outline-offset:-4px;
+}
+
 body{
   margin:0;
   font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
