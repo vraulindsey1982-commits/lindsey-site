@@ -976,18 +976,21 @@ footer a{
   box-shadow: 0 8px 24px rgba(196,127,121,.12);
 }
 
-.blog-card h2 {
+.blog-card h2,
+.blog-card h3 {
   font-size: 1.05em;
   margin: 8px 0 12px;
   line-height: 1.4;
 }
 
-.blog-card h2 a {
+.blog-card h2 a,
+.blog-card h3 a {
   color: var(--black);
   text-decoration: none;
 }
 
-.blog-card h2 a:hover { color: var(--rose-text); }
+.blog-card h2 a:hover,
+.blog-card h3 a:hover { color: var(--rose-text); }
 
 .blog-card p { color: #666; font-size: 14px; line-height: 1.6; margin: 0 0 12px; }
 
