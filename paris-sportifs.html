@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analyse privée</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <link rel="stylesheet" href="lindsey-cm.min.css">
+  <style>
+    body { background: var(--bg); }
+    .ps-wrap { max-width: 1100px; margin: 0 auto; padding: 32px 20px 80px; }
+    .ps-header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:24px; }
+    .ps-header h1 { color:#fff; font-size:24px; margin:0; }
+    .ps-header p { color: var(--text-muted); margin:4px 0 0; font-size:13px; }
+    .ps-controls { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px; }
+    .ps-controls select, .ps-controls button { min-width: 200px; }
+    .ps-note { background: var(--bg-card); border:1px solid var(--border-soft); border-radius:12px; padding:14px 16px; color: var(--text-muted); font-size:12.5px; line-height:1.6; margin-bottom:22px; }
+    table.ps-table { width:100%; border-collapse: collapse; background: var(--bg-card); border:1px solid var(--border-soft); border-radius:14px; overflow:hidden; }
+    .ps-table th, .ps-table td { padding: 12px 14px; text-align:left; font-size:13px; border-bottom:1px solid var(--border-soft); color:#e9e6f5; }
+    .ps-table th { color: var(--text-muted); font-weight:600; text-transform:uppercase; font-size:11px; letter-spacing:.04em; }
+    .ps-table tr:last-child td { border-bottom:none; }
+    .ps-prob { font-weight:800; }
+    .ps-prob.high { color:#34d399; }
+    .ps-prob.mid { color:#fbbf24; }
+    .ps-prob.low { color:#f87171; }
+    .ps-edge-pos { color:#34d399; font-weight:700; }
+    .ps-edge-neg { color:#8b8ba8; }
+    .ps-empty { text-align:center; padding: 40px 20px; color: var(--text-muted); }
+    .ps-loading { text-align:center; padding: 40px 20px; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+<div id="lock-screen" style="position:fixed;inset:0;background:#0b0b12;z-index:9999;display:flex;align-items:center;justify-content:center;">
+  <div style="background:#16161f;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:32px;max-width:340px;width:90%;text-align:center;">
+    <div style="font-weight:800;font-size:18px;color:#fff;margin-bottom:6px;">Accès privé</div>
+    <p style="color:#9a94a8;font-size:13px;margin:0 0 18px;">Entre ton code d'accès pour ouvrir l'outil.</p>
+    <input type="password" id="lock-input" class="form-input" placeholder="Code d'accès" style="width:100%;margin-bottom:12px;box-sizing:border-box;" onkeydown="if(event.key==='Enter') unlockTool()">
+    <button class="btn-generate" style="width:100%;" onclick="unlockTool()">Déverrouiller</button>
+    <div id="lock-error" style="display:none;color:#f26d6d;font-size:12px;margin-top:10px;">Code incorrect — réessaie.</div>
+  </div>
+</div>
+
+<div id="ps-content" style="display:none">
+  <div class="ps-wrap">
+    <div class="ps-header">
+      <div>
+        <h1>🎯 Analyse de cotes</h1>
+        <p>Probabilités calculées à partir des cotes réelles des bookmakers, marge retirée</p>
+      </div>
+    </div>
+
+    <div class="ps-note">
+      Comment lire ce tableau : la <strong>probabilité</strong> est la probabilité "juste" d'un résultat une fois la marge du bookmaker retirée
+      (moyenne sur tous les bookmakers suivis). La <strong>value</strong> compare cette probabilité à la meilleure cote disponible sur le marché :
+      une value positive signifie que la cote proposée est plus généreuse que ce que le résultat "mérite" statistiquement.
+      Ceci reste une estimation basée sur les cotes du marché, pas une garantie de résultat — les paris sportifs comportent toujours un risque de perte.
+    </div>
+
+    <div class="ps-controls">
+      <select class="form-select" id="ps-sport"></select>
+      <select class="form-select" id="ps-region">
+        <option value="eu">Bookmakers Europe</option>
+        <option value="uk">Bookmakers UK</option>
+        <option value="us">Bookmakers US</option>
+      </select>
+      <button class="btn-generate" onclick="loadMatches()">
+        <span class="spinner" id="ps-spinner" style="display:none"></span>
+        <span id="ps-btn-text">🔄 Analyser</span>
+      </button>
+    </div>
+
+    <div id="ps-results"></div>
+  </div>
+</div>
+
+<script>
+function unlockTool() {
+  const code = document.getElementById('lock-input').value.trim();
+  if (!code) { document.getElementById('lock-error').style.display = 'block'; return; }
+  sessionStorage.setItem('ps_key', code);
+  document.getElementById('lock-screen').style.display = 'none';
+  document.getElementById('ps-content').style.display = '';
+  initSports();
+}
+
+const SPORT_LABELS = {
+  soccer_epl: '⚽ Premier League',
+  soccer_france_ligue_one: '⚽ Ligue 1',
+  soccer_spain_la_liga: '⚽ Liga',
+  soccer_italy_serie_a: '⚽ Serie A',
+  soccer_germany_bundesliga: '⚽ Bundesliga',
+  soccer_uefa_champs_league: '⚽ Ligue des champions',
+  basketball_nba: '🏀 NBA',
+  basketball_euroleague: '🏀 Euroleague',
+  tennis_atp_us_open: '🎾 ATP',
+  icehockey_nhl: '🏒 NHL',
+  americanfootball_nfl: '🏈 NFL',
+  mma_mixed_martial_arts: '🥊 MMA',
+  rugbyunion_six_nations: '🏉 Rugby',
+};
+
+async function initSports() {
+  const select = document.getElementById('ps-sport');
+  // Liste par défaut le temps du premier chargement réel des sports actifs
+  select.innerHTML = Object.entries(SPORT_LABELS)
+    .map(([key, label]) => `<option value="${key}">${label}</option>`)
+    .join('');
+  await loadMatches();
+}
+
+async function loadMatches() {
+  const btn = document.getElementById('ps-btn-text');
+  const spinner = document.getElementById('ps-spinner');
+  const results = document.getElementById('ps-results');
+  const sport = document.getElementById('ps-sport').value;
+  const region = document.getElementById('ps-region').value;
+
+  btn.textContent = 'Analyse en cours…';
+  spinner.style.display = 'inline-block';
+  results.innerHTML = '<div class="ps-loading">Récupération des cotes…</div>';
+
+  try {
+    const res = await fetch(`/api/paris-analyse?sport=${encodeURIComponent(sport)}&region=${encodeURIComponent(region)}`, {
+      headers: { 'x-dashboard-key': sessionStorage.getItem('ps_key') || '' },
+    });
+
+    if (res.status === 401) {
+      sessionStorage.removeItem('ps_key');
+      document.getElementById('ps-content').style.display = 'none';
+      document.getElementById('lock-screen').style.display = 'flex';
+      document.getElementById('lock-error').style.display = 'block';
+      return;
+    }
+
+    const data = await res.json();
+
+    if (data.sports && data.sports.length) {
+      const select = document.getElementById('ps-sport');
+      const current = select.value;
+      select.innerHTML = data.sports
+        .map(s => `<option value="${s.key}">${SPORT_LABELS[s.key] || s.title}</option>`)
+        .join('');
+      if ([...select.options].some(o => o.value === current)) select.value = current;
+    }
+
+    if (data.error) {
+      results.innerHTML = `<div class="ps-empty">⚠️ ${data.error}</div>`;
+      return;
+    }
+
+    renderMatches(data.matches || []);
+  } catch (e) {
+    results.innerHTML = '<div class="ps-empty">Erreur lors du chargement des cotes.</div>';
+    console.error(e);
+  } finally {
+    btn.textContent = '🔄 Analyser';
+    spinner.style.display = 'none';
+  }
+}
+
+function probClass(p) {
+  if (p >= 60) return 'high';
+  if (p >= 45) return 'mid';
+  return 'low';
+}
+
+function renderMatches(matches) {
+  const results = document.getElementById('ps-results');
+  if (!matches.length) {
+    results.innerHTML = '<div class="ps-empty">Aucun match à venir pour ce sport en ce moment.</div>';
+    return;
+  }
+
+  const rows = matches.map(m => {
+    const date = new Date(m.commenceTime).toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'short' });
+    const best = m.bestPick;
+    const value = m.bestValuePick;
+    const edgeClass = value.edgePercent > 0 ? 'ps-edge-pos' : 'ps-edge-neg';
+    return `
+      <tr>
+        <td>${date}<br><span style="color:var(--text-muted)">${m.homeTeam} vs ${m.awayTeam}</span></td>
+        <td><span class="ps-prob ${probClass(best.fairProbability)}">${best.fairProbability}%</span><br><span style="color:var(--text-muted)">${best.name}</span></td>
+        <td>${best.bestOdds}<br><span style="color:var(--text-muted)">${best.bestBookmaker || '—'}</span></td>
+        <td>${value.name} @ ${value.bestOdds}<br><span class="${edgeClass}">${value.edgePercent > 0 ? '+' : ''}${value.edgePercent}%</span></td>
+        <td style="color:var(--text-muted)">${m.bookmakersCount}</td>
+      </tr>`;
+  }).join('');
+
+  results.innerHTML = `
+    <table class="ps-table">
+      <thead>
+        <tr>
+          <th>Match</th>
+          <th>Meilleure probabilité</th>
+          <th>Meilleure cote</th>
+          <th>Meilleure value</th>
+          <th>Bookmakers</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+// Auto-déverrouillage si un code a déjà été saisi dans cette session
+if (sessionStorage.getItem('ps_key')) {
+  document.getElementById('lock-screen').style.display = 'none';
+  document.getElementById('ps-content').style.display = '';
+  initSports();
+}
+</script>
+
+</body>
+</html>
