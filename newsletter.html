@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newsletter | Lindsey Créative Studio</title>
+  <meta name="description" content="Inscrivez-vous à la newsletter de Lindsey Créative Studio : conseils UGC pour les marques, coulisses et nouveautés.">
+  <link rel="canonical" href="https://www.lindsey-ugc.fr/newsletter.html">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="style-v2.min.css" />
+  <style>
+    .nl-page{min-height:100vh;display:grid;place-items:center;padding:32px 16px;background:var(--cream)}
+    .nl-card{width:100%;max-width:480px;background:var(--white);border-radius:24px;padding:32px 24px;text-align:center;box-shadow:0 10px 40px rgba(90,58,58,.08)}
+    .nl-card img{width:140px;height:auto;margin:0 auto 16px;display:block}
+    .nl-card h1{margin:0 0 10px;color:var(--brown)}
+    .nl-card p{color:var(--muted)}
+    .nl-card form{display:grid;gap:12px;margin-top:20px;text-align:left}
+    .nl-consent{display:flex;gap:10px;align-items:flex-start;font-size:.85rem}
+    .nl-consent input{width:auto;margin-top:3px}
+    #newsletter-msg{margin:0;font-weight:600;text-align:center;color:var(--brown)}
+    .nl-back{display:inline-block;margin-top:18px;font-size:.9rem}
+  </style>
+</head>
+<body>
+  <main class="nl-page">
+    <section class="nl-card" aria-labelledby="newsletter-title">
+      <picture>
+        <source srcset="logo.webp" type="image/webp">
+        <img src="logo.png" alt="Lindsey Créative Studio" width="300" height="160">
+      </picture>
+      <h1 id="newsletter-title">La newsletter de Lindsey</h1>
+      <p>Conseils UGC pour les marques, coulisses et nouveautés, directement dans votre boîte mail. Pas de spam, désinscription en un clic.</p>
+      <form id="newsletter-form" novalidate>
+        <label class="sr-only" for="nl-prenom">Votre prénom</label>
+        <input id="nl-prenom" name="prenom" placeholder="Votre prénom" autocomplete="given-name" />
+        <label class="sr-only" for="nl-email">Votre email</label>
+        <input id="nl-email" type="email" name="email" placeholder="Votre email" autocomplete="email" required />
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
+        <label class="nl-consent">
+          <input type="checkbox" name="consent" required />
+          <span>J'accepte de recevoir la newsletter de Lindsey Créative Studio. Je peux me désinscrire à tout moment. <a href="confidentialite.html">Politique de confidentialité</a></span>
+        </label>
+        <button type="submit" class="btn primary">Je m'inscris</button>
+        <p id="newsletter-msg" role="status" aria-live="polite"></p>
+      </form>
+      <a class="nl-back" href="/">← Découvrir mon site</a>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var f = document.getElementById('newsletter-form');
+      var msg = document.getElementById('newsletter-msg');
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!f.email.value || !f.email.validity.valid) { msg.textContent = 'Merci de saisir un email valide.'; return; }
+        if (!f.consent.checked) { msg.textContent = 'Merci de cocher la case de consentement.'; return; }
+        msg.textContent = 'Inscription en cours…';
+        fetch('/api/newsletter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prenom: f.prenom.value, email: f.email.value, website: f.website.value, consent: true })
+        }).then(function (r) { return r.json(); }).then(function (d) {
+          if (d.ok) { f.reset(); msg.textContent = '✅ Merci ! Vous êtes bien inscrit(e).'; }
+          else { msg.textContent = 'Oups, une erreur est survenue. Réessayez ou écrivez-moi à contact@lindsey-ugc.fr.'; }
+        }).catch(function () { msg.textContent = 'Oups, une erreur est survenue. Réessayez plus tard.'; });
+      });
+    })();
+  </script>
+</body>
+</html>
