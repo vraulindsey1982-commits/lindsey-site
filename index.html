@@ -259,6 +259,13 @@
       document.addEventListener(e, loadGA, {once: true, passive: true});
     });
   </script>
+  <style>
+    .newsletter{max-width:560px;margin:0 auto 40px;padding:0 16px;text-align:center}
+    .newsletter form{display:grid;gap:12px;margin-top:16px;text-align:left}
+    .nl-consent{display:flex;gap:10px;align-items:flex-start;font-size:.85rem}
+    .nl-consent input{width:auto;margin-top:3px}
+    #newsletter-msg{margin:0;font-weight:600;text-align:center}
+  </style>
 </head>
 
 <body>
@@ -750,6 +757,23 @@
   </main>
 
   <footer>
+    <section class="newsletter" aria-labelledby="newsletter-title">
+      <h2 id="newsletter-title">La newsletter de Lindsey</h2>
+      <p>Conseils UGC, coulisses et nouveautés, directement dans votre boîte mail. Pas de spam, désinscription en un clic.</p>
+      <form id="newsletter-form" novalidate>
+        <label class="sr-only" for="nl-prenom">Votre prénom</label>
+        <input id="nl-prenom" name="prenom" placeholder="Votre prénom" autocomplete="given-name" />
+        <label class="sr-only" for="nl-email">Votre email</label>
+        <input id="nl-email" type="email" name="email" placeholder="Votre email" autocomplete="email" required />
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
+        <label class="nl-consent">
+          <input type="checkbox" name="consent" required />
+          <span>J'accepte de recevoir la newsletter de Lindsey Créative Studio. Je peux me désinscrire à tout moment. <a href="confidentialite.html">Politique de confidentialité</a></span>
+        </label>
+        <button type="submit" class="btn primary">Je m'inscris</button>
+        <p id="newsletter-msg" role="status" aria-live="polite"></p>
+      </form>
+    </section>
     <picture>
       <source srcset="logo.webp" type="image/webp">
       <img src="logo.png" alt="Lindsey Creative Studio" class="footer-logo" width="300" height="160" loading="lazy" decoding="async">
@@ -766,6 +790,28 @@
       | <a href="cgv.html">CGV</a>
     </p>
   </footer>
+
+  <script>
+    (function () {
+      var f = document.getElementById('newsletter-form');
+      if (!f) return;
+      var msg = document.getElementById('newsletter-msg');
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!f.email.value || !f.email.validity.valid) { msg.textContent = 'Merci de saisir un email valide.'; return; }
+        if (!f.consent.checked) { msg.textContent = 'Merci de cocher la case de consentement.'; return; }
+        msg.textContent = 'Inscription en cours…';
+        fetch('/api/newsletter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prenom: f.prenom.value, email: f.email.value, website: f.website.value, consent: true })
+        }).then(function (r) { return r.json(); }).then(function (d) {
+          if (d.ok) { f.reset(); msg.textContent = '✅ Merci ! Vous êtes bien inscrit(e).'; }
+          else { msg.textContent = 'Oups, une erreur est survenue. Réessayez ou écrivez-moi à contact@lindsey-ugc.fr.'; }
+        }).catch(function () { msg.textContent = 'Oups, une erreur est survenue. Réessayez plus tard.'; });
+      });
+    })();
+  </script>
 
   <script src="script.min.js" defer></script>
 
