@@ -15,12 +15,14 @@
 ## Pages principales
 
 - [Accueil](https://www.lindsey-ugc.fr/): présentation, tarifs, FAQ, avis clients
-- [Services](https://www.lindsey-ugc.fr/services.html): détail des offres UGC et community management
+- [Services](https://www.lindsey-ugc.fr/services.html): détail des offres UGC, community management et secrétariat
+- [Secrétaire indépendante](https://www.lindsey-ugc.fr/secretaire-independante-nancy.html): secrétariat indépendant et assistance administrative à distance pour artisans et TPE, Meurthe-et-Moselle (Nancy) et toute la France, dès 25€/h
 - [Portfolio](https://www.lindsey-ugc.fr/portfolio.html): exemples de vidéos et photos UGC réalisées
 - [Blog](https://www.lindsey-ugc.fr/blog.html): articles conseils UGC et community management
 
 ## Articles de blog
 
+- [Secrétaire pour artisan : pourquoi déléguer son administratif ?](https://www.lindsey-ugc.fr/secretaire-independante-artisan.html)
 - [Contenu UGC : c'est quoi et pourquoi ça marche ?](https://www.lindsey-ugc.fr/contenu-ugc-c-est-quoi.html)
 - [Quels formats de vidéo UGC choisir pour sa marque ?](https://www.lindsey-ugc.fr/formats-video-ugc.html)
 - [UGC ou influenceur ? La vraie différence pour une marque](https://www.lindsey-ugc.fr/ugc-vs-influenceur.html)
