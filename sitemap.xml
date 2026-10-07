@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 
   <url>
     <loc>https://www.lindsey-ugc.fr/</loc>
@@ -162,16 +163,34 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-face-cam-lifestyle.html</loc>
-    <lastmod>2026-07-04</lastmod>
+    <lastmod>2026-10-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://www.lindsey-ugc.fr/face-cam-couverture.jpg</video:thumbnail_loc>
+      <video:title>Vidéo UGC face cam lifestyle | Lindsey créatrice UGC France</video:title>
+      <video:description>Vidéo UGC face cam réalisée par Lindsey pour une marque lifestyle. Contenu authentique filmé au DJI Osmo Pocket 3, prêt pour TikTok Reels et Meta Ads.</video:description>
+      <video:content_loc>https://www.lindsey-ugc.fr/Video1.mp4</video:content_loc>
+      <video:duration>22</video:duration>
+      <video:publication_date>2026-01-01T00:00:00+01:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-demonstration-produit.html</loc>
-    <lastmod>2026-07-04</lastmod>
+    <lastmod>2026-10-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://www.lindsey-ugc.fr/demonstration-produit-couverture.jpg</video:thumbnail_loc>
+      <video:title>Vidéo UGC démonstration produit | Lindsey créatrice UGC France</video:title>
+      <video:description>Vidéo UGC démonstration produit réalisée par Lindsey. Format court, ads ready, optimisé pour TikTok Ads et Instagram Reels.</video:description>
+      <video:content_loc>https://www.lindsey-ugc.fr/video2.mp4</video:content_loc>
+      <video:duration>51</video:duration>
+      <video:publication_date>2026-01-01T00:00:00+01:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
 
   <url>
@@ -179,13 +198,31 @@
     <lastmod>2026-07-04</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://www.lindsey-ugc.fr/earo-Couverture.jpg</video:thumbnail_loc>
+      <video:title>Vidéo UGC face cam | Lindsey créatrice UGC France</video:title>
+      <video:description>Vidéo UGC face cam réalisée par Lindsey, créatrice UGC France. Contenu authentique ads ready pour TikTok et Instagram Reels.</video:description>
+      <video:content_loc>https://www.lindsey-ugc.fr/earo.mp4</video:content_loc>
+      <video:duration>27</video:duration>
+      <video:publication_date>2026-06-23T00:00:00+02:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-luminette.html</loc>
-    <lastmod>2026-07-04</lastmod>
+    <lastmod>2026-10-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://www.lindsey-ugc.fr/luminette-couverture.jpg</video:thumbnail_loc>
+      <video:title>Vidéo UGC Luminette | Lindsey créatrice UGC France</video:title>
+      <video:description>Vidéo UGC réalisée par Lindsey pour Luminette. Contenu authentique ads ready pour TikTok et Instagram Reels.</video:description>
+      <video:content_loc>https://www.lindsey-ugc.fr/luminettesite.mp4</video:content_loc>
+      <video:duration>31</video:duration>
+      <video:publication_date>2026-06-25T00:00:00+02:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
 
   <url>
@@ -193,6 +230,15 @@
     <lastmod>2026-07-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://www.lindsey-ugc.fr/affiche-lindsey-2.jpeg</video:thumbnail_loc>
+      <video:title>Vidéo UGC Tossit | Lindsey créatrice UGC France</video:title>
+      <video:description>Vidéo UGC réalisée par Lindsey pour Tossit. Contenu authentique ads ready pour TikTok et Instagram Reels.</video:description>
+      <video:content_loc>https://www.lindsey-ugc.fr/tossit.mp4</video:content_loc>
+      <video:duration>11</video:duration>
+      <video:publication_date>2026-07-07T00:00:00+02:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
 
   <url>
@@ -200,6 +246,15 @@
     <lastmod>2026-07-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://www.lindsey-ugc.fr/affiche-lindsey-2.jpeg</video:thumbnail_loc>
+      <video:title>Vidéo UGC Rouge à Lèvres Givenchy | Lindsey créatrice UGC France</video:title>
+      <video:description>Vidéo UGC beauté réalisée par Lindsey sur un rouge à lèvres Givenchy. Contenu authentique ads ready pour TikTok et Instagram Reels.</video:description>
+      <video:content_loc>https://www.lindsey-ugc.fr/rougealevregivenchy.mp4</video:content_loc>
+      <video:duration>12</video:duration>
+      <video:publication_date>2026-07-07T00:00:00+02:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
 
   <url>
@@ -207,6 +262,15 @@
     <lastmod>2026-07-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://www.lindsey-ugc.fr/affiche-lindsey-2.jpeg</video:thumbnail_loc>
+      <video:title>Vidéo UGC Unboxing Chat : un colis spécial est arrivé pour mon chat</video:title>
+      <video:description>Vidéo UGC unboxing réalisée par Lindsey. Un colis spécial pour son chat, contenu lifestyle authentique ads ready pour TikTok et Instagram Reels.</video:description>
+      <video:content_loc>https://www.lindsey-ugc.fr/chat-colis.mp4</video:content_loc>
+      <video:duration>67</video:duration>
+      <video:publication_date>2026-07-07T00:00:00+02:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
 
   <url>
@@ -214,6 +278,15 @@
     <lastmod>2026-07-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://www.lindsey-ugc.fr/affiche-lindsey-2.jpeg</video:thumbnail_loc>
+      <video:title>Reel Instagram UGC | Lindsey créatrice UGC France</video:title>
+      <video:description>Reel Instagram UGC réalisé par Lindsey. Contenu lifestyle authentique ads ready pour Instagram Reels et TikTok.</video:description>
+      <video:content_loc>https://www.lindsey-ugc.fr/reel-instagram.mp4</video:content_loc>
+      <video:duration>5</video:duration>
+      <video:publication_date>2026-07-07T00:00:00+02:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
 
   <url>
@@ -221,6 +294,15 @@
     <lastmod>2026-07-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://www.lindsey-ugc.fr/karcher-couverture.jpg</video:thumbnail_loc>
+      <video:title>Vidéo UGC Kärcher WV2 Black Edition, unboxing nettoyeur de vitres | Lindsey créatrice UGC France</video:title>
+      <video:description>Vidéo UGC unboxing réalisée par Lindsey pour le nettoyeur de vitres Kärcher WV2 Black Edition. Contenu authentique ads ready pour TikTok et Instagram Reels.</video:description>
+      <video:content_loc>https://www.lindsey-ugc.fr/karcher.mp4</video:content_loc>
+      <video:duration>38</video:duration>
+      <video:publication_date>2026-07-20T00:00:00+02:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
 
   <url>
@@ -228,6 +310,15 @@
     <lastmod>2026-07-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <video:video>
+      <video:thumbnail_loc>https://www.lindsey-ugc.fr/affiche-lindsey-2.jpeg</video:thumbnail_loc>
+      <video:title>Vidéo UGC Sun (Unilever) | Lindsey créatrice UGC France</video:title>
+      <video:description>Vidéo UGC réalisée par Lindsey pour Sun (Unilever). Contenu authentique ads ready pour TikTok et Instagram Reels.</video:description>
+      <video:content_loc>https://www.lindsey-ugc.fr/sun.mp4</video:content_loc>
+      <video:duration>27</video:duration>
+      <video:publication_date>2026-07-24T00:00:00+02:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
 
 </urlset>
