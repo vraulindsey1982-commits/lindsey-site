@@ -1086,6 +1086,30 @@ footer a{
   margin-top: 8px;
 }
 
+.table-wrap {
+  overflow-x: auto;
+  margin: 0 0 24px;
+}
+
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.price-table th,
+.price-table td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid #ede8e3;
+  color: #444;
+}
+
+.price-table th {
+  background: #faf8f5;
+  color: var(--black);
+}
+
 /* SERVICES COMPLÉMENTAIRES */
 .services-grid {
   display: grid;

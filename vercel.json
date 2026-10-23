@@ -3,6 +3,7 @@
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/blog.html", "destination": "/blog", "permanent": true },
     { "source": "/contenu-ugc-c-est-quoi.html", "destination": "/blog/contenu-ugc-c-est-quoi", "permanent": true },
+    { "source": "/combien-coute-creatrice-ugc-freelance.html", "destination": "/blog/combien-coute-une-creatrice-ugc", "permanent": true },
     { "source": "/blog/:slug.html", "destination": "/blog/:slug", "permanent": true }
   ],
   "rewrites": [
