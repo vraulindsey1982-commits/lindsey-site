@@ -1062,6 +1062,30 @@ footer a{
   font-size: 14px;
 }
 
+.article-body h3 {
+  font-size: 1em;
+  margin: 24px 0 8px;
+  color: var(--black);
+}
+
+.article-figure {
+  margin: 24px 0 32px;
+}
+
+.article-figure img {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  border-radius: 16px;
+}
+
+.article-figure figcaption {
+  font-size: 13px;
+  color: #999;
+  margin-top: 8px;
+}
+
 /* SERVICES COMPLÉMENTAIRES */
 .services-grid {
   display: grid;
