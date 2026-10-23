@@ -1,6 +1,13 @@
 {
   "redirects": [
-    { "source": "/index.html", "destination": "/", "permanent": true }
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/blog.html", "destination": "/blog", "permanent": true },
+    { "source": "/contenu-ugc-c-est-quoi.html", "destination": "/blog/contenu-ugc-c-est-quoi", "permanent": true },
+    { "source": "/blog/:slug.html", "destination": "/blog/:slug", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/blog", "destination": "/blog.html" },
+    { "source": "/blog/:slug", "destination": "/blog/:slug.html" }
   ],
   "crons": [
     { "path": "/api/cron/publish-scheduled", "schedule": "0 6 * * *" }
