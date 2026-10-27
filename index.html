@@ -263,6 +263,18 @@
     .rights-box a{color:#c47f79;font-weight:700}
     .rights-note{margin:14px 0 0;font-size:.95rem;color:var(--muted)}
     @media(max-width:600px){.rights-box dl>div{grid-template-columns:1fr;gap:4px}}
+    .format-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:28px}
+    .format-item{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:20px;padding:24px}
+    .format-item h3{margin:0 0 8px;font-size:1.2rem}
+    .format-item p{margin:0;font-size:1rem}
+    .section-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:32px}
+    .steps{counter-reset:step;list-style:none;padding:0;margin:28px 0 0;display:grid;gap:16px;max-width:760px}
+    .steps li{counter-increment:step;position:relative;padding:18px 20px 18px 64px;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:18px;line-height:1.6}
+    .steps li::before{content:counter(step);position:absolute;left:18px;top:16px;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#111,#5a3a3a);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center}
+    .steps a{color:#c47f79;font-weight:700}
+    .formules-block{margin-top:48px}
+    .formules-block h3{font-size:1.4rem;margin:0 0 8px}
+    .offer-col h4{margin:4px 0 8px;font-size:1.3rem}
     .newsletter form{display:grid;gap:12px;margin-top:16px;text-align:left}
     .nl-consent{display:flex;gap:10px;align-items:flex-start;font-size:.85rem}
     .nl-consent input{width:auto;margin-top:3px}
@@ -303,9 +315,9 @@
       </div>
 
       <div class="hero-copy">
-        <p class="eyebrow">Vidéos UGC en français pour marques beauté, lifestyle &amp; food</p>
+        <p class="eyebrow">Lindsey · Créatrice UGC</p>
 
-        <h1>Lindsey, Créatrice UGC France spécialisée en vidéos TikTok & Instagram pensées pour la conversion</h1>
+        <h1>Créatrice UGC beauté et lifestyle en France — vidéos en français pour les marques</h1>
 
         <p>
           Bonjour, moi c'est <strong>Lindsey</strong>, créatrice UGC France spécialisée dans la <strong>création de contenu UGC pour marques beauté, lifestyle et food</strong> : des vidéos TikTok et Instagram conçues pour donner envie d'acheter.
@@ -334,95 +346,72 @@
       <div><strong>100%</strong><span>Contenu sur-mesure</span></div>
     </section>
 
-    <section class="section instagram-proof reveal">
-      <p class="eyebrow">Instagram</p>
-      <h2>Une audience engagée, un vrai savoir-faire des réseaux.</h2>
-      <p style="color:var(--muted); max-width:640px;">
-        Je ne me contente pas de créer du contenu pour les marques : je fais vivre mon propre compte au quotidien. Ce que ça donne, en chiffres.
+    <section id="offre" class="section reveal">
+      <p class="eyebrow">Ce que je crée</p>
+      <h2>Des vidéos UGC prêtes pour vos réseaux sociaux et publicités</h2>
+      <p style="max-width:720px;">
+        Une vidéo UGC ressemble à un vrai témoignage, filmé par une vraie personne : c'est ce qui la rend crédible aux yeux de votre audience. Je les tourne en français et je vous les livre prêtes à publier sur vos comptes, sur votre site ou en publicité Meta Ads et TikTok Ads.
       </p>
 
-      <div class="ig-stats">
-        <div><strong>14 000+</strong><span>Abonnés Instagram</span></div>
-        <div><strong>5%</strong><span>Taux d'engagement moyen</span></div>
-        <div><strong>2 000 à 3 000+</strong><span>Vues moyennes par reel</span></div>
+      <div class="checks">
+        <p>✓ Accroche travaillée pour capter l'attention dès les premières secondes</p>
+        <p>✓ Vidéos adaptées aux codes TikTok & Instagram</p>
+        <p>✓ Approche authentique, pensée pour inspirer confiance envers votre produit</p>
+        <p>✓ Livraison rapide, claire et professionnelle</p>
       </div>
 
-      <div style="text-align:center; margin-top:28px;">
-        <a href="https://www.instagram.com/lindsey.ugc.fr/" target="_blank" rel="noopener" class="btn secondary">Voir mon Instagram →</a>
-      </div>
-    </section>
-
-    <section class="section about reveal">
-      <p class="eyebrow">À propos</p>
-      <h2>Bonjour, moi c'est Lindsey.</h2>
-      <div class="about-float">
-        <picture>
-          <source srcset="lindsey-portrait.webp" type="image/webp">
-          <img src="lindsey-portrait.png" alt="Lindsey, créatrice UGC France" class="portrait-circle" loading="lazy" decoding="async">
-        </picture>
-        <p>Basée en <a href="creatrice-ugc-lorraine.html" style="color:#c47f79; font-weight:600;">Lorraine</a>, je suis créatrice UGC professionnelle depuis <strong>2026</strong>, avec une expérience des tests et contenus produits depuis <strong>2014</strong> : en gifting, j'ai appris à mettre en valeur les produits avec authenticité.</p>
-        <p>Ce qui m'a poussée à me lancer ? L'amour de la mise en scène et la chance d'avoir <strong>3 enfants</strong> qui rendent mes contenus lifestyle encore plus vrais, plus humains.</p>
-        <p>Ce qui me différencie ? <strong>L'authenticité.</strong> Pas de faux-semblants, juste du contenu qui ressemble à la vraie vie, pensé pour donner confiance à vos clients.</p>
-
-        <div class="cert-card">
-          <span class="cert-icon">🎓</span>
-          <div class="cert-info">
-            <p class="cert-label">Certification</p>
-            <p class="cert-title">Stratégie réseaux sociaux et SEO</p>
-            <p class="cert-issuer">MDA Performance</p>
-          </div>
-          <span class="cert-stamp">✓</span>
+      <div class="cards results-cards">
+        <div class="card">
+          <h3>Accroche soignée</h3>
+          <p>Des vidéos construites pour capter l'attention dès les 3 premières secondes</p>
         </div>
 
-        <div class="cert-card" style="margin-top:12px;">
-          <span class="cert-icon">📚</span>
-          <div class="cert-info">
-            <p class="cert-label">En formation continue</p>
-            <p class="cert-title">Marketing Digital</p>
-            <p class="cert-issuer">Kiluz</p>
-          </div>
-          <span class="cert-stamp">⏳</span>
+        <div class="card">
+          <h3>Ads ready</h3>
+          <p>Formats adaptés à TikTok Ads, Instagram & Meta Ads, livrés prêts à être utilisés en publicité</p>
         </div>
 
-        <a href="#contact" class="btn primary" style="margin-top:16px; display:inline-block;">Travaillons ensemble</a>
+        <div class="card">
+          <h3>Objectif conversion</h3>
+          <p>Un objectif créatif clair : transformer l'attention en envie d'acheter</p>
+        </div>
       </div>
     </section>
 
-    <section class="section reveal">
-      <p class="eyebrow">Matériel</p>
-      <h2>Un rendu professionnel grâce à un équipement de qualité.</h2>
-      <p>Chaque contenu est réalisé avec du matériel professionnel pour garantir un rendu premium.</p>
+    <section id="creation" class="section reveal">
+      <p class="eyebrow">Formats</p>
+      <h2>Création UGC beauté, skincare et lifestyle</h2>
+      <p style="max-width:720px;">
+        Je crée des vidéos pour les marques beauté &amp; skincare, lifestyle, food &amp; boissons et santé &amp; bien-être. Trois formats couvrent l'essentiel des besoins. <a href="ugc-marques-beaute-lifestyle-food.html" style="color:#c47f79; font-weight:600;">Voir tous mes cas d'usage →</a>
+      </p>
 
-      <div class="grid">
-        <div class="card">
-          <h3>🎥 Caméra</h3>
-          <p>DJI Osmo Pocket 3</p>
-          <span>Image stable et qualité cinématique</span>
+      <div class="format-list">
+        <div class="format-item">
+          <h3>Face cam et témoignage produit</h3>
+          <p>Je parle directement à la caméra de mon expérience avec votre produit : ce qui m'a plu, comment je l'utilise, pour qui il est fait. C'est le format le plus proche d'un avis spontané.</p>
         </div>
 
-        <div class="card">
-          <h3>📱 Smartphone</h3>
-          <p>Samsung Galaxy S25 Ultra</p>
-          <span>Vidéo 4K et formats adaptés aux réseaux sociaux</span>
+        <div class="format-item">
+          <h3>Unboxing et démonstration</h3>
+          <p>Découverte du colis et premier ressenti, puis le produit en action : application, texture, utilisation au quotidien, avant/après honnête. Idéal pour montrer ce qu'une photo ne montre pas.</p>
         </div>
 
-        <div class="card">
-          <h3>🎤 Audio</h3>
-          <p>Micro externe</p>
-          <span>Son clair et professionnel</span>
+        <div class="format-item">
+          <h3>Photos et vidéos verticales</h3>
+          <p>Vidéos au format 9:16, montées et sous-titrées, pour TikTok, Instagram Reels et vos publicités. Photos produit en situation en option (+20 € les 3, +30 € les 5). Matériel : DJI Osmo Pocket 3, Samsung Galaxy S25 Ultra (vidéo 4K), micro externe et drone DJI Neo.</p>
         </div>
+      </div>
 
-        <div class="card">
-          <h3>🚁 Drone</h3>
-          <p>DJI Neo</p>
-          <span>Prises de vue aériennes pour des contenus lifestyle originaux</span>
-        </div>
+      <div class="section-cta">
+        <a href="#contact" class="btn primary">Demander un devis</a>
+        <a href="#tarifs" class="btn secondary">Voir les tarifs</a>
       </div>
     </section>
 
     <section id="portfolio" class="section reveal">
       <p class="eyebrow">Portfolio</p>
-      <h2>Des contenus pensés pour capter l'attention.</h2>
+      <h2>Exemples de vidéos et collaborations</h2>
+      <p style="max-width:720px;">Missions UGC et collaborations en gifting pour des marques comme Kärcher, Vichy, Lacoste, Luminette ou Air Up. Le détail d'un projet est raconté dans <a href="etude-de-cas-ugc-luminette.html" style="color:#c47f79; font-weight:600;">l'étude de cas Luminette</a>.</p>
 
       <div class="grid portfolio-grid">
         <article>Face cam</article>
@@ -461,78 +450,92 @@
       </div>
 
       <div style="text-align:center; margin-top:30px;">
-        <a href="portfolio.html" class="btn primary">Voir tout le portfolio</a>
+        <a href="portfolio.html" class="btn secondary">Voir tout le portfolio</a>
       </div>
       <p style="text-align:center; margin-top:18px; font-size:14px;">Exemples en vidéo : <a href="video-ugc-rouge-levre-givenchy.html">vidéo UGC rouge à lèvres Givenchy</a>, <a href="video-ugc-karcher.html">vidéo UGC unboxing Kärcher WV2</a>, <a href="video-ugc-luminette.html">vidéo UGC Luminette</a> et <a href="video-ugc-face-cam-lifestyle.html">vidéo UGC face cam lifestyle</a>.</p>
 
-      <p class="eyebrow" style="margin-top:60px;">Mon approche</p>
-      <h2>Du contenu pensé pour performer.</h2>
-
-      <div class="checks">
-        <p>✓ Accroche travaillée pour capter l'attention dès les premières secondes</p>
-        <p>✓ Vidéos adaptées aux codes TikTok & Instagram</p>
-        <p>✓ Approche authentique, pensée pour inspirer confiance envers votre produit</p>
-        <p>✓ Livraison rapide, claire et professionnelle</p>
+      <h3 style="margin-top:56px;">Ce qu'en disent mes clients</h3>
+      <div id="reviews-rating" style="display:none; align-items:center; gap:10px; margin-bottom:24px;">
+        <span id="reviews-stars" style="color:#f5a623; font-size:22px;"></span>
+        <strong id="reviews-score" style="font-size:20px;"></strong>
+        <span id="reviews-count" style="color:#888; font-size:14px;"></span>
       </div>
 
-      <div class="cards results-cards">
-        <div class="card">
-          <h3>Accroche soignée</h3>
-          <p>Des vidéos construites pour capter l'attention dès les 3 premières secondes</p>
+      <div id="reviews-container" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin-bottom:24px;">
+        <div style="background:#fff; border:1px solid #ede5e0; border-radius:14px; padding:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span style="color:#f5a623;">★★★★★</span>
+            <span style="font-size:13px; color:#888;">· Google</span>
+          </div>
+          <p style="margin:0; font-style:italic;">"Bonsoir à tous, je vous recommande à 100% Lindsey, elle est très professionnelle et de bon conseil. Elle est à votre écoute, personnellement je recommande vivement !"</p>
         </div>
 
-        <div class="card">
-          <h3>Ads ready</h3>
-          <p>Formats adaptés à TikTok Ads, Instagram & Meta Ads, livrés prêts à être utilisés en publicité</p>
+        <div style="background:#fff; border:1px solid #ede5e0; border-radius:14px; padding:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span style="color:#f5a623;">★★★★★</span>
+            <span style="font-size:13px; color:#888;">· Google</span>
+          </div>
+          <p style="margin:0; font-style:italic;">"Contenu professionnel et authentique, elle comprend nos besoins. Je recommande."</p>
         </div>
 
-        <div class="card">
-          <h3>Objectif conversion</h3>
-          <p>Un objectif créatif clair : transformer l'attention en envie d'acheter</p>
+        <div style="background:#fff; border:1px solid #ede5e0; border-radius:14px; padding:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <span style="color:#f5a623;">★★★★★</span>
+            <span style="font-size:13px; color:#888;">· Google</span>
+          </div>
+          <p style="margin:0; font-style:italic;">"Personne très professionnelle, très à l'écoute, fait le maximum pour répondre aux attentes. Confiance à 100% !"</p>
         </div>
+      </div>
+
+      <div style="margin-top:28px; display:flex; flex-wrap:wrap; gap:16px; align-items:stretch;">
+      <div style="flex:1 1 280px; background:#fff; border:1px solid #ede5e0; border-radius:14px; padding:20px 24px; max-width:460px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+          <span style="color:#f5a623; font-size:18px;">★★★★★</span>
+          <strong style="font-size:16px;">5/5</strong>
+          <span style="color:#888; font-size:13px;">· via Youdji · Juin 2026</span>
+        </div>
+        <p style="margin:0 0 10px; font-weight:600;">Luma, Kahel</p>
+        <div style="display:flex; flex-wrap:wrap; gap:8px; font-size:13px; color:#666;">
+          <span>Communication : 5/5</span>
+          <span>·</span>
+          <span>Respect du brief : 5/5</span>
+          <span>·</span>
+          <span>Qualité technique : 5/5</span>
+        </div>
+      </div>
+
+      <a href="https://www.facebook.com/lilitest54" target="_blank" rel="noopener" style="flex:1 1 280px; max-width:460px; background:#fff; border:1px solid #ede5e0; border-radius:14px; padding:20px 24px; text-decoration:none; color:inherit; display:block;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+          <strong style="font-size:22px; color:#1877f2;">98 %</strong>
+          <span style="color:#888; font-size:13px;">· recommandent · Facebook · 49 avis</span>
+        </div>
+        <p style="margin:0 0 6px; font-weight:600;">Ma page Facebook lindsey.ugc.fr</p>
+        <p style="margin:0; font-size:13px; color:#c47f79; font-weight:700;">Lire les avis sur Facebook →</p>
+      </a>
+      </div>
+
+      <a id="reviews-link" href="https://search.google.com/local/writereview?placeid=ChIJ5W3ScIq1GagRtZAgvfWSrRs" target="_blank" rel="noopener" style="display:none; margin-top:20px;" class="btn secondary">Laisser un avis Google</a>
+
+      <div class="section-cta">
+        <a href="#contact" class="btn primary">Demander un devis</a>
       </div>
     </section>
 
-    <section id="formules" class="section reveal">
-      <p class="eyebrow">Deux façons de collaborer</p>
-      <h2>Contenu pour votre marque, ou publication sur mes comptes ?</h2>
-      <p style="color:var(--muted); max-width:680px;">Ce sont deux prestations différentes. En UGC, je crée la vidéo et c'est vous qui la diffusez. En publication sponsorisée, je la publie moi-même auprès de ma communauté.</p>
+    <section id="collaboration" class="section reveal">
+      <p class="eyebrow">Déroulé</p>
+      <h2>Une collaboration simple, du brief à la livraison</h2>
 
-      <div class="offer-compare">
-        <article class="offer-col">
-          <p class="offer-tag">Ma prestation principale</p>
-          <h3>Création UGC livrée à la marque</h3>
-          <p class="offer-price">Dès 110 € la vidéo</p>
-          <ul>
-            <li><strong>Qui diffuse :</strong> vous, sur vos comptes, votre site ou en publicité</li>
-            <li>Usage organique sur vos réseaux et votre site inclus, sans limite de durée</li>
-            <li>Droits publicité en option : +40 € (3 mois), +70 € (6 mois), +120 € (12 mois) par vidéo, tous canaux digitaux, en France</li>
-            <li><strong>Sur mes comptes :</strong> republication possible avec votre accord, sans mise en avant sponsorisée</li>
-            <li>1 série de retouches incluse</li>
-            <li>Livraison sous 5 à 7 jours ouvrés</li>
-          </ul>
-          <a href="#tarifs" class="offer-link">Voir les tarifs UGC ↓</a>
-        </article>
-
-        <article class="offer-col">
-          <p class="offer-tag">En complément</p>
-          <h3>Publication sponsorisée sur mes comptes</h3>
-          <p class="offer-price">Sur devis</p>
-          <ul>
-            <li><strong>Qui diffuse :</strong> moi, auprès de ma communauté (<a href="https://www.instagram.com/lindsey.ugc.fr/" target="_blank" rel="noopener">14 000+ abonnés Instagram</a>)</li>
-            <li>Toujours signalée comme partenariat commercial, comme la loi l'exige</li>
-            <li>Vous validez la vidéo avant sa mise en ligne</li>
-            <li>Statistiques de la publication envoyées après diffusion</li>
-            <li>Uniquement des produits que j'ai testés et qui correspondent à ma communauté</li>
-          </ul>
-          <a href="#contact" class="offer-link">Demander un devis →</a>
-        </article>
-      </div>
+      <ol class="steps">
+        <li><strong>Votre brief.</strong> Vous me présentez le produit, le ton souhaité, le format et l'usage prévu (réseaux ou publicité). Je vous réponds avec un devis sous 24 h.</li>
+        <li><strong>Validation et envoi du produit.</strong> Le devis précise les vidéos, le délai et les droits d'utilisation. Un acompte de 50 % lance le projet, et vous m'envoyez le produit.</li>
+        <li><strong>Tournage et montage.</strong> Je tourne chez moi, ou sur place en <a href="creatrice-ugc-lorraine.html">Lorraine</a> si le lieu compte, puis je monte et sous-titre chaque vidéo.</li>
+        <li><strong>Livraison.</strong> Vous recevez les fichiers prêts à publier sous 5 à 7 jours ouvrés après réception du produit. Une série de retouches est incluse.</li>
+      </ol>
     </section>
 
     <section id="tarifs" class="section pricing reveal">
       <p class="eyebrow">Tarifs</p>
-      <h2>Des tarifs clairs, sans surprise.</h2>
+      <h2>Tarifs, livrables et droits d'utilisation</h2>
       <p style="color:var(--muted); max-width:640px;">Voici mes formules de base. Chaque campagne étant différente, le montant final est ajusté selon votre brief, mais vous savez déjà à quoi vous attendre.</p>
 
       <div class="cards">
@@ -578,123 +581,138 @@
         Autres options : photos produit +20 € les 3, +30 € les 5. Livraison express sous 48 à 72 h : +30 %. <a href="/blog/combien-coute-une-creatrice-ugc" style="color:#c47f79; font-weight:600;">Tous mes tarifs expliqués</a>.
       </p>
 
+      <div id="formules" class="formules-block">
+        <h3>Création UGC ou publication sur mes comptes ?</h3>
+        <p style="color:var(--muted); max-width:680px;">Ce sont deux prestations différentes. En UGC, je crée la vidéo et c'est vous qui la diffusez. En publication sponsorisée, je la publie moi-même auprès de ma communauté.</p>
+      <div class="offer-compare">
+          <article class="offer-col">
+            <p class="offer-tag">Ma prestation principale</p>
+            <h4>Création UGC livrée à la marque</h4>
+            <p class="offer-price">Dès 110 € la vidéo</p>
+            <ul>
+              <li><strong>Qui diffuse :</strong> vous, sur vos comptes, votre site ou en publicité</li>
+              <li>Usage organique sur vos réseaux et votre site inclus, sans limite de durée</li>
+              <li>Droits publicité en option : +40 € (3 mois), +70 € (6 mois), +120 € (12 mois) par vidéo, tous canaux digitaux, en France</li>
+              <li><strong>Sur mes comptes :</strong> republication possible avec votre accord, sans mise en avant sponsorisée</li>
+              <li>1 série de retouches incluse</li>
+              <li>Livraison sous 5 à 7 jours ouvrés</li>
+            </ul>
+            <a href="#tarifs" class="offer-link">Voir les tarifs UGC ↓</a>
+          </article>
+
+          <article class="offer-col">
+            <p class="offer-tag">En complément</p>
+            <h4>Publication sponsorisée sur mes comptes</h4>
+            <p class="offer-price">Sur devis</p>
+            <ul>
+              <li><strong>Qui diffuse :</strong> moi, auprès de ma communauté (<a href="https://www.instagram.com/lindsey.ugc.fr/" target="_blank" rel="noopener">14 000+ abonnés Instagram</a>)</li>
+              <li>Toujours signalée comme partenariat commercial, comme la loi l'exige</li>
+              <li>Vous validez la vidéo avant sa mise en ligne</li>
+              <li>Statistiques de la publication envoyées après diffusion</li>
+              <li>Uniquement des produits que j'ai testés et qui correspondent à ma communauté</li>
+            </ul>
+            <a href="#contact" class="offer-link">Demander un devis →</a>
+          </article>
+        </div>
+      </div>
+
       <div style="text-align:center; margin-top:32px;">
         <a href="#contact" class="btn primary">Recevoir mon devis personnalisé</a>
       </div>
     </section>
 
-    <section class="section testimonials reveal">
-      <p class="eyebrow">Avis clients</p>
-      <h2>Ce qu'ils disent de moi.</h2>
+    <section class="section about reveal">
+      <p class="eyebrow">À propos</p>
+      <h2>Qui suis-je ? Une créatrice UGC basée en Lorraine</h2>
+      <div class="about-float">
+        <picture>
+          <source srcset="lindsey-portrait.webp" type="image/webp">
+          <img src="lindsey-portrait.png" alt="Lindsey, créatrice UGC France" class="portrait-circle" loading="lazy" decoding="async">
+        </picture>
+        <p>Basée en <a href="creatrice-ugc-lorraine.html" style="color:#c47f79; font-weight:600;">Lorraine</a>, je suis créatrice UGC professionnelle depuis <strong>2026</strong>, avec une expérience des tests et contenus produits depuis <strong>2014</strong> : en gifting, j'ai appris à mettre en valeur les produits avec authenticité.</p>
+        <p>Ce qui m'a poussée à me lancer ? L'amour de la mise en scène et la chance d'avoir <strong>3 enfants</strong> qui rendent mes contenus lifestyle encore plus vrais, plus humains.</p>
+        <p>Ce qui me différencie ? <strong>L'authenticité.</strong> Pas de faux-semblants, juste du contenu qui ressemble à la vraie vie, pensé pour donner confiance à vos clients.</p>
 
-      <div id="reviews-rating" style="display:none; align-items:center; gap:10px; margin-bottom:24px;">
-        <span id="reviews-stars" style="color:#f5a623; font-size:22px;"></span>
-        <strong id="reviews-score" style="font-size:20px;"></strong>
-        <span id="reviews-count" style="color:#888; font-size:14px;"></span>
-      </div>
-
-      <div id="reviews-container" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin-bottom:24px;">
-        <div style="background:#fff; border:1px solid #ede5e0; border-radius:14px; padding:20px;">
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-            <span style="color:#f5a623;">★★★★★</span>
-            <span style="font-size:13px; color:#888;">· Google</span>
+        <div class="cert-card">
+          <span class="cert-icon">🎓</span>
+          <div class="cert-info">
+            <p class="cert-label">Certification</p>
+            <p class="cert-title">Stratégie réseaux sociaux et SEO</p>
+            <p class="cert-issuer">MDA Performance</p>
           </div>
-          <p style="margin:0 0 12px; font-style:italic;">"Bonsoir à tous, je vous recommande à 100% Lindsey, elle est très professionnelle et de bon conseil. Elle est à votre écoute, personnellement je recommande vivement !"</p>
-          <p style="margin:0; font-weight:700; font-size:14px;">Philippe Thiery</p>
+          <span class="cert-stamp">✓</span>
         </div>
 
-        <div style="background:#fff; border:1px solid #ede5e0; border-radius:14px; padding:20px;">
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-            <span style="color:#f5a623;">★★★★★</span>
-            <span style="font-size:13px; color:#888;">· Google</span>
+        <div class="cert-card" style="margin-top:12px;">
+          <span class="cert-icon">📚</span>
+          <div class="cert-info">
+            <p class="cert-label">En formation continue</p>
+            <p class="cert-title">Marketing Digital</p>
+            <p class="cert-issuer">Kiluz</p>
           </div>
-          <p style="margin:0 0 12px; font-style:italic;">"Contenu professionnel et authentique, elle comprend nos besoins. Je recommande."</p>
-          <p style="margin:0; font-weight:700; font-size:14px;">Janique Vrau</p>
+          <span class="cert-stamp">⏳</span>
         </div>
 
-        <div style="background:#fff; border:1px solid #ede5e0; border-radius:14px; padding:20px;">
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-            <span style="color:#f5a623;">★★★★★</span>
-            <span style="font-size:13px; color:#888;">· Google</span>
-          </div>
-          <p style="margin:0 0 12px; font-style:italic;">"Personne très professionnelle, très à l'écoute, fait le maximum pour répondre aux attentes. Confiance à 100% !"</p>
-          <p style="margin:0; font-weight:700; font-size:14px;">Wendy Vrau</p>
-        </div>
+        <a href="#contact" class="btn primary" style="margin-top:16px; display:inline-block;">Travaillons ensemble</a>
       </div>
 
-      <div style="margin-top:28px; background:#fff; border:1px solid #ede5e0; border-radius:14px; padding:20px 24px; max-width:460px;">
-        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-          <span style="color:#f5a623; font-size:18px;">★★★★★</span>
-          <strong style="font-size:16px;">5/5</strong>
-          <span style="color:#888; font-size:13px;">· via Youdji · Juin 2026</span>
-        </div>
-        <p style="margin:0 0 10px; font-weight:600;">Luma, Kahel</p>
-        <div style="display:flex; flex-wrap:wrap; gap:8px; font-size:13px; color:#666;">
-          <span>Communication : 5/5</span>
-          <span>·</span>
-          <span>Respect du brief : 5/5</span>
-          <span>·</span>
-          <span>Qualité technique : 5/5</span>
-        </div>
-      </div>
-
-      <a id="reviews-link" href="https://search.google.com/local/writereview?placeid=ChIJ5W3ScIq1GagRtZAgvfWSrRs" target="_blank" rel="noopener" style="display:none; margin-top:20px;" class="btn secondary">Laisser un avis Google</a>
-    </section>
-
-    <section class="section reveal">
-      <p class="eyebrow">Blog & Ressources</p>
-      <h2>Conseils UGC pour les marques.</h2>
-      <p style="max-width:600px; margin-bottom:32px; color:#666;">Des guides pratiques pour comprendre le contenu UGC et faire les bons choix avant de vous lancer.</p>
-
-      <div class="blog-grid">
-        <article class="blog-card">
-          <p class="blog-tag">Conseils marques</p>
-          <h3><a href="creatrice-ugc-beaute-france.html">Créateur UGC beauté en France : comment bien le choisir ?</a></h3>
-          <p>Critères de sélection, process de collaboration, tarifs, tout ce qu'il faut savoir avant de faire appel à une créatrice UGC beauté.</p>
-          <a href="creatrice-ugc-beaute-france.html" class="blog-read-more">Lire l'article →</a>
-        </article>
-
-        <article class="blog-card">
-          <p class="blog-tag">Conseils marques</p>
-          <h3><a href="campagne-ugc-beaute.html">Comment créer une campagne UGC beauté qui convertit ?</a></h3>
-          <p>Brief, choix de la créatrice, formats, diffusion en ads, le guide complet pour une campagne UGC beauté efficace.</p>
-          <a href="campagne-ugc-beaute.html" class="blog-read-more">Lire l'article →</a>
-        </article>
-
-        <article class="blog-card">
-          <p class="blog-tag">Conseils marques</p>
-          <h3><a href="comment-choisir-creatrice-ugc.html">Comment choisir une créatrice UGC ? Mes 6 critères essentiels</a></h3>
-          <p>Les vrais critères qui font la différence entre un contenu qui convertit et un contenu qui dort dans un dossier.</p>
-          <a href="comment-choisir-creatrice-ugc.html" class="blog-read-more">Lire l'article →</a>
-        </article>
-
-        <article class="blog-card">
-          <p class="blog-tag">Étude de cas</p>
-          <h3><a href="etude-de-cas-ugc-luminette.html">Étude de cas UGC : ma collaboration avec Luminette</a></h3>
-          <p>Le brief, l'angle créatif et les coulisses d'une vidéo UGC unboxing réalisée pour Luminette.</p>
-          <a href="etude-de-cas-ugc-luminette.html" class="blog-read-more">Lire l'article →</a>
-        </article>
-      </div>
-
-      <div style="text-align:center; margin-top:32px;">
-        <a href="/blog" class="btn secondary">Voir tous les articles</a>
-      </div>
-    </section>
-
-    <section class="section seo-section reveal">
-      <p class="eyebrow">Créatrice UGC France</p>
-      <h2>Pourquoi faire appel à une créatrice UGC ?</h2>
-      <p>
-        Je suis <strong>Lindsey</strong>, créatrice UGC France spécialisée dans la <strong>création de contenu UGC pour marques beauté, lifestyle et food</strong>. J'aide les marques à développer leur visibilité grâce à des vidéos authentiques pensées pour TikTok, Instagram Reels et Meta Ads, dans les niches beauté & skincare, lifestyle, food & boissons et santé & bien-être. <a href="ugc-marques-beaute-lifestyle-food.html" style="color:#c47f79; font-weight:600;">Voir tous mes cas d'usage →</a>
+      <h3 style="margin-top:48px;">Mon compte Instagram</h3>
+      <p style="color:var(--muted); max-width:640px;">
+        Je ne me contente pas de créer du contenu pour les marques : je fais vivre mon propre compte au quotidien. Ce que ça donne, en chiffres.
       </p>
-      <p style="margin-top:16px;">
-        Le contenu UGC (User Generated Content) est aujourd'hui l'un des formats les plus utilisés par les marques sur les réseaux sociaux. Contrairement aux publicités traditionnelles, une vidéo UGC ressemble à un vrai témoignage : c'est ce qui la rend plus crédible aux yeux de votre audience.
-      </p>
+
+      <div class="ig-stats">
+        <div><strong>14 000+</strong><span>Abonnés Instagram</span></div>
+        <div><strong>5%</strong><span>Taux d'engagement moyen</span></div>
+        <div><strong>2 000 à 3 000+</strong><span>Vues moyennes par reel</span></div>
+      </div>
+
+      <div style="text-align:center; margin-top:28px;">
+        <a href="https://www.instagram.com/lindsey.ugc.fr/" target="_blank" rel="noopener" class="btn secondary">Voir mon Instagram →</a>
+      </div>
+
+      <h3 style="margin-top:48px; text-align:center;">Mes derniers posts</h3>
+      <p style="text-align:center; font-size:1.4rem; font-weight:900; color:var(--rose-text); margin:0 0 10px;">🔥 Près de 100 000 vues sur l'un de mes reels</p>
+
+      <div class="instagram-embed-grid" style="margin-top:20px;">
+        <!-- Reel best-of, ~100k vues : à garder affiché en permanence même après les prochaines mises à jour -->
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DaDomAPCbwV/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:16px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:400px; min-width:280px; width:100%;">
+          <div style="padding:16px;"><a href="https://www.instagram.com/reel/DaDomAPCbwV/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener">Voir cette publication sur Instagram</a></div>
+        </blockquote>
+
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/De9qULDOoK0/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:16px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:400px; min-width:280px; width:100%;">
+          <div style="padding:16px;"><a href="https://www.instagram.com/reel/De9qULDOoK0/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener">Voir cette publication sur Instagram</a></div>
+        </blockquote>
+
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/Dew5N_Dh1od/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:16px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:400px; min-width:280px; width:100%;">
+          <div style="padding:16px;"><a href="https://www.instagram.com/reel/Dew5N_Dh1od/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener">Voir cette publication sur Instagram</a></div>
+        </blockquote>
+
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DehZGvehn2Y/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:16px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:400px; min-width:280px; width:100%;">
+          <div style="padding:16px;"><a href="https://www.instagram.com/reel/DehZGvehn2Y/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener">Voir cette publication sur Instagram</a></div>
+        </blockquote>
+
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DeZ2GTCuk7J/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:16px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:400px; min-width:280px; width:100%;">
+          <div style="padding:16px;"><a href="https://www.instagram.com/reel/DeZ2GTCuk7J/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener">Voir cette publication sur Instagram</a></div>
+        </blockquote>
+
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DeZpgmEOnRo/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:16px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:400px; min-width:280px; width:100%;">
+          <div style="padding:16px;"><a href="https://www.instagram.com/reel/DeZpgmEOnRo/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener">Voir cette publication sur Instagram</a></div>
+        </blockquote>
+
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DeP1G-qOSEw/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:16px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:400px; min-width:280px; width:100%;">
+          <div style="padding:16px;"><a href="https://www.instagram.com/reel/DeP1G-qOSEw/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener">Voir cette publication sur Instagram</a></div>
+        </blockquote>
+
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/Dd9nN_EBDOO/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:16px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:400px; min-width:280px; width:100%;">
+          <div style="padding:16px;"><a href="https://www.instagram.com/reel/Dd9nN_EBDOO/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener">Voir cette publication sur Instagram</a></div>
+        </blockquote>
+      </div>
     </section>
 
     <section class="section faq-section reveal">
       <p class="eyebrow">FAQ</p>
-      <h2>Questions fréquentes sur le contenu UGC</h2>
+      <h2>Questions fréquentes des marques</h2>
 
       <div class="faq-list">
         <details class="faq-item">
@@ -739,44 +757,69 @@
       </div>
     </section>
 
+    <section id="contact" class="section contact reveal">
+      <p class="eyebrow">Contact</p>
+      <h2>Parlons de votre projet UGC</h2>
+      <p>Expliquez-moi votre projet, votre produit et vos objectifs. Je vous réponds rapidement avec une proposition adaptée.</p>
+
+      <form action="https://formspree.io/f/mrernnyw" method="POST" id="contact-form">
+        <label class="sr-only" for="contact-nom">Votre nom</label>
+        <input id="contact-nom" name="nom" placeholder="Votre nom" required />
+
+        <label class="sr-only" for="contact-email">Votre email</label>
+        <input id="contact-email" type="email" name="email" placeholder="Votre email" required />
+
+        <label class="sr-only" for="contact-marque">Nom de votre marque</label>
+        <input id="contact-marque" name="marque" placeholder="Nom de votre marque" />
+
+        <label class="sr-only" for="contact-besoin">Votre besoin</label>
+        <textarea id="contact-besoin" name="besoin" placeholder="Votre besoin : vidéo, photo, pack, gestion réseaux sociaux, délai..." required></textarea>
+
+        <button type="submit" class="btn primary">Envoyer ma demande</button>
+
+        <p id="form-success" style="display:none; margin-top:15px; font-weight:600;">
+          ✅ Merci ! Je vous réponds sous 24h.
+        </p>
+      </form>
+    </section>
+
     <section class="section reveal">
-      <p class="eyebrow">Instagram</p>
-      <h2 style="text-align:center;">Mes derniers posts</h2>
-      <p style="text-align:center; font-size:1.4rem; font-weight:900; color:var(--rose-text); margin:0 0 10px;">🔥 Près de 100 000 vues sur l'un de mes reels</p>
+      <p class="eyebrow">Blog & Ressources</p>
+      <h2>Conseils UGC pour les marques.</h2>
+      <p style="max-width:600px; margin-bottom:32px; color:#666;">Des guides pratiques pour comprendre le contenu UGC et faire les bons choix avant de vous lancer.</p>
 
-      <div class="instagram-embed-grid" style="margin-top:20px;">
-        <!-- Reel best-of, ~100k vues : à garder affiché en permanence même après les prochaines mises à jour -->
-        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DaDomAPCbwV/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:16px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:400px; min-width:280px; width:100%;">
-          <div style="padding:16px;"><a href="https://www.instagram.com/reel/DaDomAPCbwV/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener">Voir cette publication sur Instagram</a></div>
-        </blockquote>
+      <div class="blog-grid">
+        <article class="blog-card">
+          <p class="blog-tag">Conseils marques</p>
+          <h3><a href="creatrice-ugc-beaute-france.html">Créateur UGC beauté en France : comment bien le choisir ?</a></h3>
+          <p>Critères de sélection, process de collaboration, tarifs, tout ce qu'il faut savoir avant de faire appel à une créatrice UGC beauté.</p>
+          <a href="creatrice-ugc-beaute-france.html" class="blog-read-more">Lire l'article →</a>
+        </article>
 
-        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/De9qULDOoK0/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:16px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:400px; min-width:280px; width:100%;">
-          <div style="padding:16px;"><a href="https://www.instagram.com/reel/De9qULDOoK0/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener">Voir cette publication sur Instagram</a></div>
-        </blockquote>
+        <article class="blog-card">
+          <p class="blog-tag">Conseils marques</p>
+          <h3><a href="campagne-ugc-beaute.html">Comment créer une campagne UGC beauté qui convertit ?</a></h3>
+          <p>Brief, choix de la créatrice, formats, diffusion en ads, le guide complet pour une campagne UGC beauté efficace.</p>
+          <a href="campagne-ugc-beaute.html" class="blog-read-more">Lire l'article →</a>
+        </article>
 
-        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/Dew5N_Dh1od/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:16px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:400px; min-width:280px; width:100%;">
-          <div style="padding:16px;"><a href="https://www.instagram.com/reel/Dew5N_Dh1od/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener">Voir cette publication sur Instagram</a></div>
-        </blockquote>
+        <article class="blog-card">
+          <p class="blog-tag">Conseils marques</p>
+          <h3><a href="comment-choisir-creatrice-ugc.html">Comment choisir une créatrice UGC ? Mes 6 critères essentiels</a></h3>
+          <p>Les vrais critères qui font la différence entre un contenu qui convertit et un contenu qui dort dans un dossier.</p>
+          <a href="comment-choisir-creatrice-ugc.html" class="blog-read-more">Lire l'article →</a>
+        </article>
 
-        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DehZGvehn2Y/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:16px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:400px; min-width:280px; width:100%;">
-          <div style="padding:16px;"><a href="https://www.instagram.com/reel/DehZGvehn2Y/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener">Voir cette publication sur Instagram</a></div>
-        </blockquote>
+        <article class="blog-card">
+          <p class="blog-tag">Étude de cas</p>
+          <h3><a href="etude-de-cas-ugc-luminette.html">Étude de cas UGC : ma collaboration avec Luminette</a></h3>
+          <p>Le brief, l'angle créatif et les coulisses d'une vidéo UGC unboxing réalisée pour Luminette.</p>
+          <a href="etude-de-cas-ugc-luminette.html" class="blog-read-more">Lire l'article →</a>
+        </article>
+      </div>
 
-        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DeZ2GTCuk7J/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:16px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:400px; min-width:280px; width:100%;">
-          <div style="padding:16px;"><a href="https://www.instagram.com/reel/DeZ2GTCuk7J/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener">Voir cette publication sur Instagram</a></div>
-        </blockquote>
-
-        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DeZpgmEOnRo/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:16px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:400px; min-width:280px; width:100%;">
-          <div style="padding:16px;"><a href="https://www.instagram.com/reel/DeZpgmEOnRo/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener">Voir cette publication sur Instagram</a></div>
-        </blockquote>
-
-        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DeP1G-qOSEw/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:16px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:400px; min-width:280px; width:100%;">
-          <div style="padding:16px;"><a href="https://www.instagram.com/reel/DeP1G-qOSEw/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener">Voir cette publication sur Instagram</a></div>
-        </blockquote>
-
-        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/Dd9nN_EBDOO/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:16px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:400px; min-width:280px; width:100%;">
-          <div style="padding:16px;"><a href="https://www.instagram.com/reel/Dd9nN_EBDOO/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank" rel="noopener">Voir cette publication sur Instagram</a></div>
-        </blockquote>
+      <div style="text-align:center; margin-top:32px;">
+        <a href="/blog" class="btn secondary">Voir tous les articles</a>
       </div>
     </section>
 
@@ -804,32 +847,6 @@
           <span>Création de site internet avec <a href="https://lartisan-web.fr" target="_blank" rel="noopener" style="color:#c47f79;">L'Artisan Web</a></span>
         </article>
       </div>
-    </section>
-
-    <section id="contact" class="section contact reveal">
-      <p class="eyebrow">Contact</p>
-      <h2>Travaillons ensemble.</h2>
-      <p>Expliquez-moi votre projet, votre produit et vos objectifs. Je vous réponds rapidement avec une proposition adaptée.</p>
-
-      <form action="https://formspree.io/f/mrernnyw" method="POST" id="contact-form">
-        <label class="sr-only" for="contact-nom">Votre nom</label>
-        <input id="contact-nom" name="nom" placeholder="Votre nom" required />
-
-        <label class="sr-only" for="contact-email">Votre email</label>
-        <input id="contact-email" type="email" name="email" placeholder="Votre email" required />
-
-        <label class="sr-only" for="contact-marque">Nom de votre marque</label>
-        <input id="contact-marque" name="marque" placeholder="Nom de votre marque" />
-
-        <label class="sr-only" for="contact-besoin">Votre besoin</label>
-        <textarea id="contact-besoin" name="besoin" placeholder="Votre besoin : vidéo, photo, pack, gestion réseaux sociaux, délai..." required></textarea>
-
-        <button type="submit" class="btn primary">Envoyer ma demande</button>
-
-        <p id="form-success" style="display:none; margin-top:15px; font-weight:600;">
-          ✅ Merci ! Je vous réponds sous 24h.
-        </p>
-      </form>
     </section>
   </main>
 
