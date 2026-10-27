@@ -18,7 +18,6 @@ async function loadReviews() {
       container.innerHTML = reviews.map(r => `
         <blockquote>
           <div class="review-meta">
-            <span class="review-author">${r.author_name}</span>
             <span class="review-stars">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
           </div>
           <p class="review-text">"${r.text}"</p>
