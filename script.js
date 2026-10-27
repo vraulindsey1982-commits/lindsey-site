@@ -45,6 +45,15 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+// Suivi GA4 / GTM des demandes de devis envoyées
+function trackLead() {
+  const formType = location.pathname.includes('secretaire') ? 'secretariat' : 'ugc';
+  if (typeof window.gtag === 'function') {
+    gtag('event', 'generate_lead', { form_type: formType, page_path: location.pathname });
+  }
+  (window.dataLayer = window.dataLayer || []).push({ event: 'demande_devis', form_type: formType, page_path: location.pathname });
+}
+
 // Formulaire de contact
 const form = document.getElementById("contact-form");
 if (form) {
@@ -59,6 +68,7 @@ if (form) {
     if (response.ok) {
       form.reset();
       successMsg.style.display = "block";
+      trackLead();
     } else {
       alert("Oops… il y a un problème. Réessaie !");
     }
