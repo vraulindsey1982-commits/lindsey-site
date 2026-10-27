@@ -1310,3 +1310,6 @@ footer a{
   justify-content: center;
   flex-shrink: 0;
 }
+
+/* Bouton Devis toujours visible sur mobile */
+.nav-cta{display:none}@media(max-width:850px){.nav-cta{display:inline-block;margin-left:auto;padding:8px 14px!important;font-size:.9rem}}
