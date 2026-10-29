@@ -10,7 +10,7 @@ async function loadReviews() {
       document.getElementById('reviews-stars').textContent = stars;
       document.getElementById('reviews-score').textContent = rating.toFixed(1);
       document.getElementById('reviews-count').textContent = `(${total} avis)`;
-      document.getElementById('reviews-rating').style.display = 'flex';
+      document.getElementById('reviews-rating').style.visibility = 'visible';
     }
 
     if (reviews && reviews.length) {
