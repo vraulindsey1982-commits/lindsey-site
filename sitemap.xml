@@ -10,13 +10,14 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/portfolio.html</loc>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://www.lindsey-ugc.fr/services.html</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -135,7 +136,7 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/campagne-ugc-beaute.html</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -149,14 +150,14 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/creatrice-ugc-skincare.html</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://www.lindsey-ugc.fr/creatrice-ugc-beaute-france.html</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -198,7 +199,7 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-face-cam-lifestyle.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
     <video:video>
@@ -214,7 +215,7 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-demonstration-produit.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
     <video:video>
@@ -230,7 +231,7 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-earo.html</loc>
-    <lastmod>2026-07-04</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
     <video:video>
@@ -246,7 +247,7 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-luminette.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
     <video:video>
@@ -262,7 +263,7 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-tossit.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
     <video:video>
@@ -278,7 +279,7 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-rouge-levre-givenchy.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
     <video:video>
@@ -294,7 +295,7 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-chat-colis.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
     <video:video>
@@ -310,7 +311,7 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-reel-instagram.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
     <video:video>
@@ -326,7 +327,7 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-karcher.html</loc>
-    <lastmod>2026-07-20</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
     <video:video>
@@ -342,7 +343,7 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-sun.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
     <video:video>
@@ -358,7 +359,7 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-omo-cajoline.html</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
     <video:video>
@@ -374,7 +375,7 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-dji-neo.html</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
     <video:video>
@@ -390,7 +391,7 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-oral-b.html</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
     <video:video>
@@ -406,7 +407,7 @@
 
   <url>
     <loc>https://www.lindsey-ugc.fr/video-ugc-eucerin.html</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
     <video:video>
