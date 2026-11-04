@@ -1,8 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /mentions-legales.html
-Disallow: /confidentialite.html
-Disallow: /cgv.html
 
 # Robots des IA (ChatGPT, Claude, Perplexity, Gemini...) : autorisés explicitement
 User-agent: GPTBot
